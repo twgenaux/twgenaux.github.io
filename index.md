@@ -10,7 +10,7 @@ title: Theron W. Genaux
 
 In this repository is code and programs related to ASTM E1394, ASTM E1381, LIS1, LIS2, and related code and projects.
 
-[Parsing ASTM E1394 Messages](https:https://twgenaux.github.io/ASTME1394MessagParsing) 
+[Parsing ASTM E1394 Messages](https://twgenaux.github.io/ASTME1394MessagParsing) 
 
 This project demonstrates generically reading and creating ASTM  E1394 messages. 
 
