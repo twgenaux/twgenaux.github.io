@@ -14,15 +14,17 @@ The following output is from a program that was developed to explore two ideas; 
 
 Input message:
 
-> H|\^&|||OCD^VISION^5.10.0.46252^JNumber|||||||P|LIS2-A|20240307151237
-> P|1|PID123456||NID123456^MID123456^OID123456|Brown^Bobby^B|White|19650102030400|U||||||||||||||||||||||||||
-> O|1|SID101||ABO-D|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F|||||
-> O|1|SID101||ABScr|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F|||||
-> L||
->
+```
+H|\^&|||OCD^VISION^5.10.0.46252^JNumber|||||||P|LIS2-A|20240307151237
+P|1|PID123456||NID123456^MID123456^OID123456|Brown^Bobby^B|White|19650102030400|U|||||||||||||||||||||||
+O|1|SID101||ABO-D|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F|||||
+O|1|SID101||ABScr|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F|||||
+L||
+```
 
 Parse massage into record Position/Value pairss:
 
+> ```
 > Delimiters:|\^&
 > H.1:H
 > H.5:OCD^VISION^5.10.0.46252^JNumber
@@ -66,9 +68,13 @@ Parse massage into record Position/Value pairss:
 > O.23:20240307151237
 > O.26:F
 > L.1:L
+> ```
+>
+> 
 
 Extract message content into Key/Value pairs:
 
+> ```
 > Delimiters:|\^&
 > H-RecordType:H
 > H-SenderName:OCD^VISION^5.10.0.46252^JNumber
@@ -109,9 +115,13 @@ Extract message content into Key/Value pairs:
 > O-ReportedTime:20240307151237
 > O-ReportType:F
 > L-RecordType:L
+> ```
+>
+> 
 
 Recreate the message by first converting Key/Value pairs into record Position/Value pairs:
 
+> ```
 > Delimiters:|\^&
 > H.1:H
 > H.5:OCD^VISION^5.10.0.46252^JNumber
@@ -152,14 +162,21 @@ Recreate the message by first converting Key/Value pairs into record Position/Va
 > O.23:20240307151237
 > O.26:F
 > L.1:L
+> ```
+>
+> 
 
 Export Position/Value pairs into an ASTM message:
 
+> ```
 > H|\^&|||OCD^VISION^5.10.0.46252^JNumber|||||||P|LIS2-A|20240307151237
 > P|1|PID123456||NID123456^MID123456^OID123456|Brown^Bobby^B|White|19650102030400|U
 > O|1|SID101||ABO-D|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F
 > O|1|SID101||ABScr|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F
 > L
+> ```
+>
+> 
 
 
 
