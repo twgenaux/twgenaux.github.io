@@ -22,7 +22,7 @@ O|1|SID101||ABScr|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F|||
 L||
 ```
 
-Parse massage into record Position/Value pairss:
+Parse massage into record Position:Value pairs:
 
 > ```
 > Delimiters:|\^&
@@ -72,7 +72,7 @@ Parse massage into record Position/Value pairss:
 >
 > 
 
-Extract message content into Key/Value pairs:
+Extract message content into Key:Value pairs:
 
 > ```
 > Delimiters:|\^&
@@ -119,7 +119,7 @@ Extract message content into Key/Value pairs:
 >
 > 
 
-Recreate the message by first converting Key/Value pairs into record Position/Value pairs:
+Recreate the message by first converting Key:Value pairs into record Position:Value pairs:
 
 > ```
 > Delimiters:|\^&
