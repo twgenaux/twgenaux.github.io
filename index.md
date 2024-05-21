@@ -19,3 +19,6 @@ In 2015 I started working with vendors and customers to help them interface to m
 I had already seen some code that reads and writes ASTM messages, both on the web and proprietary. And I always thought that they were error prone to use and and overly complex. I started  wondering how reading, writng, and processing ASTM messaging could be generalized so that one could adapt to all the variations that I've seen. I also wondered how to make it less error prone.
 
 I played around mentally going through different ideas for a while until I realized that an ASTM record is in essence a recursive data structure, one recursion per separator. ASTM records have 3 separators; Field, Repeat-Field, and Components. Because it only has 3 delimiters, it is limited to only 3 levels of recursion. [Continue reading...](https://twgenaux.github.io/ASTME1394MessagParsing) 
+
+[Parsing ASTM E1394 Messages](https://github.com/twgenaux/tgenaux-ASTM-LIS/AstmMessageParsing/ASTME1394MessagParsing) 
+
