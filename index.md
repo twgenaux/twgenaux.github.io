@@ -20,3 +20,9 @@ I had already seen some code that reads and writes ASTM messages, both on the we
 
 I played around mentally going through different ideas for a while until I realized that an ASTM record is in essence a recursive data structure, one recursion per separator. ASTM records have 3 separators; Field, Repeat-Field, and Components. Because it only has 3 delimiters, it is limited to only 3 levels of recursion. [Continue reading...](https://twgenaux.github.io/ASTME1394MessagParsing) 
 
+
+
+[ASTM Message Formats](https://twgenaux.github.io/MessageFormats/MessageFormats)  
+
+
+
