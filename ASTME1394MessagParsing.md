@@ -7,7 +7,13 @@ tags: [LIS,ASTM,E1394,LIS02]
 
 ### ASTM E1394 Message Parsing
 
-This project demonstrates generically extracting the contents of ASTM  E1394 messages
+This project demonstrates generically reading and creating ASTM  E1394 messages. 
+
+In 2015 I started working with vendors and customers to help them interface to my company's new instrument. The message format was ASTM E1394 (ASTM). I started to wonder how LIS and middleware vendors were able to adapt to connecting with so many instruments where each instrument manufacturer developed their own message format based on the ASTM E1394 standard.
+
+I had already seen some code that reads and writes ASTM messages, both on the web and proprietary. And I always thought that they were error prone to use and and overly complex. I started  wondering how reading, writng, and processing ASTM messaging could be generalized so that one could adapt to all the variations that I've seen. I also wondered how to make it less error prone.
+
+I played around mentally going through different ideas for a while until I realized that an ASTM record is in essence a recursive data structure, one recursion per separator. ASTM records have 3 separators; Field, Repeat-Field, and Components. Because it only has 3 delimiters, it is limited to only 3 levels of recursion
 
 The following output is from a program that was developed to explore two ideas; generically reading and writing ASTM messages, and using bi-directional maps to map database orders, patients, and results to create and read ASTM messages. The program supports round-tripping, such that the extracted content from one message can be used to recreate the equivelent original message. This program also works with HL7 Version 2.5 message files.
 
@@ -174,5 +180,4 @@ O|1|SID101||ABO-D|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F
 O|1|SID101||ABScr|N|20240307151207|||||||||CENTBLOOD|||||||20240307151237|||F
 L
 ```
-
 
