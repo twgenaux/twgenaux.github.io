@@ -2,39 +2,43 @@
 title: Introduction to ASTM Message Formats
 category: LIS
 author: [ Theron W. Genaux, Draft, 2-February-2024]
-tags: [LIS,ASTM,E1394, ASTM E1394,LIS2, LIOS2, HL7 V2 ]
+theme: Pixyll
+tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 ---
 
-
-# TODO
-
-Add links to standards, LIS guides, and other resources.
-
-Start off with a bare-bones ASTM Order record.
-
-# Style
-
-Objects or parts start with a capital letter; Order record.
+# Introduction to ASTM Message Formats
 
 | Acronym             | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
 | LIS                 | Laboratory Information Systems                               |
 | ASTM                | Refers to ASTM E1394 and LIS02 standards.                    |
 | Record              | An ordered list of fields, i.e the fields in a Patient record containing a patient's name, date of birth, ... |
-| Field               | An attribute of a record, i.e. a patient's  name             |
+| Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
 | Repeat field        | A repeating attribute of a field, i.e. a list of two or more of a patient's attending physicians |
 | Component           | A single data element, i.e. a patient's name can consist of a first, middle, and last name, where each name is a componet of the patient name field in a Patient record. |
-| ASTM Message        | to be treated as having equal priority or standing to associated repeat fields. of data elements which precede it, for example, parts of a field or repeat field entry; NOTES: a) As anthe basic attribute.An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
-| ASTM Message Format | example, the patient's name is recorded as last name, first name, and middle initial, each of which isA specific implantation of the ASTM E1394 standards by a manufacturer. |
-|                     | separated by a component delimiter; b) Components cannot contain repeat fields. |
+| ASTM Message        | An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
+| ASTM Message Format | A specific implantation of the ASTM E1394 or LIS02 standards by a manufacturer. |
+|                     |                                                              |
+
+## TODO
+
+- [ ] Add links to standards, LIS guides, and other resources.
+- [x] Explain Field separator
+- [ ] Explain Repeat field separator
+- [ ] Explain Component separator
 
 
 
-# Introduction to ASTM Message Formats
+## Style
+
+Objects or parts start with a capital letter; Order record.
+
+|      |
+| ---- |
 
 The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.
 
-One example of an ASTM message is provided below. My goal is for you to be able to understand its construction and be able to identify each part. Don't worry; we won't jump into this all at once. We will start small and work our way up to more complex messages as we go along.
+One example of an ASTM message is provided below. My goal is for you to be able to understand its construction and be able to identify each part. Don't worry, we won't jump into this all at once. We will start small and work our way up to more complex messages as we go along.
 
 ```ASTM
 H|\^&|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633
@@ -45,27 +49,21 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
 L|1|N
 ```
 
-An ASTM message is an ordered list of lines, called records. A record is an ordered list of fields. Fields are separated by a Field Separator, in this case a pipe character is used (|). Each record starts with a record type ID, such as O, for the Order record.
+An ASTM message is an ordered list of lines, called records. A record is an ordered list of fields. Fields are separated by a Field Separator, in this case a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
 
 Let's begin with an ASTM Order record with just the essential parts and nothing else.
-
-
 
 ```ASTM
 O|1|SID101||ABORH|||||||||||CENTBLOOD
 ```
 
-
-
-
-
-The table below shows the Order record fields with their field position number, field descriptions, and values. The position in the record identifies the contents of each field.  
+The table below shows the field in the above Order, along with their field position number, data type, and values. The position in the record identifies the data type of each field.  
 
 ![image-20240419223033977](.\Message Formats.assests\image-20240419223033977.png) 
 
-ASTM messages are easy to implement. And using a separator in this way makes it easy for computers to create and parse these messages.
+ASTM messages are easy to implement. Using a field separator makes it easy for computers to create and parse these messages.
 
-Let me show you how to take apart this Order record and identify each field and the type of information in it.
+Let me show you how to manually take apart this Order record and identify each field and the type of information in it.
 
 You can use any text editor that can number the lines and allows you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I'll demonstrate with Notepad++.
 
@@ -73,26 +71,28 @@ You can use any text editor that can number the lines and allows you to replace 
 
 The first step is to split the fields into separate lines:
 
-1. Enter the field separator. 
+1. In the Replace dialog, enter the field separator. 
 2. Enter the <CR> and <LF>
 3. Click Replace All
 
-You now have a list of fields where each field position is the number of the line it is on.
+You now have a list of fields where each line number is also its field position.
 
 ![image-20240420183844463](.\Message Formats.assests\image-20240420183844463.png) 
 
-Field names and their position come from the ASTM standard. The specification for the Order record is in section 8. The field definitions start with section 8.4.1 (Record Type ID). The field position is the last number of the section number that defines it (1). Therefore, the Specimen ID (Sample ID) is in section 8.4.3 and is referred to as O.3.
+Field names and their position are defined in the ASTM standard. The specification for the Order record is in section 8 of the ASTM E1394 standard. The field definitions start with section 8.4.1 (Record Type ID). The field position is the last number of the section number that defines it, 1 for the  Record Type ID. TheSpecimen ID (Sample ID) is in section 8.4.3 and is referred to as O.3, for Order record field 3.
 
-You can use this same technique in reverse to create an order record manually.
+You can use this same technique for listing the fields in reverse to create an Order record manually.
 
 ![image-20240420185330462](.\Message Formats.assests\image-20240420185330462.png) 
 
 To hand code an Order record:
 
-1. Enter each field attribute on the line number that corresponds to its field number as defined by the ASTM standard. For an Order record, the sample ID goes in field 3, so write it on line 3.
+1. Enter each field attribute on the line number that corresponds to its field position as defined by the ASTM standard. For an Order record, the sample ID goes in field 3, so write it on line 3.
 2. In the Replace dialog, enter the <CR> and <LF> 
 3. Enter the field separator. 
 4. Click *Replace all*
+
+Now we have manually created an Order record. Computers are programed to do something similar.
 
 ![image-20240420185552555](.\Message Formats.assests\image-20240420185552555.png) 
 
@@ -110,17 +110,13 @@ O|1|SID102\SID103||Type + Ab Scn Pnl Bld|||||||||||PACKEDCELLS\PLASMA
 
 
 
-
-
-
-
-![image-20240420190402026](.\Message Formats.assests\image-20240420190402026.png) 
+ 
 
 ## TODO
 
 1. Repeated fields - multiple sample IDs in an order
 2. Components - patient name
-3. Repeated fields with Components - multiple referring physicians
+3. Repeated fields with Components - multiple physicians
 4. Bring it back to the original message.
 5. Where to find what each field is? The instrument interface guide. The standard. 
 6. Links to the standards
