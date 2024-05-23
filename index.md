@@ -22,7 +22,3 @@ I played around mentally going through different ideas for a while until I reali
 
 
 
-[ASTM Message Formats](https://twgenaux.github.io/MessageFormats/MessageFormats)  
-
-
-
