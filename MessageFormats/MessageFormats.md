@@ -14,8 +14,8 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 | ASTM                | Refers to ASTM E1394 and LIS02 standards.                    |
 | Record              | An ordered list of fields, i.e the fields in a Patient record containing a patient's name, date of birth, ... |
 | Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
-| Repeat field        | A repeating attribute of a field, i.e. a list of two or more of a patient's attending physicians |
-| Component           | A single data element, i.e. a patient's name can consist of a first, middle, and last name, where each name is a componet of the patient name field in a Patient record. |
+| Repeat field        | A repeating field data type, i.e. a list of two or more of a patient's attending physicians |
+| Component           | A single data element of a data type of a field, i.e. a patient's name can consist of a first, middle, and last name, where each name is a componet of the patient name field in a Patient record. |
 | ASTM Message        | An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
 | ASTM Message Format | A specific implantation of the ASTM E1394 or LIS02 standards by a manufacturer. |
 |                     |                                                              |
@@ -99,10 +99,10 @@ Now we have manually created an Order record. Computers are programed to do some
 
 ### Repeat Fields
 
-
+A Repeat field is a duplication of the same field where each value is unique. For example, an order record with multiple Specimen IDs; such as a pair of blood samples from the same draw, one containing packed red blood cells and the other plasma.
 
 ```ASTM
-O|1|SID102\SID103||Type + Ab Scn Pnl Bld|||||||||||PACKEDCELLS\PLASMA
+O|1|SID102\SID103||ABO FWD/RVS|||||||||||PACKEDCELLS\PLASMA
 ```
 
 ### Componets
