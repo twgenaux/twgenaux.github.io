@@ -109,7 +109,7 @@ O|1|SID102\SID103||Type + Ab Scn Pnl Bld|||||||||||PACKEDCELLS\PLASMA
 
 
 ```ASTM
-P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward<CR>
+P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
 ```
 
 
@@ -121,6 +121,11 @@ The ASTM record notation I use is very similar to IP notation and is used to ide
 
 - RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye
 
+## Record Separator
+
+
+
+## ASTM Escape Sequences
 
 
 The escape character is the last of the 4 defined characters in the header. The escape character is used to create a sequence of characters to replace the defined characters in the text values. This is similar to what is done in XML when \&lt; is used to replace the reserved character *left angle bracket* (<) in text data.
