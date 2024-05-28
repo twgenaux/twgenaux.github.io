@@ -30,7 +30,7 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 - [ ] How do I find out what each field is? The instrument interface guide. The standard.
 - [ ] Add links to the standards
 - [ ] Data Types
-- [ ] A Record Sequence Number is used in record types that may occur multiple tienes within a single message. The number used defines the z'th occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number).
+- [ ] A Record Sequence Number is used in record types that may occur multiple timeswithin a single message. The number used defines the nth occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number). Add example message.
 
 
 The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.
