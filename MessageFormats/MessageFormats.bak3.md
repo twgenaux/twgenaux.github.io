@@ -24,21 +24,8 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 
 - [ ] Add links to standards, LIS guides, and other resources.
 - [x] Explain Field separator
-- [ ] Explain Repeat field separator - multiple sample IDs in an order
-- [ ] Explain Component separator - patient name
-- [ ] Repeated fields with Components - multiple physicians
-- [ ] How do I find out what each field is? The instrument interface guide. The standard.
-- [ ] Add links to the standards
-- [ ] Data Types
-- [ ] A Record Sequence Number is used in record types that may occur multiple tienes within a single message. The number used defines the z'th occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number).
-
-## ASTM Record Notation
-
-The ASTM record notation I use is very similar to IP notation and is used to identify the parts of a record. It consists of a record ID followed by indexes into the parts of the record.  
-
-- RecordID.Field - The specimen ID in the Order record field 3, is denoted as O.3
-
-- RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye
+- [ ] Explain Repeat field separator
+- [ ] Explain Component separator
 
 
 
@@ -121,36 +108,19 @@ Now we have manually created an Order record. Computers are programed to do some
 O|1|SID102\SID103||Type + Ab Scn Pnl Bld|||||||||||PACKEDCELLS\PLASMA
 ```
 
-The escape character is the last of the 4 defined characters in the header. The escape character is used to create a sequence of characters to replace the defined characters in the text values. This is similar to what is done in XML when \&lt; is used to replace the reserved character *left angle bracket* (<) in text data.
-
-Take for example the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name was placed in an order profile field as is, it would not be parsed as one profile, but three. To prevent this, embedded repeat field separators are replaced with an escape sequence, which will be converted back to the embedded repeat field separator when it is parsed by the receiver of the message. 
-
-When the sender writes "ABO\Rh\ABScr" into the order record, every repeat separator (\\) is replaced with "&R&",  resulting with a string of "ABO<u>&R&</u>Rh<u>&R&</u>ABScr". When the profile is read by the receiver of the message, every "&R&" is replaced with the repeat field separator (\\), restoring the data to it's original text.
-
-```
-Profile name: ABO\Rh\ABScr
-When written into the message, replace every field separator (\) with the escape sequence &R&: 
-	ABO&R&Rh&R&ABScr
-When read from the message, replace every escape sequence &R& with the field separator (\):
-	ABO\Rh\ABScr
-
-O|1|SID101||ABO&R&Rh&R&ABScr|||||||||||CENTBLOOD
-```
 
 
+ 
 
-Table 1: Recode Type IDs
+## TODO
 
-| Type ID | Record Description                                           | Level |
-| ------- | ------------------------------------------------------------ | ----- |
-| H       | Message Header - contains information about the sender and defines separators and the escape character | 0     |
-| P       | Patient - contains information about an individual patient   | 1     |
-| O       | Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request. | 2     |
-| R       | Result - contains the results ofzl a single analytic determination. | 3     |
-| M       | Manufacture Information - the fields in this record are defined by the manufacturer. |       |
-| Q       | Request for information - used to request information, e.g. request outstanding orders for a sample. | 1     |
-| L       | Message Terminator - the last record in the message. A header record may be transmitted after this record signifying the start of a second message. | 0     |
-
+1. Repeated fields - multiple sample IDs in an order
+2. Components - patient name
+3. Repeated fields with Components - multiple physicians
+4. Bring it back to the original message.
+5. Where to find what each field is? The instrument interface guide. The standard. 
+6. Links to the standards
+7. No, you don't have to list each record and its field definitions.
 
 
 
