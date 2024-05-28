@@ -3,7 +3,7 @@
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 
-<style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+<link href='https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext' rel='stylesheet' type='text/css' /><link href='https://fonts.googleapis.com/css?family=Lato:900,300&subset=latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
 .mac-os-11 { --title-bar-height: 28px; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, h4, h5 { white-space: pre-wrap; }
@@ -300,28 +300,72 @@ span.cm-strikethrough { text-decoration: line-through; }
 }
 
 
-html {
-	font-size: 19px;
+@include-when-export url(https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext);
+@include-when-export url(https://fonts.googleapis.com/css?family=Lato:900,300&subset=latin-ext);
+
+:root {
+	--control-text-color: #777;
 }
 
-html, body {
-	margin: auto;
-	background: #fefefe;
-	-webkit-font-smoothing: antialiased;
+/**
+ * forked from pixyll.com
+ * MIT license
+ */
+
+h1,
+.h1,
+.f1 {
+	font-size: 2rem;
+	line-height: 2.5rem;
 }
+h2,
+.h2,
+.f2 {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+h3,
+.h3,
+.f3 {
+	font-size: 1.25rem;
+	line-height: 1.5rem;
+}
+p,
+.p,
+.f4,
+h4,
+h5,
+h6,
+dl,
+ol,
+ul,
+pre[cid],
+div[cid],
+#typora-source {
+	font-size: 1.125rem;
+	line-height: 1.5rem;
+}
+
+h4 {
+	font-size: 1.13rem;
+}
+/*
+ Pixyll
+ A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.
+ Best served with BASSCSS (http://jxnblk.github.io/basscss)
+ Crafted with <3 by John Otander (@4lpine) - ©2015 John Otander MIT License http://opensource.org/licenses/MIT
+
+*/
+
 body {
-	font-family: "Vollkorn", Palatino, Times;
-	color: #333;
-	line-height: 1.4;
-	text-align: justify;
+	font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", "STSong", 'Segoe UI Emoji', Serif;
+	line-height: 1.5rem;
+	font-weight: 400;
 }
 
 #write {
-	max-width: 960px;
-	margin: 0 auto;
-	margin-bottom: 2em;
-	line-height: 1.53;
-	padding-top: 40px;
+	max-width: 914px;
+	color: #333;
 }
 
 @media only screen and (min-width: 1400px) {
@@ -330,230 +374,354 @@ body {
 	}
 }
 
-@media print {
-	html {
-		font-size: 13px;
+@media only screen and (min-width: 1700px) {
+	#write {
+		max-width: 1200px;
 	}
 }
 
-/* Typography
--------------------------------------------------------- */
-
-#write>h1:first-child,
-h1 {
-	margin-top: 1.6em;
-	font-weight: normal;
+img {
+	width: auto;
+	max-width: 100%;
+}
+body {
+	font-size: 1.5rem;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
-h1 {
-	font-size:3em;
+.ty-table-edit {
+	background: #ededed;
 }
 
-h2 {
-	margin-top:2em;
-	font-weight: normal;
+table {
+	width: 100%;
+	font-size: 1.125rem;
+}
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td,
+table > tfoot > tr > th,
+table > tfoot > tr > td {
+	padding: 12px;
+	line-height: 1.2;
+	vertical-align: top;
+	border-top: 1px solid #333;
+}
+table > thead > tr > th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #333;
+}
+table > caption + thead > tr:first-child > th,
+table > caption + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > td,
+table > thead:first-child > tr:first-child > th,
+table > thead:first-child > tr:first-child > td {
+	border-top: 0;
+}
+table > tbody + tbody {
+	border-top: 2px solid #333;
+}
+p {
+	font-weight: 300;
+	line-height: 1.5;
+}
+abbr {
+	border-bottom: 1px black dotted;
+	cursor: help;
+}
+pre,
+code {
+	font-family: Menlo, Monaco, "Courier New", monospace;
 }
 
-h3 {
-	font-weight: normal;
-	font-style: italic;
-	margin-top: 3em;
+code,
+.md-fences  {
+	color: #7a7a7a;
 }
 
-h1, 
-h2, 
-h3{
-	text-align: center;
-}
-
-h2:after{
-	border-bottom: 1px solid #2f2f2f;
-    content: '';
-    width: 100px;
-    display: block;
-    margin: 0 auto;
-    height: 1px;
-}
-
-h1+h2, h2+h3 {
-	margin-top: 0.83em;
-}
-
-p,
-.mathjax-block {
-	margin-top: 0;
-	-webkit-hypens: auto;
-	-moz-hypens: auto;
-	hyphens: auto;
-}
-ul {
-	list-style: square;
-	padding-left: 1.2em;
-}
-ol {
-	padding-left: 1.2em;
-}
-
-@media print {
-	ol {
-		padding-left: 40px;
-	}
+.md-fences {
+	padding: 1.125em;
+	margin-bottom: 0.88em;
+	font-size: 1rem;
+	border: 1px solid #7a7a7a;
+	padding-bottom: 0.5rem;
+	padding-top: 0.5rem;
 }
 
 blockquote {
-	margin-left: 1em;
-	padding-left: 1em;
-	border-left: 1px solid #ddd;
+	padding: 1.33em;
+	font-style: italic;
+	border-left: 5px solid #7a7a7a;
+	color: #555;
 }
-code,
-pre {
-	font-family: "Consolas", "Menlo", "Monaco", monospace, serif;
-	font-size: .9em;
-	background: white;
+blockquote em {
+	color: #000;
 }
-.md-fences{
-	margin-left: 1em;
-	padding-left: 1em;
-	border: 1px solid #ddd;
-	padding-bottom: 8px;
-	padding-top: 6px;
-	margin-bottom: 1.5em;
+blockquote footer {
+	font-size: .85rem;
+	font-style: normal;
+	background-color: #fff;
+	color: #7a7a7a;
+	border-color: transparent;
 }
-
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+	font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: bold;
+	line-height: 1.2;
+	margin: 1em 0 0.5em;
+}
+@media screen and (min-width: 48em) {
+	.h1,
+	h1 {
+		font-size: 3.250rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.298rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.625rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+	#write>h4.md-focus:before,
+	#write>h5.md-focus:before,
+	#write>h6.md-focus:before{
+		top: 1px;
+	}
+	.p,
+	p,
+	li {
+		font-size: 1.25rem;
+		line-height: 1.8;
+	}
+	table {
+		font-size: 1.25rem;
+	}
+}
+@media (max-width: 48em) {
+	blockquote {
+		margin-left: 1rem;
+		margin-right: 0;
+		padding: 0.5em;
+	}
+	.h1,
+	h1 {
+		font-size: 2.827rem;
+	}
+	.h2,
+	h2 {
+		font-size: 1.999rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.413rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+}
+@media screen and (min-width: 64em) {
+	.h1,
+	h1 {
+		font-size: 4.498rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.29rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.9rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.591rem;
+	}
+	#write>h4.md-focus:before{
+		top:4px;
+	}
+}
 a {
-	color: #2484c1;
-	text-decoration: none;
-}
-a:hover {
+	color: #463F5C;
 	text-decoration: underline;
 }
-a img {
-	border: none;
+
+#write {
+	padding-top: 2rem;
 }
-h1 a,
-h1 a:hover {
-	color: #333;
-	text-decoration: none;
+
+#write pre.md-meta-block {
+	min-height: 35px;
+	padding: 0.5em 1em;
+	white-space: pre;
+	border: 0px;
+
+	border-left: 30px #f8f8f8 solid;
+	border-right: 30px #f8f8f8 solid;
+	width: 100vw;
+	max-width: calc(100% + 60px);
+
+	margin-left: -30px;
+	margin-bottom: 2em;
+	margin-top: -2010px;
+	padding-top: 2000px;
+	padding-bottom: 10px;
+	line-height: 1.5em;
+	color: #7a7a7a;
+	background-color: #fafafa;
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: 300;
+	clear: both;
+	padding-left: 0;
+	font-size:1.125rem;
 }
-hr {
-	color: #ddd;
-	height: 1px;
-	margin: 2em 0;
-	border-top: solid 1px #ddd;
-	border-bottom: none;
-	border-left: 0;
-	border-right: 0;
+.md-image>.md-meta {
+	color: #463F5C
 }
-.ty-table-edit {
-	background: #ededed;
-    padding-top: 4px;
+.footnotes {
+	font-size:1.1rem;
 }
-table {
-	margin-bottom: 1.333333rem
+.md-tag {
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
 }
-table th,
-table td {
-	padding: 8px;
-	line-height: 1.333333rem;
-	vertical-align: top;
-	border-top: 1px solid #ddd
+.code-tooltip {
+	background: white;
 }
-table th {
-	font-weight: bold
-}
-table thead th {
-	vertical-align: bottom
-}
-table caption+thead tr:first-child th,
-table caption+thead tr:first-child td,
-table colgroup+thead tr:first-child th,
-table colgroup+thead tr:first-child td,
-table thead:first-child tr:first-child th,
-table thead:first-child tr:first-child td {
-	border-top: 0
-}
-table tbody+tbody {
-	border-top: 2px solid #ddd
+.code-tooltip-content {
+	font-size: 1.1rem;
 }
 
 .task-list{
-	padding:0;
+	padding-left: 0;
 }
 
 .md-task-list-item {
-	padding-left: 1.6rem;
+	padding-left:34px;
 }
 
-.md-task-list-item > input:before {
-	content: '\221A';
-	display: inline-block;
-	width: 1.33333333rem;
-  	height: 1.6rem;
-	vertical-align: middle;
-	text-align: center;
-	color: #ddd;
-	background-color: #fefefe;
+.md-task-list-item > input{
+	width: 1.25rem;
+	height: 1.25rem;
+	display: block;
+	-webkit-appearance: initial;
+	top: -0.2rem;
+	margin-left: -1.6em;
+	margin-top: calc(1rem - 7px);
+	border: none;
+}
+
+.md-task-list-item > input:focus{
+	outline: none;
+	box-shadow: none;
+}
+
+.md-task-list-item > input:before{
+	border: 1px solid #555;
+	border-radius: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: #fff;
+	content: ' ';
+	transition: background-color 200ms ease-in-out;
+	display: block;
 }
 
 .md-task-list-item > input:checked:before,
 .md-task-list-item > input[checked]:before{
-	color: inherit;
+	background: #333;
+	border-width: 2px;
+	display:inline-block;
+	transition: background-color 200ms ease-in-out;
 }
+
+.md-task-list-item > input:checked:after,
+.md-task-list-item > input[checked]:after {
+	opacity: 1;
+}
+
+.md-task-list-item > input:after {
+	opacity: 1;
+	-webkit-transition: opacity 0.05s ease-in-out;
+	-moz-transition: opacity 0.05s ease-in-out;
+	transition: opacity 0.05s ease-in-out;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	position: absolute;
+	top: 0.4375rem;
+	left: 0.28125rem;
+	width: 0.9375rem;
+	height: 0.5rem;
+	border: 3px solid #fff;
+	border-top: 0;
+	border-right: 0;
+	content: ' ';
+	opacity: 0;
+}
+
 .md-tag {
-	color: inherit;
-	font: inherit;
-}
-#write pre.md-meta-block {
-	min-height: 35px;
-	padding: 0.5em 1em;
-}
-#write pre.md-meta-block {
-	white-space: pre;
-	background: #f8f8f8;
-	border: 0px;
-	color: #999;
-	
-	width: 100vw;
-	max-width: calc(100% + 60px);
-	margin-left: -30px;
-	border-left: 30px #f8f8f8 solid;
-	border-right: 30px #f8f8f8 solid;
-
-	margin-bottom: 2em;
-	margin-top: -1.3333333333333rem;
-	padding-top: 26px;
-	padding-bottom: 10px;
-	line-height: 1.8em;
-	font-size: 0.9em;
-	font-size: 0.76em;
-	padding-left: 0;
-}
-.md-img-error.md-image>.md-meta{
-	vertical-align: bottom;
-}
-#write>h5.md-focus:before {
-	top: 2px;
+	color:inherit;
 }
 
-.md-toc {
-	margin-top: 40px;
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
 }
 
-.md-toc-content {
-	padding-bottom: 20px;
+#typora-sidebar {
+	font-size:1rem !important;
+}
+
+.html-for-mac #typora-sidebar {
+	background-color:white;
+}
+
+.outline-content li, .outline-content ul {
+	font-size:1rem !important;
+}
+
+.outline-title {
+	line-height: inherit;
+	margin-top: 10px;
+}
+
+.outline-expander {
+	width: 18px;
 }
 
 .outline-expander:before {
-	color: inherit;
-	font-size: 14px;
-	top: auto;
-	content: "\f0da";
-	font-family: FontAwesome;
+ 	content: "+";
+	font-family: inherit;
+	color: rgb(108, 108, 108); 
+  font-size: 1.5rem;
+ 	top: -0.1rem;
 }
 
-.outline-expander:hover:before,
-.outline-item-open>.outline-item>.outline-expander:before {
-  	content: "\f0d7";
+.outline-expander:hover:before {
+	content: "+";
+}
+
+.outline-item-open>.outline-item>.outline-expander:before{
+	content: "-";
 }
 
 /** source code mode */
@@ -562,9 +730,8 @@ table tbody+tbody {
     color: #6A6A6A;
 }
 
-.html-for-mac #typora-sidebar {
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+.os-windows #typora-source {
+	font-family: inherit;
 }
 
 .cm-s-typora-default .cm-header, 
@@ -577,34 +744,38 @@ table tbody+tbody {
 	color: #777777;
 }
 
-.typora-node .file-list-item-parent-loc, 
-.typora-node .file-list-item-time, 
-.typora-node .file-list-item-summary {
-	font-family: arial, sans-serif;
-}
-
-.md-task-list-item>input {
-    margin-left: -1.3em;
-    margin-top: calc(1rem - 12px);
+.md-diagram-panel {
+	margin-top: 24px;
+	margin-left: -1.2em;
 }
 
 .md-mathjax-midline {
 	background: #fafafa;
 }
 
-.md-fences .code-tooltip {
-	bottom: -2em !important;
+.enable-diagrams pre.md-fences[lang="sequence"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="flow"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="mermaid"] .code-tooltip {
+    bottom: -3.4em;
 }
 
 .dropdown-menu .divider {
 	border-color: #e5e5e5;
 }
 
+li {
+	margin: 0.5rem 0;
+}
+
+li > *:last-child {
+	margin-bottom: 0;
+}
+
 
 </style><title>Introduction to ASTM Message Formats</title>
 </head>
 <body class='typora-export os-windows'><div class='typora-export-content'>
-<div id='write'  class=''><h1 id='introduction-to-astm-message-formats'><span>Introduction to ASTM Message Formats</span></h1><figure class='table-figure'><table><thead><tr><th><span>Acronym</span></th><th><span>Description</span></th></tr></thead><tbody><tr><td><span>LIS</span></td><td><span>Laboratory Information Systems</span></td></tr><tr><td><span>ASTM</span></td><td><span>Refers to ASTM E1394 and LIS02 standards.</span></td></tr><tr><td><span>Record</span></td><td><span>An ordered list of fields, i.e the fields in a Patient record containing a patient&#39;s name, date of birth, ...</span></td></tr><tr><td><span>Field</span></td><td><span>An attribute (Data Type) of a record, i.e. a patient&#39;s  name</span></td></tr><tr><td><span>Repeat field</span></td><td><span>A repeating attribute of a field, i.e. a list of two or more of a patient&#39;s attending physicians</span></td></tr><tr><td><span>Component</span></td><td><span>A single data element, i.e. a patient&#39;s name can consist of a first, middle, and last name, where each name is a componet of the patient name field in a Patient record.</span></td></tr><tr><td><span>ASTM Message</span></td><td><span>An ordered list of ASTM records, starting with a Header record and ending with a Terminator record.</span></td></tr><tr><td><span>ASTM Message Format</span></td><td><span>A specific implantation of the ASTM E1394 or LIS02 standards by a manufacturer.</span></td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></figure><h2 id='todo'><span>TODO</span></h2><ul><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Add links to standards, LIS guides, and other resources.</span></p></li><li class='md-task-list-item task-list-item task-list-done' ><input type='checkbox' checked/><p><span>Explain Field separator</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Explain Repeat field separator - multiple sample IDs in an order</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Explain Component separator - patient name</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Repeated fields with Components - multiple physicians</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>How do I find out what each field is? The instrument interface guide. The standard.</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Add links to the standards</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Data Types</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>A Record Sequence Number is used in record types that may occur multiple tienes within a single message. The number used defines the z&#39;th occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number).</span></p></li></ul><h2 id='astm-record-notation'><span>ASTM Record Notation</span></h2><p><span>The ASTM record notation I use is very similar to IP notation and is used to identify the parts of a record. It consists of a record ID followed by indexes into the parts of the record.  </span></p><ul><li><p><span>RecordID.Field - The specimen ID in the Order record field 3, is denoted as O.3</span></p></li><li><p><span>RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye</span></p></li></ul><p>&nbsp;</p><h2 id='style'><span>Style</span></h2><p><span>Objects or parts start with a capital letter; Order record.</span></p><figure class='table-figure'><table><thead><tr><th>&nbsp;</th></tr></thead><tbody></tbody></table></figure><p><span>The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.</span></p><p><span>One example of an ASTM message is provided below. My goal is for you to be able to understand its construction and be able to identify each part. Don&#39;t worry, we won&#39;t jump into this all at once. We will start small and work our way up to more complex messages as we go along.</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="ASTM"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="astm"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 11.0703px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">H|\^&amp;|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">P|1|PID123456||NID123456^MID123456^OID123456|Brown^Bobby^B|White|19650102030400|U|||||PHY1234^Kildare^James^P|Blaine</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID305||ABO|N|20210309142136|||||||||CENTBLOOD|||||||20210309142229|||R</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">R|1|ABO|B|||||R||Automatic||20210309142229|JNumber</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">L|1|N</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 183px;"></div><div class="CodeMirror-gutters" style="display: none; height: 183px;"></div></div></div></pre><p><span>An ASTM message is an ordered list of lines, called records. A record is an ordered list of fields. Fields are separated by a Field Separator, in this case a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. </span></p><p><span>Let&#39;s begin with an ASTM Order record with just the essential parts and nothing else.</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="ASTM"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="astm"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 11.0703px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID101||ABORH|||||||||||CENTBLOOD</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 26px;"></div><div class="CodeMirror-gutters" style="display: none; height: 26px;"></div></div></div></pre><p><span>The table below shows the field in the above Order, along with their field position number, data type, and values. The position in the record identifies the data type of each field.  </span></p><p><img src=".\Message Formats.assests\image-20240419223033977.png" referrerpolicy="no-referrer" alt="image-20240419223033977"><span> </span></p><p><span>ASTM messages are easy to implement. Using a field separator makes it easy for computers to create and parse these messages.</span></p><p><span>Let me show you how to manually take apart this Order record and identify each field and the type of information in it.</span></p><p><span>You can use any text editor that can number the lines and allows you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I&#39;ll demonstrate with Notepad++.</span></p><p><img src=".\Message Formats.assests\image-20240420191928705.png" referrerpolicy="no-referrer" alt="image-20240420191928705"><span>  </span></p><p><span>The first step is to split the fields into separate lines:</span></p><ol start='' ><li><p><span>In the Replace dialog, enter the field separator. </span></p></li><li><p><span>Enter the </span><CR><span> and </span><LF></p></li><li><p><span>Click Replace All</span></p></li></ol><p><span>You now have a list of fields where each line number is also its field position.</span></p><p><img src=".\Message Formats.assests\image-20240420183844463.png" referrerpolicy="no-referrer" alt="image-20240420183844463"><span> </span></p><p><span>Field names and their position are defined in the ASTM standard. The specification for the Order record is in section 8 of the ASTM E1394 standard. The field definitions start with section 8.4.1 (Record Type ID). The field position is the last number of the section number that defines it, 1 for the  Record Type ID. TheSpecimen ID (Sample ID) is in section 8.4.3 and is referred to as O.3, for Order record field 3.</span></p><p><span>You can use this same technique for listing the fields in reverse to create an Order record manually.</span></p><p><img src=".\Message Formats.assests\image-20240420185330462.png" referrerpolicy="no-referrer" alt="image-20240420185330462"><span> </span></p><p><span>To hand code an Order record:</span></p><ol start='' ><li><p><span>Enter each field attribute on the line number that corresponds to its field position as defined by the ASTM standard. For an Order record, the sample ID goes in field 3, so write it on line 3.</span></p></li><li><p><span>In the Replace dialog, enter the </span><CR><span> and </span><LF><span> </span></p></li><li><p><span>Enter the field separator. </span></p></li><li><p><span>Click </span><em><span>Replace all</span></em></p></li></ol><p><span>Now we have manually created an Order record. Computers are programed to do something similar.</span></p><p><img src=".\Message Formats.assests\image-20240420185552555.png" referrerpolicy="no-referrer" alt="image-20240420185552555"><span> </span></p><p>&nbsp;</p><h2 id='the-other-separators'><span>The other separators</span></h2><h3 id='repeat-fields'><span>Repeat Fields</span></h3><p>&nbsp;</p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="ASTM"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="astm"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 11.0703px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID102\SID103||Type + Ab Scn Pnl Bld|||||||||||PACKEDCELLS\PLASMA</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 26px;"></div><div class="CodeMirror-gutters" style="display: none; height: 26px;"></div></div></div></pre><p><span>The escape character is the last of the 4 defined characters in the header. The escape character is used to create a sequence of characters to replace the defined characters in the text values. This is similar to what is done in XML when </span><span>&amp;</span><span>lt; is used to replace the reserved character </span><em><span>left angle bracket</span></em><span> (&lt;) in text data.</span></p><p><span>Take for example the name of a profile that contains the repeat field separator, as in &quot;ABO\Rh\ABScr&quot;, named after the analyses returned by the profile. If this profile name was placed in an order profile field as is, it would not be parsed as one profile, but three. To prevent this, embedded repeat field separators are replaced with an escape sequence, which will be converted back to the embedded repeat field separator when it is parsed by the receiver of the message. </span></p><p><span>When the sender writes &quot;ABO\Rh\ABScr&quot; into the order record, every repeat separator (</span><span>\</span><span>) is replaced with &quot;&amp;R&amp;&quot;,  resulting with a string of &quot;ABO</span><u><span>&amp;R&amp;</span></u><span>Rh</span><u><span>&amp;R&amp;</span></u><span>ABScr&quot;. When the profile is read by the receiver of the message, every &quot;&amp;R&amp;&quot; is replaced with the repeat field separator (</span><span>\</span><span>), restoring the data to it&#39;s original text.</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 11.0703px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Profile name: ABO\Rh\ABScr</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">When written into the message, replace every field separator (\) with the escape sequence &amp;R&amp;: </span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>ABO&amp;R&amp;Rh&amp;R&amp;ABScr</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">When read from the message, replace every escape sequence &amp;R&amp; with the field separator (\):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>ABO\Rh\ABScr</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
-</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID101||ABO&amp;R&amp;Rh&amp;R&amp;ABScr|||||||||||CENTBLOOD</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 187px;"></div><div class="CodeMirror-gutters" style="display: none; height: 187px;"></div></div></div></pre><p>&nbsp;</p><p><span>Table 1: Recode Type IDs</span></p><figure class='table-figure'><table><thead><tr><th><span>Type ID</span></th><th><span>Record Description</span></th><th><span>Level</span></th></tr></thead><tbody><tr><td><span>H</span></td><td><span>Message Header - contains information about the sender and defines separators and the escape character</span></td><td><span>0</span></td></tr><tr><td><span>P</span></td><td><span>Patient - contains information about an individual patient</span></td><td><span>1</span></td></tr><tr><td><span>O</span></td><td><span>Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request.</span></td><td><span>2</span></td></tr><tr><td><span>R</span></td><td><span>Result - contains the results ofzl a single analytic determination.</span></td><td><span>3</span></td></tr><tr><td><span>M</span></td><td><span>Manufacture Information - the fields in this record are defined by the manufacturer.</span></td><td>&nbsp;</td></tr><tr><td><span>Q</span></td><td><span>Request for information - used to request information, e.g. request outstanding orders for a sample.</span></td><td><span>1</span></td></tr><tr><td><span>L</span></td><td><span>Message Terminator - the last record in the message. A header record may be transmitted after this record signifying the start of a second message.</span></td><td><span>0</span></td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p></div></div>
+<div id='write'  class=''><h1 id='introduction-to-astm-message-formats'><span>Introduction to ASTM Message Formats</span></h1><figure class='table-figure'><table><thead><tr><th><span>Acronym</span></th><th><span>Description</span></th></tr></thead><tbody><tr><td><span>LIS</span></td><td><span>Laboratory Information Systems</span></td></tr><tr><td><span>ASTM</span></td><td><span>Refers to ASTM E1394 and LIS02 standards.</span></td></tr><tr><td><span>Record</span></td><td><span>An ordered list of fields, i.e the fields in a Patient record containing a patient&#39;s name, date of birth, ...</span></td></tr><tr><td><span>Field</span></td><td><span>An attribute (Data Type) of a record, i.e. a patient&#39;s  name</span></td></tr><tr><td><span>Repeat field</span></td><td><span>A repeating attribute of a field, i.e. a list of two or more of a patient&#39;s attending physicians</span></td></tr><tr><td><span>Component</span></td><td><span>A single data element, i.e. a patient&#39;s name can consist of a first, middle, and last name, where each name is a componet of the patient name field in a Patient record.</span></td></tr><tr><td><span>ASTM Message</span></td><td><span>An ordered list of ASTM records, starting with a Header record and ending with a Terminator record.</span></td></tr><tr><td><span>ASTM Message Format</span></td><td><span>A specific implantation of the ASTM E1394 or LIS02 standards by a manufacturer.</span></td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></figure><h2 id='todo'><span>TODO</span></h2><ul><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Add links to standards, LIS guides, and other resources.</span></p></li><li class='md-task-list-item task-list-item task-list-done' ><input type='checkbox' checked/><p><span>Explain Field separator</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Explain Repeat field separator - multiple sample IDs in an order</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Explain Component separator - patient name</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Repeated fields with Components - multiple physicians</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>How do I find out what each field is? The instrument interface guide. The standard.</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Add links to the standards</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>Data Types</span></p></li><li class='md-task-list-item task-list-item task-list-not-done' ><input type='checkbox' /><p><span>A Record Sequence Number is used in record types that may occur multiple tienes within a single message. The number used defines the z&#39;th occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number).</span></p></li></ul><h2 id='astm-record-notation'><span>ASTM Record Notation</span></h2><p><span>The ASTM record notation I use is very similar to IP notation and is used to identify the parts of a record. It consists of a record ID followed by indexes into the parts of the record.  </span></p><ul><li><p><span>RecordID.Field - The specimen ID in the Order record field 3, is denoted as O.3</span></p></li><li><p><span>RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye</span></p></li></ul><p>&nbsp;</p><h2 id='style'><span>Style</span></h2><p><span>Objects or parts start with a capital letter; Order record.</span></p><figure class='table-figure'><table><thead><tr><th>&nbsp;</th></tr></thead><tbody></tbody></table></figure><p><span>The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.</span></p><p><span>One example of an ASTM message is provided below. My goal is for you to be able to understand its construction and be able to identify each part. Don&#39;t worry, we won&#39;t jump into this all at once. We will start small and work our way up to more complex messages as we go along.</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="ASTM"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="astm"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 8.5px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">H|\^&amp;|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">P|1|PID123456||NID123456^MID123456^OID123456|Brown^Bobby^B|White|19650102030400|U|||||PHY1234^Kildare^James^P|Blaine</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID305||ABO|N|20210309142136|||||||||CENTBLOOD|||||||20210309142229|||R</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">R|1|ABO|B|||||R||Automatic||20210309142229|JNumber</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">L|1|N</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 147px;"></div><div class="CodeMirror-gutters" style="display: none; height: 147px;"></div></div></div></pre><p><span>An ASTM message is an ordered list of lines, called records. A record is an ordered list of fields. Fields are separated by a Field Separator, in this case a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. </span></p><p><span>Let&#39;s begin with an ASTM Order record with just the essential parts and nothing else.</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="ASTM"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="astm"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 8.5px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID101||ABORH|||||||||||CENTBLOOD</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 21px;"></div><div class="CodeMirror-gutters" style="display: none; height: 21px;"></div></div></div></pre><p><span>The table below shows the field in the above Order, along with their field position number, data type, and values. The position in the record identifies the data type of each field.  </span></p><p><img src=".\Message Formats.assests\image-20240419223033977.png" referrerpolicy="no-referrer" alt="image-20240419223033977"><span> </span></p><p><span>ASTM messages are easy to implement. Using a field separator makes it easy for computers to create and parse these messages.</span></p><p><span>Let me show you how to manually take apart this Order record and identify each field and the type of information in it.</span></p><p><span>You can use any text editor that can number the lines and allows you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I&#39;ll demonstrate with Notepad++.</span></p><p><img src=".\Message Formats.assests\image-20240420191928705.png" referrerpolicy="no-referrer" alt="image-20240420191928705"><span>  </span></p><p><span>The first step is to split the fields into separate lines:</span></p><ol start='' ><li><p><span>In the Replace dialog, enter the field separator. </span></p></li><li><p><span>Enter the </span><CR><span> and </span><LF></p></li><li><p><span>Click Replace All</span></p></li></ol><p><span>You now have a list of fields where each line number is also its field position.</span></p><p><img src=".\Message Formats.assests\image-20240420183844463.png" referrerpolicy="no-referrer" alt="image-20240420183844463"><span> </span></p><p><span>Field names and their position are defined in the ASTM standard. The specification for the Order record is in section 8 of the ASTM E1394 standard. The field definitions start with section 8.4.1 (Record Type ID). The field position is the last number of the section number that defines it, 1 for the  Record Type ID. TheSpecimen ID (Sample ID) is in section 8.4.3 and is referred to as O.3, for Order record field 3.</span></p><p><span>You can use this same technique for listing the fields in reverse to create an Order record manually.</span></p><p><img src=".\Message Formats.assests\image-20240420185330462.png" referrerpolicy="no-referrer" alt="image-20240420185330462"><span> </span></p><p><span>To hand code an Order record:</span></p><ol start='' ><li><p><span>Enter each field attribute on the line number that corresponds to its field position as defined by the ASTM standard. For an Order record, the sample ID goes in field 3, so write it on line 3.</span></p></li><li><p><span>In the Replace dialog, enter the </span><CR><span> and </span><LF><span> </span></p></li><li><p><span>Enter the field separator. </span></p></li><li><p><span>Click </span><em><span>Replace all</span></em></p></li></ol><p><span>Now we have manually created an Order record. Computers are programed to do something similar.</span></p><p><img src=".\Message Formats.assests\image-20240420185552555.png" referrerpolicy="no-referrer" alt="image-20240420185552555"><span> </span></p><p>&nbsp;</p><h2 id='the-other-separators'><span>The other separators</span></h2><h3 id='repeat-fields'><span>Repeat Fields</span></h3><p>&nbsp;</p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="ASTM"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="astm"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 8.5px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID102\SID103||Type + Ab Scn Pnl Bld|||||||||||PACKEDCELLS\PLASMA</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 21px;"></div><div class="CodeMirror-gutters" style="display: none; height: 21px;"></div></div></div></pre><p><span>The escape character is the last of the 4 defined characters in the header. The escape character is used to create a sequence of characters to replace the defined characters in the text values. This is similar to what is done in XML when </span><span>&amp;</span><span>lt; is used to replace the reserved character </span><em><span>left angle bracket</span></em><span> (&lt;) in text data.</span></p><p><span>Take for example the name of a profile that contains the repeat field separator, as in &quot;ABO\Rh\ABScr&quot;, named after the analyses returned by the profile. If this profile name was placed in an order profile field as is, it would not be parsed as one profile, but three. To prevent this, embedded repeat field separators are replaced with an escape sequence, which will be converted back to the embedded repeat field separator when it is parsed by the receiver of the message. </span></p><p><span>When the sender writes &quot;ABO\Rh\ABScr&quot; into the order record, every repeat separator (</span><span>\</span><span>) is replaced with &quot;&amp;R&amp;&quot;,  resulting with a string of &quot;ABO</span><u><span>&amp;R&amp;</span></u><span>Rh</span><u><span>&amp;R&amp;</span></u><span>ABScr&quot;. When the profile is read by the receiver of the message, every &quot;&amp;R&amp;&quot; is replaced with the repeat field separator (</span><span>\</span><span>), restoring the data to it&#39;s original text.</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 8.5px; left: 4px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Profile name: ABO\Rh\ABScr</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">When written into the message, replace every field separator (\) with the escape sequence &amp;R&amp;: </span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>ABO&amp;R&amp;Rh&amp;R&amp;ABScr</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">When read from the message, replace every escape sequence &amp;R&amp; with the field separator (\):</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>ABO\Rh\ABScr</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">O|1|SID101||ABO&amp;R&amp;Rh&amp;R&amp;ABScr|||||||||||CENTBLOOD</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 149px;"></div><div class="CodeMirror-gutters" style="display: none; height: 149px;"></div></div></div></pre><p>&nbsp;</p><p><span>Table 1: Recode Type IDs</span></p><figure class='table-figure'><table><thead><tr><th><span>Type ID</span></th><th><span>Record Description</span></th><th><span>Level</span></th></tr></thead><tbody><tr><td><span>H</span></td><td><span>Message Header - contains information about the sender and defines separators and the escape character</span></td><td><span>0</span></td></tr><tr><td><span>P</span></td><td><span>Patient - contains information about an individual patient</span></td><td><span>1</span></td></tr><tr><td><span>O</span></td><td><span>Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request.</span></td><td><span>2</span></td></tr><tr><td><span>R</span></td><td><span>Result - contains the results ofzl a single analytic determination.</span></td><td><span>3</span></td></tr><tr><td><span>M</span></td><td><span>Manufacture Information - the fields in this record are defined by the manufacturer.</span></td><td>&nbsp;</td></tr><tr><td><span>Q</span></td><td><span>Request for information - used to request information, e.g. request outstanding orders for a sample.</span></td><td><span>1</span></td></tr><tr><td><span>L</span></td><td><span>Message Terminator - the last record in the message. A header record may be transmitted after this record signifying the start of a second message.</span></td><td><span>0</span></td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p></div></div>
 </body>
 </html>
