@@ -6,7 +6,7 @@ theme: Pixyll
 tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 ---
 
-# Introduction to ASTM Message Formats
+# Introduction to ASTM Message Formats - DRAFT
 
 | Acronym             | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
