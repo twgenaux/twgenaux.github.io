@@ -32,22 +32,6 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 - [ ] Data Types
 - [ ] A Record Sequence Number is used in record types that may occur multiple tienes within a single message. The number used defines the z'th occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number).
 
-## ASTM Record Notation
-
-The ASTM record notation I use is very similar to IP notation and is used to identify the parts of a record. It consists of a record ID followed by indexes into the parts of the record.  
-
-- RecordID.Field - The specimen ID in the Order record field 3, is denoted as O.3
-
-- RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye
-
-
-
-## Style
-
-Objects or parts start with a capital letter; Order record.
-
-|      |
-| ---- |
 
 The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.
 
@@ -121,13 +105,31 @@ Now we have manually created an Order record. Computers are programed to do some
 O|1|SID102\SID103||Type + Ab Scn Pnl Bld|||||||||||PACKEDCELLS\PLASMA
 ```
 
+### Componets
+
+
+```ASTM
+P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward<CR>
+```
+
+
+## ASTM Record Notation
+
+The ASTM record notation I use is very similar to IP notation and is used to identify the parts of a record. It consists of a record ID followed by indexes into the parts of the record.  
+
+- RecordID.Field - The specimen ID in the Order record field 3, is denoted as O.3
+
+- RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye
+
+
+
 The escape character is the last of the 4 defined characters in the header. The escape character is used to create a sequence of characters to replace the defined characters in the text values. This is similar to what is done in XML when \&lt; is used to replace the reserved character *left angle bracket* (<) in text data.
 
 Take for example the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name was placed in an order profile field as is, it would not be parsed as one profile, but three. To prevent this, embedded repeat field separators are replaced with an escape sequence, which will be converted back to the embedded repeat field separator when it is parsed by the receiver of the message. 
 
 When the sender writes "ABO\Rh\ABScr" into the order record, every repeat separator (\\) is replaced with "&R&",  resulting with a string of "ABO<u>&R&</u>Rh<u>&R&</u>ABScr". When the profile is read by the receiver of the message, every "&R&" is replaced with the repeat field separator (\\), restoring the data to it's original text.
 
-```
+```ASTM
 Profile name: ABO\Rh\ABScr
 When written into the message, replace every field separator (\) with the escape sequence &R&: 
 	ABO&R&Rh&R&ABScr
