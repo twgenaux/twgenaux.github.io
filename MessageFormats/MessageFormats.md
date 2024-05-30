@@ -69,7 +69,7 @@ You can use any text editor that can number the lines and allow you to replace t
 The first step is to split the fields into separate lines:
 
 1. In the Replace dialog, enter the field separator. 
-2. Enter the <CR> and <LF>
+2. Enter the \<CR> and \<LF>
 3. Click Replace All
 
 You now have a list of fields where each line number is also its field position.
@@ -85,7 +85,7 @@ You can use this same technique for listing the fields in reverse to create an O
 To hand code an Order record:
 
 1. Enter each field attribute on the line number that corresponds to its field position as defined by the ASTM standard. For an Order record, the sample ID goes in field 3, so write it on line 3.
-2. In the Replace dialog, enter the <CR> and <LF> 
+2. In the Replace dialog, enter \<CR> and \<LF> 
 3. Enter the field separator. 
 4. Click *Replace all*
 
@@ -116,7 +116,7 @@ If we break the above Order record into fields, we get the following fields and 
 | O.16     | PACKEDCELLS\PLASMA |
 
 
-Fields O.3, Specimen ID, and O.16, Specimen Type are Repeat fields. Now, we can break the O.3 field into its components like we did by replacing the Field separators with <CR><LF>. Only this time we will use the Repeat field separator (^).
+Fields O.3, Specimen ID, and O.16, Specimen Type are Repeat fields. Now, we can break the O.3 field into its components like we did by replacing the Field separators with \<CR>\<LF>. Only this time we will use the Repeat field separator (^).
 
 
 ```ASTM
