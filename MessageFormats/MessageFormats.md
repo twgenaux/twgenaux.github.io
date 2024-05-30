@@ -10,27 +10,27 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 
 | Acronym             | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
-| LIS                 | Laboratory Information Systems                               |
 | ASTM                | Refers to ASTM E1394 and LIS02 standards.                    |
-| Record              | An ordered list of fields, i.e the fields in a Patient record containing a patient's name, date of birth, ... |
-| Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
-| Repeat field        | A repeating field data type, i.e. a list of two or more of a patient's attending physicians |
-| Component           | A single data element of a data type of a field, i.e. a patient's name can consist of a first, middle, and last name, where each name is a componet of the patient name field in a Patient record. |
 | ASTM Message        | An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
 | ASTM Message Format | A specific implantation of the ASTM E1394 or LIS02 standards by a manufacturer. |
+| Component           | A single data element of a field's data type, i.e., of the patient name field in a Patient record. |
+| Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
+| LIS                 | Laboratory Information Systems                               |
+| Record              | An ordered list of fields, i.e., the fields in a Patient record containing a patient's name, date of birth, etc. |
+| Repeat field        | A repeating field data type, i.e., a list of two or more of a patient's attending physicians |
 |                     |                                                              |
 
 ## TODO
 
 - [ ] Add links to standards, LIS guides, and other resources.
 - [x] Explain Field separator
-- [ ] Explain Repeat field separator - multiple sample IDs in an order
+- [ ] Explain Repeat field separator - multiple sample IDs in an order.
 - [ ] Explain Component separator - patient name
 - [ ] Repeated fields with Components - multiple physicians
 - [ ] How do I find out what each field is? The instrument interface guide. The standard.
 - [ ] Add links to the standards
 - [ ] Data Types
-- [ ] A Record Sequence Number is used in record types that may occur multiple timeswithin a single message. The number used defines the nth occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number). Add example message.
+- [ ] A Record Sequence Number is used in record types that may occur multiple times within a single message. The number used defines the nth occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number). Add an example message.
 
 
 The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.
@@ -46,7 +46,7 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
 L|1|N
 ```
 
-An ASTM message is an ordered list of lines, called records. A record is an ordered list of fields. Fields are separated by a Field Separator, in this case a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
+An ASTM message is an ordered list of lines called records. A record is an ordered list of fields. A Field Separator separates fields; in this case, a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
 
 Let's begin with an ASTM Order record with just the essential parts and nothing else.
 
@@ -54,7 +54,7 @@ Let's begin with an ASTM Order record with just the essential parts and nothing 
 O|1|SID101||ABORH|||||||||||CENTBLOOD
 ```
 
-The table below shows the field in the above Order, along with their field position number, data type, and values. The position in the record identifies the data type of each field.  
+The table below shows the fields in the above Order and their field position number, data type, and values. The position in the record identifies the data type of each field.  
 
 ![image-20240419223033977](.\Message Formats.assests\image-20240419223033977.png) 
 
@@ -62,7 +62,7 @@ ASTM messages are easy to implement. Using a field separator makes it easy for c
 
 Let me show you how to manually take apart this Order record and identify each field and the type of information in it.
 
-You can use any text editor that can number the lines and allows you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I'll demonstrate with Notepad++.
+You can use any text editor that can number the lines and allow you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I'll demonstrate with Notepad++.
 
 ![image-20240420191928705](.\Message Formats.assests\image-20240420191928705.png)  
 
@@ -95,9 +95,9 @@ Now we have manually created an Order record. Computers are programed to do some
 
 
 
-## The other separators
 
-### Repeat Fields
+
+# Repeat Fields
 
 A Repeat field is a duplication of the same field where each value is unique. For example, an order record with multiple Specimen IDs; such as a pair of blood samples from the same draw, one containing packed red blood cells and the other plasma.
 
@@ -105,7 +105,82 @@ A Repeat field is a duplication of the same field where each value is unique. Fo
 O|1|SID102\SID103||ABO FWD/RVS|||||||||||PACKEDCELLS\PLASMA
 ```
 
-### Componets
+If we break the above Order record into fields, we get the following fields and values:
+
+| Position | Value              |
+| -------- | ------------------ |
+| O.1      | O                  |
+| O.2      | 1                  |
+| O.3      | SID102\SID103      |
+| O.5      | ABO FWD/RVS        |
+| O.16     | PACKEDCELLS\PLASMA |
+
+
+Fields O.3, Specimen ID, and O.16, Specimen Type are Repeat fields. Now, we can break the O.3 field into its components like we did by replacing the Field separators with <CR><LF>. Only this time we will use the Repeat field separator (^).
+
+
+```ASTM
+SID102\SID103
+```
+
+And we end up with the following:
+
+![image-20240529214915431](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240529214915431.png) 
+
+Note that components are numbered from 1 to n. The ASTM position notation is the following:
+
+
+| Position | Value              |
+| -------- | ------------------ |
+| O.3.1    | SID102             |
+| O.3.2    | SID103             |
+
+
+
+Listing the complete Order record using the ASTM notation, we have this:
+
+
+| Position | Value              |
+| -------- | ------------------ |
+| O.1      | O                  |
+| O.2      | 1                  |
+| O.3.1    | SID102             |
+| O.3.2    | SID103             |
+| O.5      | ABO FWD/RVS        |
+| O.16.1   | PACKEDCELLS        |
+| O.16.2   | PLASMA             |
+
+
+
+
+
+| Position | Value              |
+| -------- | ------------------ |
+| O.1      | O                  |
+| O.2      | 1                  |
+| O.3      | SID102\SID103      |
+| O.3.1    | SID102             |
+| O.3.2    | SID103             |
+| O.5      | ABO FWD/RVS        |
+| O.16     | PACKEDCELLS\PLASMA |
+| O.16.1   | PACKEDCELLS        |
+| O.16.2   | PLASMA             |
+
+
+
+
+
+![image-20240529210743871](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240529210743871.png) 
+
+
+
+fgghjgfhjghjhg
+
+![image-20240529210904860](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240529210904860.png) 
+
+
+
+# Components
 
 
 ```ASTM
