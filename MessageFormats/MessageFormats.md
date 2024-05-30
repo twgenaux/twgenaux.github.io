@@ -125,7 +125,7 @@ SID102\SID103
 
 And we end up with the following:
 
-![image-20240529214915431](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240529214915431.png) 
+![image-20240529214915431](.\assets\image-20240529214915431.png)  
 
 Note that components are numbered from 1 to n. The ASTM position notation is the following:
 
@@ -170,13 +170,13 @@ Listing the complete Order record using the ASTM notation, we have this:
 
 
 
-![image-20240529210743871](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240529210743871.png) 
+![image-20240529210743871](.\assets\image-20240529210743871.png)  
 
 
 
 fgghjgfhjghjhg
 
-![image-20240529210904860](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240529210904860.png) 
+![image-20240529210904860](.\assets\image-20240529210904860.png)  
 
 
 
