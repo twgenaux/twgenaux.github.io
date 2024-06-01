@@ -1,23 +1,30 @@
 ---
 title: Introduction to ASTM Message Formats
 category: LIS
-author: [ Theron W. Genaux, Draft, 2-February-2024]
+author: [ Theron W. Genaux]
 theme: Pixyll
 tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 ---
 
-# Introduction to ASTM Message Formats - DRAFT
+<h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM Message Formats</center></span></h1>
+<h3><span><center>DRAFT</center></span></h1>
+<p style="text-align:center">Theron W. Genaux</p>
+<p style="text-align:center">31-May-2024</p>
 
-| Acronym             | Description                                                  |
+
+# Definitions 
+
+| Term                | Description                                                  |
 | ------------------- | ------------------------------------------------------------ |
 | ASTM                | Refers to ASTM E1394 and LIS02 standards.                    |
 | ASTM Message        | An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
-| ASTM Message Format | A specific implantation of the ASTM E1394 or LIS02 standards by a manufacturer. |
+| ASTM Message Format | A specific implementation of the ASTM E1394 or LIS02 standards by a manufacturer. |
 | Component           | A single data element of a field's data type, i.e., of the patient name field in a Patient record. |
+| Data Type           | A defined format of one or more data values, such as a birthdate, patient's name, etc. |
 | Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
 | LIS                 | Laboratory Information Systems                               |
 | Record              | An ordered list of fields, i.e., the fields in a Patient record containing a patient's name, date of birth, etc. |
-| Repeat field        | A repeating field data type, i.e., a list of two or more of a patient's attending physicians |
+| Repeat field        | A repeating field (data type), i.e., a list of two or more of a patient's attending physicians |
 |                     |                                                              |
 
 ## TODO
@@ -33,9 +40,12 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 - [ ] A Record Sequence Number is used in record types that may occur multiple times within a single message. The number used defines the nth occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number). Add an example message.
 
 
+
+# Introduction
+
 The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.
 
-One example of an ASTM message is provided below. My goal is for you to be able to understand its construction and be able to identify each part. Don't worry, we won't jump into this all at once. We will start small and work our way up to more complex messages as we go along.
+One example of an ASTM message is provided below. My goal is for you to be able to understand its construction and be able to identify each part. Don't worry; we won't jump into this all at once. We will start small and work our way up to more complex messages as we go along.
 
 ```ASTM
 H|\^&|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633
@@ -48,7 +58,7 @@ L|1|N
 
 An ASTM message is an ordered list of lines called records. A record is an ordered list of fields. A Field Separator separates fields; in this case, a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
 
-Let's begin with an ASTM Order record with just the essential parts and nothing else.
+Let's begin with an ASTM Order record with only the essential parts and nothing else.
 
 ```ASTM
 O|1|SID101||ABORH|||||||||||CENTBLOOD
@@ -137,7 +147,7 @@ Note that components are numbered from 1 to n. The ASTM position notation is the
 
 
 
-Listing the complete Order record using the ASTM notation, we have this:
+List of the complete Order record with the ASTM notation and their vaules:
 
 
 | Position | Value              |
@@ -188,7 +198,7 @@ P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edwa
 ```
 
 
-## ASTM Record Notation
+# ASTM Record Notation
 
 The ASTM record notation I use is very similar to IP notation and is used to identify the parts of a record. It consists of a record ID followed by indexes into the parts of the record.  
 
@@ -196,11 +206,11 @@ The ASTM record notation I use is very similar to IP notation and is used to ide
 
 - RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye
 
-## Record Separator
+# Record Separator
 
 
 
-## ASTM Escape Sequences
+# ASTM Escape Sequences
 
 
 The escape character is the last of the 4 defined characters in the header. The escape character is used to create a sequence of characters to replace the defined characters in the text values. This is similar to what is done in XML when \&lt; is used to replace the reserved character *left angle bracket* (<) in text data.

@@ -1,11 +1,18 @@
 ---
 title: ASTM E1394 Message Parsing
 category: ASTM E1394
-author: [ Theron W. Genaux, Revision 2, https://github.com/twgenaux/tgenaux-ASTM-LIS]
+author: [ Theron W. Genaux]
 tags: [LIS,ASTM,E1394,LIS02]
 ---
 
-### ASTM E1394 Message Parsing
+
+
+<h1 id='astm-e1394-message-parsing'><span><center>ASTM E1394 Message Parsing</center></span></h1>
+<h3><span><center>DRAFT</center></span></h1>
+<p style="text-align:center">Theron W. Genaux</p>
+<p style="text-align:center">31-May-2024</p>
+
+
 
 This project demonstrates generically reading and creating ASTM  E1394 messages. 
 
