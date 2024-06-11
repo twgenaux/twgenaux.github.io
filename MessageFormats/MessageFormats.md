@@ -99,7 +99,7 @@ To hand code an Order record:
 3. Enter the field separator. 
 4. Click *Replace all*
 
-Now we have manually created an Order record. Computers are programed to do something similar.
+Now we have manually created an Order record. Computers are programmed to do something similar.
 
 ![image-20240420185552555](.\Message Formats.assests\image-20240420185552555.png) 
 
@@ -109,7 +109,7 @@ Now we have manually created an Order record. Computers are programed to do some
 
 # Repeat Fields
 
-A Repeat field is a duplication of the same field where each value is unique. For example, an order record with multiple Specimen IDs; such as a pair of blood samples from the same draw, one containing packed red blood cells and the other plasma.
+A Repeat field is a duplication of the same field where each value is unique. For example, an order record with multiple Specimen IDs, such as a pair of blood samples from the same draw, one containing packed red blood cells and the other plasma.
 
 ```ASTM
 O|1|SID102\SID103||ABO FWD/RVS|||||||||||PACKEDCELLS\PLASMA
@@ -126,7 +126,7 @@ If we break the above Order record into fields, we get the following fields and 
 | O.16     | PACKEDCELLS\PLASMA |
 
 
-Fields O.3, Specimen ID, and O.16, Specimen Type are Repeat fields. Now, we can break the O.3 field into its components like we did by replacing the Field separators with \<CR>\<LF>. Only this time we will use the Repeat field separator (^).
+Fields O.3, Specimen ID, and O.16, Specimen Type are Repeat fields. Now, we can break the O.3 field into components as we did by replacing the Field separators with \<CR>\<LF>. Only this time, we will use the Repeat field separator (^).
 
 
 ```ASTM
