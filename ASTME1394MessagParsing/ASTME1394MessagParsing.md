@@ -10,7 +10,7 @@ tags: [LIS,ASTM,E1394,LIS02]
 <h1 id='astm-e1394-message-parsing'><span><center>ASTM E1394 Message Parsing</center></span></h1>
 <h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">8-June-2024</p>
+<p style="text-align:center">14-June-2024</p>
 
 
 
@@ -86,7 +86,7 @@ L.1:L
 
 
 
-A bi-directional translation map is used to remap the Position:Value pairs into Key:Value pairs.
+A bi-directional translation map is used to remap the Position:Value pairs into Key:Value pairs. It is also used to remap the Key:ValuePosition:Value pairs back into Position:Value pairs.
 
 An Order record like this:
 
@@ -130,11 +130,6 @@ Remapping to Key:Value pairs:
 ```
 RecordType:O
 SeqeNumber:1
-OrderSampleIDs:SID101
-OrderTestID:ABORH
-OrderSampleTypes:CENTBLOOD
-RecordType:O
-SeqeNumber:1
 OrderSampleIDs:SID102\SID103
 OrderSampleID1:SID102
 OrderSampleID2:SID103
@@ -146,7 +141,7 @@ OrderSampleType2:PLASMA
 
 
 
-We used a bi-directional translation map to remap the message Position:Value pairs into Key:Value pairs. 
+I used a bi-directional translation map to remap the message Position:Value pairs into Key:Value pairs. 
 
 Here we list the extracted message Key:Value pairs:
 
