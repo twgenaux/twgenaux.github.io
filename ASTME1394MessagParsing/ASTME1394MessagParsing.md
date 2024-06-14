@@ -10,7 +10,8 @@ tags: [LIS,ASTM,E1394,LIS02]
 <h1 id='astm-e1394-message-parsing'><span><center>ASTM E1394 Message Parsing</center></span></h1>
 <h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">31-May-2024</p>
+<p style="text-align:center">8-June-2024</p>
+
 
 
 
@@ -22,7 +23,7 @@ I had already seen some code that reads and writes ASTM messages, both on the we
 
 I played around mentally going through different ideas for a while until I realized that an ASTM record is in essence a recursive data structure, one recursion per separator. ASTM records have 3 separators; Field, Repeat-Field, and Components. Because it only has 3 delimiters, it is limited to only 3 levels of recursion. Note, HL7 2.x (Pipehat) has 4 separators and 4 levels of recursion. This code also supports HL7 2.x messages.
 
-The following output is from a program that was developed to explore two ideas; generically reading and writing ASTM messages, and using bi-directional maps to map database orders, patients, and results to create and read ASTM messages. The program supports round-tripping, such that the extracted content from one message can be used to recreate the equivelent original message. This program also works with HL7 Version 2.5 message files.
+The following output is from a program that was developed to explore two ideas; generically reading and writing ASTM messages, and using bi-directional maps (Translation Map) to map database orders, patients, and results to create and read ASTM messages. The program supports round-tripping, such that the extracted content from one message can be used to recreate the equivelent original message. This program also works with HL7 Version 2.5 message files.
 
 
 Input message:
@@ -85,7 +86,69 @@ L.1:L
 
 
 
-Extract message content into Key:Value pairs:
+A bi-directional translation map is used to remap the Position:Value pairs into Key:Value pairs.
+
+An Order record like this:
+
+```
+O|1|SID102\SID103||ABO FWD/RVS|||||||||||PACKEDCELLS\PLASMA
+```
+
+Is parsed into Position:Value pairs:
+
+```
+O.1:O
+O.2:1
+O.3:SID102\SID103
+O.3.1:SID102
+O.3.2:SID103
+O.5:ABO FWD/RVS
+O.16:PACKEDCELLS\PLASMA
+O.16.1:PACKEDCELLS
+O.16.2:PLASMA
+```
+
+It can be remapped into Key:Value pairs using a bi-directional translation map:
+
+```
+RecordType:O.1
+SeqeNumber:O.2
+OrderSampleIDs:O.3
+OrderSampleID1:O.3.1
+OrderSampleID2:O.3.2
+OrderTestID:O.5    # Universal Test ID
+OrderPriority:O.6
+OrderReqDateTime:O.7
+OrderActionCode:O.12
+OrderSampleTypes:O.16
+OrderSampleType1:O.16.1
+OrderSampleType2:O.16.2
+```
+
+Remapping to Key:Value pairs:
+
+```
+RecordType:O
+SeqeNumber:1
+OrderSampleIDs:SID101
+OrderTestID:ABORH
+OrderSampleTypes:CENTBLOOD
+RecordType:O
+SeqeNumber:1
+OrderSampleIDs:SID102\SID103
+OrderSampleID1:SID102
+OrderSampleID2:SID103
+OrderTestID:ABO FWD/RVS
+OrderSampleTypes:PACKEDCELLS\PLASMA
+OrderSampleType1:PACKEDCELLS
+OrderSampleType2:PLASMA
+```
+
+
+
+We used a bi-directional translation map to remap the message Position:Value pairs into Key:Value pairs. 
+
+Here we list the extracted message Key:Value pairs:
 
 ```
 Delimiters:|\^&
