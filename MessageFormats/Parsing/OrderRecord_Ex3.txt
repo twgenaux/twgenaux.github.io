@@ -1,0 +1,3 @@
+# Order Record - Example 3
+P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+
