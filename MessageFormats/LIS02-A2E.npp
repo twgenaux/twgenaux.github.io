@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NotepadPlus>
+    <Session activeView="0">
+        <mainView activeIndex="0">
+            <File firstVisibleLine="11" xOffset="0" scrollWidth="13574" startPos="1953" endPos="1953" selMode="0" offset="3" wrapCount="4" lang="None (Normal Text)" encoding="-1" userReadOnly="no" filename="C:\Users\tgenaux\OneDrive - QuidelOrtho\tgenaux.GitHub\twgenaux.github.io\MessageFormats\LIS02-A2E.txt" backupFilePath="" originalFileLastModifTimestamp="1688181001" originalFileLastModifTimestampHigh="31116622" tabColourId="-1" RTL="no" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no">
+                <Mark line="19" />
+                <Mark line="167" />
+                <Mark line="205" />
+                <Mark line="307" />
+                <Mark line="415" />
+                <Mark line="473" />
+                <Mark line="539" />
+                <Mark line="555" />
+                <Mark line="601" />
+            </File>
+        </mainView>
+        <subView activeIndex="0">
+            <File firstVisibleLine="21" xOffset="0" scrollWidth="2211" startPos="989" endPos="989" selMode="0" offset="0" wrapCount="1" lang="None (Normal Text)" encoding="-1" userReadOnly="no" filename="C:\Users\tgenaux\OneDrive - QuidelOrtho\tgenaux.GitHub\twgenaux.github.io\MessageFormats\LIS02-A2E Map.txt" backupFilePath="" originalFileLastModifTimestamp="-270231682" originalFileLastModifTimestampHigh="31116622" tabColourId="-1" RTL="no" mapFirstVisibleDisplayLine="-1" mapFirstVisibleDocLine="-1" mapLastVisibleDocLine="-1" mapNbLine="-1" mapHigherPos="-1" mapWidth="-1" mapHeight="-1" mapKByteInDoc="512" mapWrapIndentMode="-1" mapIsWrap="no" />
+        </subView>
+    </Session>
+</NotepadPlus>

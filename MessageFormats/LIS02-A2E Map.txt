@@ -1,19 +1,154 @@
+# LIS2-A Standard Specification for Transferring Information Between 
+# Clinical Instruments and Computer Systems
+# 
+# This specification has sufficient flexibility to permit the addition of
+# fields to existing record types or the creation of new record types to
+# accommodate new test and reporting methodologies.
 
-# Message Header Record
-1:Record Type ID
-2:Delimiter Definition
-3:Message Control ID
-4:Access Password
-5:Sender Name or ID
-6:Sender Street Address
-7:Reserved Field
-08:Sender Telephone Number
-09:Characteristics of Sender
-10:Receiver ID
-11:Comment or Special Instructions
-12:Processing ID
-13:Version Number
-14:Date and Time of Message
+# Record Types
+# H - Message Header Record (H)
+# P - Patient Identifying Record (P)
+# O - Test Order Record (O)
+# R - Result Record (R)
+# C - Comment Record (C)
+# Q - Request Information Record (Q)
+# S - Scientific Record (S)
+# M - Manufacturer Information Record (M)
 
 
-# Patient Information Record
+# H - Message Header Record
+# Contains information about the sender and receiver.
+H.1:Record Type ID
+H.2:Delimiter Definition
+H.3:Message Control ID
+H.4:Access Password
+H.5:Sender Name or ID
+H.6:Sender Street Address
+H.7:Reserved Field
+H.8:Sender Telephone Number
+H.9:Characteristics of Sender
+H.10:Receiver ID
+H.11:Comment or Special Instructions
+H.12:Processing ID (P, T, D, Q)
+H.13:Version Number (LIS02-A2)
+H.14:Date and Time of Message
+
+
+# P - Patient Information Record
+# Contains the Patient demographics
+P.1:Record Type
+P.2:Sequence Number
+P.3:Practice-Assigned Patient ID
+P.4:Laboratory-Assigned Patient ID
+P.5:Patient ID Number 3
+P.6:Patient Name
+P.7:Mother’s Maiden Name
+P.8:Birthdate
+P.9:Patient Sex
+P.10:Patient Race-Ethnic Origin
+P.11:Patient Address
+P.12:Reserved Field
+P.13:Attending Physician ID
+P.14:Special Field 1
+P.15:Special Field 2
+P.16:Patient Height
+P.17:Patient Weight
+P.18:Patient Diagnosis
+P.20:Active Medications
+P.21:Patient Diet
+P.22:Practice Field Number 1
+P.23:Practice Field Number 2
+P.24:Admission and Discharge Dates
+P.25:Admission Status
+P.26:Location
+P.27:Diagnostic Codes
+P.28:Alternative Diagnostic Codes
+P.29:Patient Religion
+P.30:Marital Status
+P.31:Isolation Status
+P.32:Language
+P.33:Hospital Service
+P.34:Hospital Institution
+P.35:Dosage Category
+
+# O - Test Order Record
+# Contians all test-specific required fields for ordering one or more tests.
+O.1:Record Type ID
+O.2:Sequence Number
+O.3:Specimen ID
+O.4:Instrument Specimen ID
+O.5:Test ID
+O.6:Priority
+O.7:Requested/Ordered Date and Time
+O.8:Specimen Collection Date and Time
+O.9:Collection End Time
+O.10:Collection Volume
+O.11:Collector ID
+O.12:Action Code
+O.13:Danger Code
+O.14:Relevant Clinical Information
+O.15:Date Time Specimen Received
+O.16:Specimen Descriptor
+O.17:Ordering Physician
+O.18:Physician’s Telephone Number
+O.19:User Field Number 1
+O.20:User Field Number 2
+O.21:Laboratory Field Number 1
+O.22:Laboratory Field Number 2
+O.23:Date Time Results Reported or Last Modified
+O.24:Billing Charge
+O.25:Instrument Section ID
+O.26:Report Type
+O.27:Reserved Field
+O.28:Location of Specimen Collection
+O.29:Nosocomial Infection Flag
+O.30:Specimen Service
+O.31:Specimen Institution
+
+# R - Result Record
+# Contains the results of a single analytical determination.
+R.1:Record Type ID
+R.2:Sequence Number
+R.3:Test ID
+R.4:Measurement Value
+R.5:Units
+R.6:Reference Ranges
+R.7:Abnormal Flags
+R.8:Nature of Abnormality Testing
+R.9:Result Status
+R.10:Date of Change in Normative Values
+R.11:Operator Identification
+R.12:Date Time Test Started
+R.13:Date Time Test Completed
+R.14:Instrument Identification
+
+# C - Comment Record
+C.1:Record Type ID
+C.2:Sequence Number
+C.3:Comment Source
+C.4:Comment Text
+C.5:Comment Type
+
+# Q - Request Information Record
+Q.1:Record Type ID
+Q.2:Sequence Number
+Q.3:Starting Range ID Number
+Q.4:Ending Range ID Number
+Q.5:Test ID
+Q.6:Request Time Limits
+Q.7:Beginning Request Results Date and Time
+Q.8:Ending Request Results Date and Time
+Q.9:Requesting Physician Name
+Q.10:Requesting Physician Telephone Number
+Q.11:User Field Number 1
+Q.12:User Field Number 2
+Q.13:Request Information Status Codes
+
+# L - Message Terminator Record
+L.1:Record Type ID
+L.2:Sequence Number
+L.3:Termination Code
+
+# M - Manufacturer Information Record
+M.1:Record Type ID
+M.2:Sequence Number

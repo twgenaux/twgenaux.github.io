@@ -13,11 +13,26 @@ Repeat field - A single data element winch expresses a duplication of the field 
 Test - A qualitative, semiqualitative, quantitative, or semiquantitative procedure for detecting the presence of, or measuring the quantity of an analyte.
 Upload - Data transmitted from a clinical instrument to an information system.
 
+4. Significance aud Use
+1.	General Information'.
+1.	This specification provides for two-way transmission allowing for data-flow in either direction. It provides for sending demographic and test information to or from clinical instruments. 
+
+This specification has sufficient flexibility to permit the addition of fields to existing record types or the creation of new record types to accommodate new test and reporting methodologies.
+
+2.	This specification is related to NCCLS document LIS5. Both standards use positional convention to define the structure of messages that exchange information about clinical test requests and results. The set of conventions specifies a hierarchical set of records in which the records higher in the hierarchy contain information that is common to all records lower in the hierarchy and thus avoids redundancy in linking data together. The positional convention is simple and direct to implement, requiring only a sequence of strings each having variable length delimited fields which are positionally specified.
+3.	NCCLS document LIS5. in its entirety, is not appropriate for use as a clinical instrument to computer system interface. The conventions of NCCLS document LIS5 regarding record types and the organization of data elements within the records have been adhered to as closely as possible to ensure that common data elements defined there and used within instruments are specified as closely as possible. This facilitates the use of this specification consistent with NCCLS document LIS5 in a number of settings. There are three compelling reasons for developing a separate standard which deviates from NCCLS document LIS5.
+1.	The scope of NCCLS document LIS5 is specifically targeted to accommodate information transfer between two independent computer systems requiring shared patient demographic and test result data. NCCLS document LIS5 contains extensive requirements and limitations, much of which may be of little, if any. use by clinical instrument systems. Further, clinical instruments have test and instrument specific requirements outside the scope of NCCLS document LIS5 and. as such, are not available within the existing NCCLS document LIS5.
+2.	The structure of NCCLS document LIS5 provides great flexibility in the ordering and reporting of test results and patient demographics. While this is appropriate for use by advanced computer systems of equivalent rank. NCCLS document LIS5 clearly falls beyond the technical limitations of many clinical laboratory instruments. This specification attempts to identify, and simplify, all complex data structures and interface procedures and. where practical, restrict multiple procedural options to single procedures appropriate for the clinical instrument setting. Further, this specification has attempted to assign a master/slave hierarchy where conflicts may occur, assigning appropriate responsibility for data processing or reporting operations to the party (clinical instrument or computer system) better able to process a particular task. For example, in all cases involving the ordering or reporting of tests, the instrument manufacturer is solely responsible for assigning the test and result ID numbers (see 6.6.1). These reductions in flexibility directly result in increased structure and clarity, which is deemed more appropriate for ensuring successful interface implementation within the clinical instrument setting.
+3.	NCCLS document LIS5 was developed independent of data protocol and transfer considerations. NCCLS document LIS5 uses maximum field and record lengths. Combined with its record level checksum and error recovery facilities. NCCLS document LIS5 may be implemented without a data protocol layer. By contrast, this message-content specification has been developed in cooperative effort with a correlative low-level data transfer and protocol specification. While each specification (message-content and low-level protocol) is designed to be independently implemented and maintained, the message-content specification presumes that a protocol layer exists that will handle record blocking/deblocking, error detection and recovery, and other associated data transport tasks. As such, all protocol level operations and limitations existing in NCCLS document LIS5 are not applicable, and therefore not included in this document.
+
+
+
+
 4 Information Requirements in Clinical Testing 4.1 General Approach
 Messages may contam one or more requests/results for one or more patients. Tests may be requested as groups of many individual tests. These groups are referred to as “batteries.” Examples of batteries are tests produced on a multichannel analyzer, such as a basic metabolic profile (BMP), physiological groupings of tests (such as liver function tests) and minimal inhibitory concentration tests (MICs) in microbiology testing. The fact that a senes of tests is contained in a battery does not imply that they are all perfonned on the same analytic instrument.
 Messages consist of a hierarchy of records of various ripes. Records at level zero contam information pertaining to the sender identification and completion of transmission. Records at level one of the hierarchy contain information about individual patients. Records at level two contain information about test order requests and specimens. Records at level three contain information about test results.
 Comment records may be inserted at any level in the hierarchy. A comment record always relates to the immediately precedmg patient, order, result, scientific, or manufacturer information record. Therefore, if a comment record were to follow a patient record (level one), then that comment record would be treated as a level two record. A comment record may not follow the message terminator record.
-Manufacturer information records may be inserted at any level in the hierarchy. Tins record ripe always relates to the immediately preceding patient, order, result, scientific, or comment record. Therefore, if a manufacturer information record were to follow a patient record (level one), then the record would be treated as a level two record. Tins record may not follow the message terminator record.
+Manufacturer information records may be inserted at any level in the hierarchy. This record ripe always relates to the immediately preceding patient, order, result, scientific, or comment record. Therefore, if a manufacturer information record were to follow a patient record (level one), then the record would be treated as a level two record. This record may not follow the message terminator record.
 Additional record types are the request-information record and the terminator record. The request- information record provides for the request of demographies or test results to or from the clinical instrument for specified patients, specimens, tests, and dates, and the like. The message terminator record must be the very last record of the message.
 The smallest element of information in any record is the field, containing a single item of information, such as a date, a patient name, or a numeric test result.
 The test order record contains information about ordering a single test, test battery, or a senes of tests or battenes, as discussed in Sections 5.5.3 and 8.
@@ -83,7 +98,7 @@ NOTE: Any number of legal characters may follow.
 6.	Specification of Delimiters
 The actual delimiters to be employed in a given transmission shall be specified in the header message. It is the responsibility of the sender to avoid the inclusion of any delimiter characters within the field contents. The receiving information system will determine what characters to use by reading the specifications of the header it receives. See Section 5.4 for examples of delimiters used for this document.
 7.	Delimiters for Null Values
-Fields shall be identified by their position, obtained by counting field delimiters from the front of the record. Tins position-sensitive identification procedure requires that when the contents of the field are null, its corresponding field delimiter must be included in the record to ensure that the fth field can be found by counting (i—1) delimiters. Delimiters are not included for trailing null fields; that is, if the tenth field was the last field containing data, the record could terminate after the tenth field, and therefore would contain only nine delimiters.
+Fields shall be identified by their position, obtained by counting field delimiters from the front of the record. This position-sensitive identification procedure requires that when the contents of the field are null, its corresponding field delimiter must be included in the record to ensure that the fth field can be found by counting (i—1) delimiters. Delimiters are not included for trailing null fields; that is, if the tenth field was the last field containing data, the record could terminate after the tenth field, and therefore would contain only nine delimiters.
 8.	Fields of No Concern to the Receiving System
 Transmitted records may include more fields than are required by a receiving system. When processing a message, the receiving system may ignore any field it does not require. Fields must always be transmitted, however, in the positional order specified.
 9.	Fields with Null Values
@@ -92,7 +107,7 @@ A system may transmit a null value for a field because: 1) it does not know the 
 network may never transmit the patient' s birtkdate, sex, or race in the patient record when transmitting the order and result records to the requesting system, because it knows that the hospital registry system always broadcasts new or changed patient data to the receiving system.
 Because the sending system can use null values to indicate no change, a null value does not overwrite existing data in the receiving system. In rare circumstances, for example, if a system erroneously sent a patient’s birthdate when the birthdate was actually unknown, the receiving system should replace its existing value for a field with a null value.
 A field containing only a pair of double quotes (Latin-1(34)) should be treated as an instruction to the receiver that the existing contents pertaining to that field definition should be deleted.
-The use of null fields to default to previous values is discouraged, especially in the case of specimen numbers, where it can cause significant ambiguity. Tins section is retained for compatibility with previous versions of this standard. The vendor must document the behavior of the handling of null fields by the mterface.
+The use of null fields to default to previous values is discouraged, especially in the case of specimen numbers, where it can cause significant ambiguity. This section is retained for compatibility with previous versions of this standard. The vendor must document the behavior of the handling of null fields by the mterface.
 5.5 Data Record Usage Overview
 Data shall be exchanged in records of different types. Each record is introduced by field (number one) identifying the record type, and terminated by a carnage return. The following record types are defined.
 NOTE: The record type ID field shall be case insensitive.
@@ -101,14 +116,14 @@ This record shall contain infoimation about the sender and the receiver, that is
 2.	Patient Identifying Record (P)
 This record type contains infoimation about an individual patient.
 3.	Test Order Record (O)
-When sent from the mfonnation system to the instrument, tins record shall represent a test order and may be followed by one or more result records wrhich would contain mfonnation pertinent to the test bemg ordered. When sent by the mstrument to the mfonnation system, it shall provide mfonnation about the specunen test request, and may be followed by result records (at least one record for each test within the ordered batteries).
+When sent from the mfonnation system to the instrument, This record shall represent a test order and may be followed by one or more result records wrhich would contain mfonnation pertinent to the test bemg ordered. When sent by the mstrument to the mfonnation system, it shall provide mfonnation about the specunen test request, and may be followed by result records (at least one record for each test within the ordered batteries).
 4.	Result Record (R)
 Each result record shall contain the results of a smgle analytic detenmnation.
 5.	Comment Record (C)
 Comment records shall apply to any other record except the message trailer record. They may be free standmg messages sent to or from the mstnunent, unrelated to a particular patient or test procedure.
 
 6.	Request Information Record (Q)
-Tins record shall be used to request information for new tests, tests previously ordered, and possibly tests previously reported. A single request information record may request demographic information, or results for an individual test, multiple tests, or all tests for a single date, a senes of dates, or a range of dates, or both, and for an individual patient, group of patients, individual spec miens, groups of specimens, etc.
+This record shall be used to request information for new tests, tests previously ordered, and possibly tests previously reported. A single request information record may request demographic information, or results for an individual test, multiple tests, or all tests for a single date, a senes of dates, or a range of dates, or both, and for an individual patient, group of patients, individual spec miens, groups of specimens, etc.
 7.	Scientific Record (S)
 This record shall be used to exchange results between cluneal sites for the purposes of proficiency testing or method development.
 8.	Manufacturer Information Record (M)
@@ -117,7 +132,7 @@ This record, which is similar to the comment record, may be used to send complex
 1.	Universal Test ID
 This field is defined as a four-part field with provisions to further define the test identification via use of component fields. The test ED field is used to identify a test or battery name. The four parts which are defined below are the universal test identifier, the test name, the test identifier type, and the manufacturer- defined test code. All test ED parts must be separated by a component delimiter and are position dependent. As an example, additional information which may be mcluded in this field type are instrument ID, organism ED (for sensitivity tests), well number, cup number, location number, tray number, bar-code number, etc. It is the responsibility of the instrument manufacturer to define the data content of the test ED field. When the test ED is used in the result record, there must be sufficient information within the test ED field to determine the relationship of the test result to the test, battery, or batteries ordered.
 1.	Universal Test ED (Pari 1)
-Tins is the first component of the test ED field. Tins field is currently unused but reserved for the application of a universal test identifier code (LOENC Codes), should one system become available for use at a future time.
+This is the first component of the test ED field. This field is currently unused but reserved for the application of a universal test identifier code (LOENC Codes), should one system become available for use at a future time.
 2.	 Universal T est ED Name (Pari 2)
 This would be the test or battery name associated with the universal test ED code described in Section 5.6.1.1.
 3.	Universal Test ED Type (Pari 3)
@@ -138,26 +153,26 @@ When multiple telephone numbers apply, they may be included in one field and sep
 When a field contains a specific observation, for example, patient’s weight, patient's height, or collection volume, the default units of measurement for that observation are specified in the field definition. When the observation is measured in the default units, the units need not be transmitted. If the measure is recorded in muts different from the default, for example, if the weight is measured in pounds rather than kilograms, the measurement units must be transmitted. In this case, the units are transmitted in the same field as the measurement. The units follow the measure and are separated from it by a component delimiter, for example, 100 * lb. Units should be expressed in ISO standard abbreviations in accordance with ISO 2955 4
 3.	Addresses
 An address occupies a single field in a record. The address may be comprised of five components (street address, city, state, zip, or postal code, and country code) separated by component delmuters so that the receiving party can break them into separate fields as needed. An example would be 52 Hilton Street #B42 ‘ Chicago ' EL ' 60305	* USA. The country need only be transmitted when it cannot be assumed
-from the context. The components of tins field are position dependent.
+from the context. The components of This field are position dependent.
 4.	Provider and User IDs
 Physicians’ and other caregivers’ codes may be transmitted as internal code numbers, as full names, or both, as mutually agreed upon between the sender and the receiver. When both the name and ID number are sent. ED numbers should come first and be separated from the name by a component delmuter. Each component of the name is also separated by a component delmuter. The order of the components of the name shall be: 1) last name; 2) first name; 3) middle initial or name; 4) suffix (e.g., Jr., Sr.); and 5) title (e.g.. Dr.. Mi'.). Thus, if Dr. John G. Jones, Jr. had an identifier of 401-0, his number and name would be
 
 transmitted as 401-0 * JONES ’ JOHN G ’ JR ’ DR. When necessary, more than one ID may be sent within one field. Multiple IDs in one field are separated by repeat delimiters.
 7.	Record Sequence Number
-Tins is a required field used in record types that may occur multiple tunes within a single message. The number used defines the /111 occurrence of the associated record type at a particulai* Inerarchical level and is reset to one whenever a record of a greater Inerarchical significance (lower number) is transmitted or if the same record is used at a different hierarchical level (e.g., comment records).
+This is a required field used in record types that may occur multiple tunes within a single message. The number used defines the /111 occurrence of the associated record type at a particulai* Inerarchical level and is reset to one whenever a record of a greater Inerarchical significance (lower number) is transmitted or if the same record is used at a different hierarchical level (e.g., comment records).
 7.	Examples of Basic Record Types
 The following examples are given for a set of transmitted results for a given patient. These will show how the employment of the conventions defined lead to a valid message. In these examples, the first two fields of each line (record) of the message body contam the record type and the integer record sequence number (excepting the header record). Carriage return is mdicated by <CR>. To simplify the example, all the components of each record have not been mcluded. Ellipses (...) are used to mdicate fields that are left out and comments are enclosed in square brackets. Record hierarchical levels are shown by indentation.
 NOTE: The user may wish to study the record definitions outlmed in Section 6 before reviewing the samples shown in Figures 3 to 11. Trailmg fields, unused, may or may not have field delmiiters transmitted. Both cases should be handled by the receiving parser.
 
 
 6 Message Header Record
-The header shall contam identifiers of both the sender and the receiver. The message header is a level zero record and must be followed at some point by a message terminator record before ending the session or transmitting another header record. Tins record type must always be the first record in a transmission.
+The header shall contain identifiers of both the sender and the receiver. The message header is a level zero record and must be followed at some point by a message terminator record before ending the session or transmitting another header record. This record type must always be the first record in a transmission.
 1.	Record Type ID
 The character H identifies the record as a message header record.
 2.	Delimiter Definition
-The five Latin-1 characters that immediately follow the H (the header ED) define the delimiters to be used throughout the subsequent records of the message. The second character in the header record is the field delimiter, the thud character is the repeat delimiter, the fourth character is the component delimiter, and the fifth is the escape character. A field delimiter follows these characters to separate them from subsequent fields. Another way to view tins is that the first field contains H and the second field contains the repeat, component, and escape delimiters. Using the example delimiters, the first six characters in the header record would appear as follows: H | V & |.
+The five Latin-1 characters that immediately follow the H (the header ED) define the delimiters to be used throughout the subsequent records of the message. The second character in the header record is the field delimiter, the thud character is the repeat delimiter, the fourth character is the component delimiter, and the fifth is the escape character. A field delimiter follows these characters to separate them from subsequent fields. Another way to view This is that the first field contains H and the second field contains the repeat, component, and escape delimiters. Using the example delimiters, the first six characters in the header record would appear as follows: H | V & |.
 3.	Message Control ID
-This is a unique number or other ED that uniquely identifies the transmission for use in network systems that have defined acknowledgment protocols that are outside of the scope of tins document. Note that tins is the tim'd field.
+This is a unique number or other ED that uniquely identifies the transmission for use in network systems that have defined acknowledgment protocols that are outside of the scope of This document. Note that This is the tim'd field.
 
 4.	Access Password
 This is a level secunty/access password as mutually agreed upon by the sender and receiver. If this security check fails, the transmission will be aborted, and the sender will be notified of an access violation.
@@ -187,7 +202,8 @@ Tliis value identifies the version level of the specification. This value is cur
 6.14 Date and Time of Message
 Tliis field contains the date and tune that the message was generated using the format specified in Section
 5.6.2.
-Patient Information Record
+
+7. Patient Information Record
 Each line of the patient record shall begin with a record type and end with a carnage return.
 1.	Record Type
 The character P identifies the record as a patient record.
@@ -199,16 +215,16 @@ Tliis identifier shall be the unique ED assigned and used by the practice to ide
 4.	Laboratory-Assigned Patient ID
 Tliis identifier shall be the unique processing number assigned to the patient by the laboratory*.
 5.	Patient ID Number 3
-Tliis field shall be optionally used for additional, universal, or manufacturer-defined identifiers (such as the social security account no.), as arranged between the transmitter and the receiver. Please note that individuals are not required to provide social security numbers.
+This field shall be optionally used for additional, universal, or manufacturer-defined identifiers (such as the social security account no.), as arranged between the transmitter and the receiver. Please note that individuals are not required to provide social security numbers.
 6.	Patient Name
 The patient's name shall be presented in the following format: last name, first name, middle name or initial, suffix, and title, and each of these components shall be separated by a component delimiter as described in Section 5.6.6.
 7.	Mother’s Maiden Name
-The optional mother's maiden name may be required to distinguish between patients with the same birthdate and last name when registry files are very large. Tins name shall be presented as the mother's maiden surname, for example, Thompson.
+The optional mother's maiden name may be required to distinguish between patients with the same birthdate and last name when registry files are very large. This name shall be presented as the mother's maiden surname, for example, Thompson.
 8.	Birthdate
 The birthdate shall be presented in the standard format specified in Section 5.6.2.
 
 9.	Patient Sex
-Tins field shall be represented by M, F, or U.
+This field shall be represented by M, F, or U.
 10.	Patient Race-Ethnic Origin
 The following examples may be used:
 W	white
@@ -226,14 +242,14 @@ The patient’s telephone number is formatted as defined in Section 5.6.3.
 14.	Attending Physician ID
 This field shall identify the physician(s) caring for the patient as either names or codes, as agreed upon between the sender and the receiver. Identifiers or names, or both, should be separated by component delimiters as specified in Section 5.6.6. Multiple physician names (for example, ordering physician, attending physician, referring physician) shall be separated by repeat delimiters.
 15.	Special Field 1
-This is an optional text field for vendor use (each laboratory can use tins differently).
+This is an optional text field for vendor use (each laboratory can use This differently).
 16.	Special Field 2
 This is an optional text field for vendor use.
 17.	Patient Height
 This is an optional numeric field containing the patient’s height. The default units are centmieters. If measured in ternis of another unit, the units should also be transmitted as specified in Section 5.6.4.
 
 18.	Patient Weight
-Tins is an optional numeric field containing the patient's weight. The default units are kilograms. If measured in tenus of another mut, for example, pounds, the unit name shall also be transmitted as specified in Section 5.6.4. Height and weight information is not currently required by all labora tones but is of value in estimating nonnative values based upon body surface area.
+This is an optional numeric field containing the patient's weight. The default units are kilograms. If measured in tenus of another mut, for example, pounds, the unit name shall also be transmitted as specified in Section 5.6.4. Height and weight information is not currently required by all labora tones but is of value in estimating nonnative values based upon body surface area.
 19.	Patient’s Known or Suspected Diagnosis
 This value should be entered either as an ICD-9 code or as free text. If multiple diagnoses are recorded, they shall be separated by repeat delimiters.
 20.	Patient Active Medications
@@ -280,7 +296,7 @@ SE	secretion/excretion precautions
 SI	strict isolation
 WSP wound and skin precautions
 32.	Language
-The value of this field indicates the patient's primary language. Tins may be needed when the patient is not fluent in the local language.
+The value of this field indicates the patient's primary language. This may be needed when the patient is not fluent in the local language.
 
 33.	Hospital Service
 This value indicates the hospital service currently assigned to the patient. Both code and text may be sent when separated by a component delimiter as in Section 5.6.6.
@@ -288,6 +304,7 @@ This value indicates the hospital service currently assigned to the patient. Bot
 This value indicates the hospital institution currently assigned to the patient. Both code and text may be sent when separated by a component delimiter as in Section 5.6.6.
 35.	Dosage Category
 This value indicates the patient dosage group. For example, A-ADULT, PI-PEDIATRIC (one to six months), P2-PEDIATRIC (six months to three years), etc. Subcomponents of this field may be used to define dosage subgroups.
+
 8 Test Order Record
 1.	General
 The test order record defines the attributes of a particular request for a clinical instrument’s services and contains all specimen information. An order record will be generated by the information system to request a given test, battery, or set of tests. The information in an order record will usually apply to a single specimen. However, there is not necessarily a one-to-one relationship between specimen and tests ordered. Different test batteries will usually be ordered within different order records even when they can be performed on a single specimen. In this case, the specimen information is duplicated in each of the order records that employ that specimen.
@@ -302,10 +319,11 @@ Microbiological culture results are different. A new order record should be crea
 3.	General Applications
 The order record may be used in four different circumstances:
 1.	It is sent by the information system to request a particular set of instrument tests.
-2.	It is transmitted back to the information system as part of the results. If the ordered instrument analyses can be completed, the instrument sends back the order record along with the result records according to the hierarchy described in tins document. If results cannot be produced, for example, because the specimen is hemolyzed, the laboratory transmits the order with an appropriate report ripe (see Section 8.4.26) to indicate this problem, but no result records are transmitted.
-3.	The order record is transmitted back to the information system in response to a request information query. In tins case, it has the same form as in paragraph (2) above.
+2.	It is transmitted back to the information system as part of the results. If the ordered instrument analyses can be completed, the instrument sends back the order record along with the result records according to the hierarchy described in This document. If results cannot be produced, for example, because the specimen is hemolyzed, the laboratory transmits the order with an appropriate report ripe (see Section 8.4.26) to indicate this problem, but no result records are transmitted.
+3.	The order record is transmitted back to the information system in response to a request information query. In This case, it has the same form as in paragraph (2) above.
 4.	The instrument is requesting demographic or tests-ordered information from the information system.
 3.	Field Definitions
+
 The order record is comprised of the following fields:
 1.	Record Type ID
 The character assigned to the order record shall be O.
@@ -315,7 +333,7 @@ This field shall be represented as described in Section 5.6.7.
 This text field shall represent a unique identifier for the specimen assigned by the information system and returned by the instrument. If the specimen has multiple components further identifying cultures derived from it, these component identifiers will follow the specimen ID and be separated by component delimiters. For example, the specimen ED may contain the specimen number followed by the isolate number, well or cup number (for example, 1043 5A ' 01 64).
 
 4.	Instrument Specimen ID
-Tins text field shall represent a unique identifier assigned by the instrument, if different from the information system identifier, and returned with results for use in referring to any results.
+This text field shall represent a unique identifier assigned by the instrument, if different from the information system identifier, and returned with results for use in referring to any results.
 5.	Universal Test ID
 This field shall use universal test ID as described in Section 5.6.1.
 6.	Priority
@@ -327,7 +345,7 @@ C	callback
 P	preoperative
 If more than one priority code applies, they must be separated by repeat delmuters.
 7.	Requested/Ordered Date and Time
-The contents of this field shall be represented as specified in Section 5.6.2 and will denote the date and tune the test order should be considered ordered. Usually tins will be the date and tune the order was recorded. This is the date and tune against winch the priorities should be considered. If the ordering service wants the test performed at a specified tune in the future, for example, a test to be drawn two days in the future at 8 p in., the future date and tune should be recorded here. Note that the message header data and the future date and tune should be recorded here. Further, note that the message header record date and tune (see Section 6.14) mdicates the tune the order was transmitted to or from the instrument.
+The contents of this field shall be represented as specified in Section 5.6.2 and will denote the date and tune the test order should be considered ordered. Usually This will be the date and tune the order was recorded. This is the date and tune against winch the priorities should be considered. If the ordering service wants the test performed at a specified tune in the future, for example, a test to be drawn two days in the future at 8 p in., the future date and tune should be recorded here. Note that the message header data and the future date and tune should be recorded here. Further, note that the message header record date and tune (see Section 6.14) mdicates the tune the order was transmitted to or from the instrument.
 8.	Specimen Collection Date and Time
 This field shall represent the actual tune the specimen was collected or obtained.
 9.	Collection End Time
@@ -340,7 +358,7 @@ This field shall identify the person and facility which collected the specimen. 
 12.	Action Code
 Tliis field shall indicate the action to be taken with respect to the specnnens that accompany or precede this request. The following codes shall be used:
 C cancel request for the battery or tests named
-A add the requested tests or batteries to the existing specimen with the patient and specimen identifiers and date/tune given in tins record N	new requests accompanying	a new specimen
+A add the requested tests or batteries to the existing specimen with the patient and specimen identifiers and date/tune given in This record N	new requests accompanying	a new specimen
 P	pending specimen
 L	reserved
 X specimen or test already in process Q	treat specimen as a Q/C test specimen
@@ -370,9 +388,9 @@ Tliis is an optional field definable for any use by the laboratory7.
 22.	Laboratory Field Number 2
 Tliis field is similar to that described in Section 8.4.21.
 23.	Date Time Results Reported or Last Modified
-Tliis field is used to indicate the date and tune the results for the order are composed into a report, or into this message or when a status as defined in Sections 8.4.26 or 9.9 is entered or changed. When the information system queries the instrument for untransmitted results, the information in tins field may be used to control processing on the communications link. Usually, the ordering service would only want those results for which the reporting date and tune is greater than the date and tune the inquiring system last received results. Dates and tunes should be recorded as specified m Section 5.6.2.
+This field is used to indicate the date and tune the results for the order are composed into a report, or into this message or when a status as defined in Sections 8.4.26 or 9.9 is entered or changed. When the information system queries the instrument for untransmitted results, the information in This field may be used to control processing on the communications link. Usually, the ordering service would only want those results for which the reporting date and tune is greater than the date and tune the inquiring system last received results. Dates and tunes should be recorded as specified m Section 5.6.2.
 24.	Instrument Charge to Information System
-Tliis field contains the billmg charge or accounting reference by this instrument for tests performed.
+Tliis field contains the Billing charge or accounting reference by this instrument for tests performed.
 25.	Instrument Section ID
 Tliis identifier may denote the section of the instrument where the test was performed. In the case where multiple instruments are on a single lme or a test was moved from one instrument to another, this field will show which instrument or section of an instrument performed the test.
 26.	Report Types
@@ -394,7 +412,8 @@ Tliis field is used for epidemiological reporting purposes and will show whether
 30.	Specimen Service
 In cases wiiere an individual service may apply to the specimen collected, and the service is different from the patient record service, tliis field may be used to define the specific sendee responsible for such collection.
 31.	Specimen Institution
-In cases where the specimen may have been collected in an institution, and the institution is different from the patient record institution, tins field may be used to record the institution of specimen collection.
+In cases where the specimen may have been collected in an institution, and the institution is different from the patient record institution, This field may be used to record the institution of specimen collection.
+
 9 Result Record
 The result record shall include the following fields:
 1.	Record Type ID
@@ -404,7 +423,7 @@ The sequence number shall be assigned as described in Section 5.6.7.
 3.	Universal Test ID
 Tliis field shall use the universal test IDs described in Section 5.6.1.
 4.	Data or Measurement Value
-Whether numeric, text, or coded values, the data shall be recorded in ASCII text notation. If the data result contains qualifying elements of equal stature, these should be separated by component delimiters. Tliis applies strictly to results of identical nature (that is, this field may not contam implied subvalues). Use of components within tins field should be avoided whenever possible.
+Whether numeric, text, or coded values, the data shall be recorded in ASCII text notation. If the data result contains qualifying elements of equal stature, these should be separated by component delimiters. Tliis applies strictly to results of identical nature (that is, this field may not contam implied subvalues). Use of components within This field should be avoided whenever possible.
 Multiple results or values, observed, calculated, or implied, for a single test order (i.e., MIC or interpretation codes from a single antibiotic sensitivity test) must be reported in separate result records with each result definition defined uniquely by the test ED field as given in Section 9.3. Correspondingly, the test ED field (see Section 9.3) must be sufficiently descriptive to determine the placement of the data value with reference to the original test order record and to other result records associated with said test order record.
 
 5.	Units
@@ -450,7 +469,9 @@ This field records the date and tune the instrument started the test for which t
 13.	Date Time Test Completed
 This field records the date and tune the instrument completed the test for which the results are now’ being reported. Date and tune should be reported as specified in Section 5.6.2.
 14.	Instrument Identification
-This field identifies the instrument or section of instrument that performed tins particular measurement.
+This field identifies the instrument or section of instrument that performed This particular measurement.
+
+
 10 Comment Record
 Comment records may be inserted anywhere except after the message terminator record. Each comment record shall apply to the first noncomment record precedmg it. The comment record shall include the following fields:
 10.1 Record Type ID
@@ -472,7 +493,9 @@ T	result name comment
 P	positive result comment
 N	negative result comment
 I.	instrument flag(s) comment
-II.	Request Information Record
+
+
+Request Information Record
 The request information record is used by either clinical instrument or information system to remotely request information from the reciprocal system.
 NOTE: Only one request record may be outstanding at a time; the receiver of a request record must terminate the request, when finished, by means of the message terminator record, or the sender must cancel the request before sending a second logical request.
 The request record shall include the following fields:
@@ -488,7 +511,7 @@ This specification does not address how long data are to be retamed by an instru
 4.	Ending Range ID Number
 This field is similar to that described in Section 11.3. If a single result or specimen demographic or test order is being requested, then this field may be left blank.
 5.	Universal Test ID
-This field is as described in Section 5.6.1. Tins field may alternatively contain multiple codes separated by repeat delimiters, or the field may contam the text ALL, which signifies a request for all results on all tests or batteries for the patients/'specimens/tests defined in Sections 11.3 and 11.4 and within the dates described in Sections 11.6 and 11.7.
+This field is as described in Section 5.6.1. This field may alternatively contain multiple codes separated by repeat delimiters, or the field may contam the text ALL, which signifies a request for all results on all tests or batteries for the patients/'specimens/tests defined in Sections 11.3 and 11.4 and within the dates described in Sections 11.6 and 11.7.
 6.	Nature of Request Time Limits
 Specify whether the date and tune limits specified in Sections 11.7 and 11.8 refer to the specunen collect or ordered date (see Section 8.4.8) or test date (see Section 8.4.23): S mdicates the specunen collect date; R mdicates the result test date. If notlung is entered, the date criteria are assumed to be the result test date.
 7.	Beginning Request Results Date and Time
@@ -499,7 +522,7 @@ This field, if not null, specifies the endmg or latest (or most recent) date and
 9.	Requesting Physician Name
 This field identifies the mdividual physician requestmg the results. The identity of the requesting physician is recorded as specified in Section 5.6.6.
 
-10.	Requesting Physician Telephone Number Tins field is as specified in Section 5.6.3.
+10.	Requesting Physician Telephone Number This field is as specified in Section 5.6.3.
 11.	User Field Number 1 This is a user-defined field.
 12.	User Field Number 2 This is a user-defined field.
 13.	Request Information Status Codes
@@ -516,11 +539,12 @@ A abort/cancel last request entena (allows a new request to follow')
 N	requesting newr or edited results only
 O requesting test orders and demographies only (no results)
 D	requesting demographics only (e.g., patient record)
+
 12 Message Terminator Record
 This is the last record in the message. A header record may be transmitted after this record signifying the start of a second message.
 1.	Record Type ID This record type is coded as L.
 2.	Sequence Number
-This field is as described in Section 5.6.7. (For this record type, the value of tins field should always be
+This field is as described in Section 5.6.7. (For this record type, the value of This field should always be
 1.)
 3.	Termination Code
 This field provides an explanation of the end of the session.
@@ -531,6 +555,7 @@ Q	error in last request for information
 
 I no information available from last query F last request for information processed
 NOTE: I or Q will terminate a request and allowr processing of a new request record.
+
 13 Scientific Record
 The scientific record exchanges the test data on cluneal laboratory/instrument performance, quality assurance, or method development. It contains information in addition to the analyte measures found in the result record, although there are common elements in the two records.
 1.	Record Type ID
@@ -569,7 +594,7 @@ This field shall be represented in accordance with Section 5.6.2.
 17.	Analytical Preprocessing Steps
 This text field shall contam the description of any preprocessmg steps.
 18.	Patient Diagnosis
-Tins field shall be represented as IDC-9-CM codes.
+This field shall be represented as IDC-9-CM codes.
 19.	Patient Birthdate
 This should be represented as specified in Section 7.8.
 20.	Patient Sex
@@ -578,7 +603,7 @@ This field shall be represented in accordance with Section 7.9.
 This should be represented in accordance with Section 7.10.
 
 14 Manufacturer Information Record
-Tins record is provided solely for custom use by the instrument or computer system manufacturer. It has no inherent hierarchical level and may be inserted at any point except immediately following a message terminator record. It is recommended that tins record type not be implemented unless all other possibilities have been exhausted. This record shall include the following:
+This record is provided solely for custom use by the instrument or computer system manufacturer. It has no inherent hierarchical level and may be inserted at any point except immediately following a message terminator record. It is recommended that This record type not be implemented unless all other possibilities have been exhausted. This record shall include the following:
 •	Record type ED—C oded as M.
 •	Sequence number—As defined in Section 5.6.7.
 HEADER
