@@ -1,0 +1,48 @@
+AstmMessageParsing.exe Example2.txt /TransMap:"LIS02-A2E Map.txt"
+
+O.1:O
+O.2:1
+O.3:SID102\SID103
+O.3.1:SID102
+O.3.2:SID103
+O.5:ABO FWD/RVS
+O.16:PACKEDCELLS\PLASMA
+O.16.1:PACKEDCELLS
+O.16.2:PLASMA
+
+
+
+
+
+O|1|SID102\SID103||ABO FWD/RVS|||||||||||PACKEDCELLS\PLASMA
+
+
+
+
+
+O.1:O
+O.2:1
+O.3:SID101
+O.5:ABORH
+O.16:CENTBLOOD
+
+Record Type ID:O
+Sequence Number:1
+Specimen ID:SID101
+Test ID:ABORH
+Specimen Descriptor:CENTBLOOD
+
+M.1:O
+M.2:1
+O.3:SID101
+Q.5:ABORH
+O.16:CENTBLOOD
+
+
+
+O|1|SID101||ABORH|||||||||||CENTBLOOD
+
+
+O|1|SID101||ABORH|||||||||||CENTBLOOD
+
+
