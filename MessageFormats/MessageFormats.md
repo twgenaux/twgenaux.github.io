@@ -31,6 +31,10 @@ L|1|N
 
 An ASTM message is an ordered list of lines called records. A record is an ordered list of fields. A Field Separator separates fields; in this case, a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
 
+
+
+# Field Separator
+
 Let's begin with an ASTM Order record with only the essential parts and nothing else.
 
 ```ASTM
@@ -92,7 +96,7 @@ Now, we have manually created an Order record. Computers are programmed to do so
 
 
 
-# Repeat Fields
+# Repeat Field Separator
 
 A Repeat field contains multiple unique field values. For example, an order record with multiple Specimen IDs, such as a pair of blood samples from the same draw, one containing packed red blood cells and the other plasma.
 
@@ -137,7 +141,7 @@ Below, I list the complete order record field position notations, Data Types, an
 
   
 
-# Components
+# Component Separator
 
 One data type that occurs in ASTM is a person's full name.  ASTM specifies that full names follow this format: last name, first name, middle name or initial, suffix, and title. Full names have several components, and the component separator separates each part.  Naming conventions vary considerably around the world. Full names can be in any format agreed upon between the sender and the receiver. This means the parts of a full name do not have to be separated by the component separator. When more than one full name is required, they are separated by a repeat separator.
 
@@ -201,12 +205,40 @@ Below is a list of the fields, their position notation, Data Type, and value.
 
 
 
+# Escape Sequences
+
+Separators and escape characters can vary with each message; they are defined in the Header record and used throughout the message. The escape character is the last of the four defined characters in the header. Its primary purpose is to create a sequence of characters to replace message separator characters used in field data. There is also an escape sequence for the escape character. 
+
+ASTM messages use escape sequences to handle situations where the standard field separator character might appear within the data. 
+
+- **Standard Separators:** The structure of an ASTM message uses specific characters to separate different data elements. Depending on the specific implementation, these separators could be commas, pipes ("|"), or other characters.
+
+- **Data with Separators:**  Sometimes, the data might contain the same separator character used in the structure of the message.
+
+Escape sequences avoid confusion when the receiver reads a message. The special character sequence tells the receiving system to interpret the escape sequence as a separator *character*, not part of the message's structure.
+
+Take, for example, the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name were placed in the order profile field as is, the receiver would read it as three repeat fields and not one profile name. To prevent this, the repeat field separators in the text data are replaced by the sender with an escape sequence, which will be converted back to the repeat field separator character by the receiver of the message.
+
+| ESCAPE Sequence |                                 |
+| --------------- | ------------------------------- |
+| &F&             | Embedded field separator        |
+| &S&             | Embedded component separator    |
+| &R&             | Embedded repeat field separator |
+| &E&             | Embedded escape character       |
+
+
+
+
 
 # ASTM Record Notation
 
 The ASTM record notation I use allows us to identify the parts of a record. It consists of a record ID followed by indexes, one for Field, Repeat Field, and Component.  
 
-Record-ID.Field.Repeat.Component
+​	Record-ID.Field.Repeat.Component
+
+When a message contains records with sequence number greater than 1, we can use the following notation to indicate the record being referenced.
+
+​	Record-ID.Field[SequenceNumber].Repeat.Component
 
 # Breaking down the introductory Message
 
@@ -320,30 +352,6 @@ A Result record is returned for each separate analysis requested by the test.
 
 
 
-# ASTM Escape Sequences
-
-Separators and escape characters can vary with each message; they are defined in the Header record and used throughout the message. The escape character is the last of the four defined characters in the header. Its primary purpose is to create a sequence of characters to replace message separator characters used in field data. There is also an escape sequence for the escape character. 
-
-ASTM messages use escape sequences to handle situations where the standard field separator character might appear within the data. 
-
-- **Standard Separators:** The structure of an ASTM message uses specific characters to separate different data elements. Depending on the specific implementation, these separators could be commas, pipes ("|"), or other characters.
-
-- **Data with Separators:**  Sometimes, the data might contain the same separator character used in the structure of the message.
-
-Escape sequences avoid confusion when the receiver reads a message. The special character sequence tells the receiving system to interpret the escape sequence as a separator *character*, not part of the message's structure.
-
-Take, for example, the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name were placed in the order profile field as is, the receiver would read it as three repeat fields and not one profile name. To prevent this, the repeat field separators in the text data are replaced by the sender with an escape sequence, which will be converted back to the repeat field separator character by the receiver of the message.
-
-| ESCAPE Sequence |                                 |
-| --------------- | ------------------------------- |
-| &F&             | Embedded field separator        |
-| &S&             | Embedded component separator    |
-| &R&             | Embedded repeat field separator |
-| &E&             | Embedded escape character       |
-
-
-
-
 # Definitions 
 
 | TERM                | DESCRIPTION                                                  |
@@ -379,3 +387,4 @@ Take, for example, the name of a profile that contains the repeat field separato
 
 - [ ] Add section - How do I find out the definition of each field?
 - [ ] Add a refernce section with links to standards, LIS guides, and other resources.
+- [ ] Add an example message in section ASTM Record Notation to illustrate the notation
