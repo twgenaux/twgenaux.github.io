@@ -9,7 +9,8 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 <h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM Message Formats</center></span></h1>
 <h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">11-July-2024</p>
+<p style="text-align:center">21-July-2024</p>
+
 
 
 
@@ -353,11 +354,17 @@ A Result record is returned for each separate analysis requested by the test.
 
 # ASTM Escape Sequences
 
-The escape character is the last of the four defined characters in the header. Its primary purpose is to create a sequence of characters to replace message separator characters used in fields. There is also an escape sequence for the escape character. 
+Separators and escape characters can vary with each message; they are defined in the Header record and used throughout the message. The escape character is the last of the four defined characters in the header. Its primary purpose is to create a sequence of characters to replace message separator characters used in field data. There is also an escape sequence for the escape character. 
 
-ASTM uses escape sequences to differentiate between field text data, reserved separators, and escape characters. 
+ASTM messages use escape sequences to handle situations where the standard field separator character might appear within the data. 
 
-Take, for example, the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name were placed in an order profile field as is, the receiver would read it as 3 repeat fields and not one profile name. To prevent this, the repeat field separator in the text data is replaced by the sender with an escape sequence, which will be converted back to the embedded repeat field separator character by the receiver of the message.
+- **Standard Separators:** The structure of an ASTM message uses specific characters to separate different data elements. Depending on the specific implementation, these separators could be commas, pipes ("|"), or other characters.
+
+- **Data with Separators:**  Sometimes, the data might contain the same separator character used in the structure of the message.
+
+Escape sequences avoid confusion when the receiver reads a message. The special character sequence tells the receiving system to interpret the escape sequence as a separator *character*, not part of the message's structure.
+
+Take, for example, the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name were placed in the order profile field as is, the receiver would read it as three repeat fields and not one profile name. To prevent this, the repeat field separators in the text data are replaced by the sender with an escape sequence, which will be converted back to the repeat field separator character by the receiver of the message.
 
 | ESCAPE Sequence |                                 |
 | --------------- | ------------------------------- |
@@ -366,7 +373,7 @@ Take, for example, the name of a profile that contains the repeat field separato
 | &R&             | Embedded repeat field separator |
 | &E&             | Embedded escape character       |
 
-Separators and escape characters can vary with each message; they are defined in the Header record and used throughout the message.
+
 
 
 
