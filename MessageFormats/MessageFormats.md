@@ -15,38 +15,30 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 
 # Definitions 
 
-| Term                | Description                                                  |
+| TERM                | DESCRIPTION                                                  |
 | ------------------- | ------------------------------------------------------------ |
 | ASTM                | Refers to ASTM E1394 and LIS02 standards.                    |
 | ASTM Message        | An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
 | ASTM Message Format | A specific implementation of the ASTM E1394 or LIS02 standards by a manufacturer. |
-| Component           | A single data element of a field's data type, i.e., of the patient name field in a Patient record. |
+| Component           | A single data element of a field's Data Type, i.e., of the patient name field in a Patient record. |
 | Data Type           | A defined format of one or more data values, such as a birthdate, patient's name, etc. |
 | Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
 | LIS                 | Laboratory Information Systems                               |
 | Record              | An ordered list of fields, i.e., the fields in a Patient record containing a patient's name, date of birth, etc. |
-| Repeat field        | A repeating field (data type), i.e., a list of two or more of a patient's attending physicians |
-|                     |                                                              |
+| Repeat field        | A repeating field (Data Type), i.e., a list of two or more of a patient's attending physicians |
+| Sequence Number     | Used to distinguish records of the same type that may occur multiple times within ahierarchical level within a message. |
 
 ## TODO
 
 - [ ] Add links to standards, LIS guides, and other resources.
-- [x] Explain Field separator
-- [ ] Explain Repeat field separator - multiple sample IDs in an order.
-- [ ] Explain Component separator - patient name
-- [ ] Repeated fields with Components - multiple physicians
 - [ ] How do I find out what each field is? The instrument interface guide. The standard.
-- [ ] Add links to the standards
-- [ ] Data Types
-- [ ] A Record Sequence Number is used in record types that may occur multiple times within a single message. The number used defines the nth occurrence of the associated record type at a particular hierarchical level and is reset to one whenever a record of a greater hierarchical significance (lower number). Add an example message.
-
-
+- [ ] Table of Data Types
 
 # Introduction
 
 The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.
 
-One example of an ASTM message is provided below. My goal is for you to be able to understand its construction and be able to identify each part. Don't worry; we won't jump into this all at once. We will start small and work our way up to more complex messages as we go along.
+Below is one example of an ASTM message. I aim to help you understand its construction and identify each part. Don't worry; we won't jump into this all at once. We will start small and work our way up to more complex messages as we go along.
 
 ```ASTM
 H|\^&|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633
@@ -65,52 +57,64 @@ Let's begin with an ASTM Order record with only the essential parts and nothing 
 O|1|SID101||ABORH|||||||||||CENTBLOOD
 ```
 
-The table below shows the fields in the above Order and their field position number, data type, and values. The position in the record identifies the data type of each field.  
+The table below shows the fields in the above Order record and their field position number, Data Type, and values. The field position in the record identifies its Data Type.  
 
 ![image-20240419223033977](.\Message Formats.assests\image-20240419223033977.png) 
 
-ASTM messages are easy to implement. Using a field separator makes it easy for computers to create and parse these messages.
+ASTM messages use field separators, making it easy for computers to create and parse these messages.
 
-Let me show you how to manually take apart this Order record and identify each field and the type of information in it.
+Let me show you how to manually disassemble this Order record and identify each field and the type of information it contains.
 
-You can use any text editor that can number the lines and allow you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I'll demonstrate with Notepad++.
+You can use any text editor that shows line numbers and allows you to replace each field separator (|) with a line break. I'll demonstrate with Notepad++.
 
-![image-20240420191928705](.\Message Formats.assests\image-20240420191928705.png)  
+![image-20240719202227277](.\assets\image-20240719202227277.png)    
 
 The first step is to split the fields into separate lines:
 
 1. In the Replace dialog, enter the field separator. 
-2. Enter the \<CR> and \<LF>
-3. Click Replace All
+2. Enter the new line characters: \r\n
+3. Enable the Extended search
+4. Click Replace All
 
 You now have a list of fields where each line number is also its field position.
 
 ![image-20240420183844463](.\Message Formats.assests\image-20240420183844463.png) 
 
-Field names and their position are defined in the ASTM standard. The specification for the Order record is in section 8 of the ASTM E1394 standard. The field definitions start with section 8.4.1 (Record Type ID). The field position is the last number of the section number that defines it, 1 for the  Record Type ID. TheSpecimen ID (Sample ID) is in section 8.4.3 and is referred to as O.3, for Order record field 3.
+Field names and their position are defined in the ASTM standard. The specification for the Order record is in section 8 of the ASTM E1394-97 standard. The field definitions start with section 8.4.1 (Record Type ID). The field position is the last number of the section number that defines it, 1 for the  Record Type ID. 
 
-You can use this same technique for listing the fields in reverse to create an Order record manually.
+The Specimen ID is in section 8.4.3 and is referred to as O.3 for Order record field 3.
 
-![image-20240420185330462](.\Message Formats.assests\image-20240420185330462.png) 
+Below, I list the fields, their position notation, Data Type, and value.
+
+| Position | Data Type           | Value     |
+| -------- | ------------------- | --------- |
+| O.1      | Record Type ID      | O         |
+| O.2      | Sequence Number     | 1         |
+| O.3      | Specimen ID         | SID101    |
+| O.5      | Test ID             | ABORH     |
+| O.16     | Specimen Descriptor | CENTBLOOD |
+
+You can use the same process in reverse to create an Order record manually.
+
+![image-20240719204446801](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719204446801.png) 
 
 To hand code an Order record:
 
-1. Enter each field attribute on the line number that corresponds to its field position as defined by the ASTM standard. For an Order record, the sample ID goes in field 3, so write it on line 3.
-2. In the Replace dialog, enter \<CR> and \<LF> 
+1. Enter each field attribute on the line number corresponding to its field position as defined by the ASTM standard or the manufacturer's LIS interface guide. For example, the sample ID goes in field 3 for an Order record, so write it on line 3.
+2. Enter the new line characters: \r\n
 3. Enter the field separator. 
-4. Click *Replace all*
+4. Enable the Extended search
+5. Click *Replace all*
 
-Now we have manually created an Order record. Computers are programmed to do something similar.
+Now, we have manually created an Order record. Computers are programmed to do something similar.
 
 ![image-20240420185552555](.\Message Formats.assests\image-20240420185552555.png) 
 
 
 
-
-
 # Repeat Fields
 
-A Repeat field is a duplication of the same field where each value is unique. For example, an order record with multiple Specimen IDs, such as a pair of blood samples from the same draw, one containing packed red blood cells and the other plasma.
+A Repeat field contains multiple unique field values. For example, an order record with multiple Specimen IDs, such as a pair of blood samples from the same draw, one containing packed red blood cells and the other plasma.
 
 ```ASTM
 O|1|SID102\SID103||ABO FWD/RVS|||||||||||PACKEDCELLS\PLASMA
@@ -118,16 +122,15 @@ O|1|SID102\SID103||ABO FWD/RVS|||||||||||PACKEDCELLS\PLASMA
 
 If we break the above Order record into fields, we get the following fields and values:
 
-| Position | Value              |
-| -------- | ------------------ |
-| O.1      | O                  |
-| O.2      | 1                  |
-| O.3      | SID102\SID103      |
-| O.5      | ABO FWD/RVS        |
-| O.16     | PACKEDCELLS\PLASMA |
+| Position | Data Type           | Value              |
+| -------- | ------------------- | ------------------ |
+| O.1      | Record Type ID      | O                  |
+| O.2      | Sequence Number     | 1                  |
+| O.3      | Specimen ID         | SID102\SID103      |
+| O.5      | Test ID             | ABO FWD/RVS        |
+| O.16     | Specimen Descriptor | PACKEDCELLS\PLASMA |
 
-
-Fields O.3, Specimen ID, and O.16, Specimen Type are Repeat fields. Now, we can break the O.3 field into components as we did by replacing the Field separators with \<CR>\<LF>. Only this time, we will use the Repeat field separator (^).
+Field O.3, Specimen ID is a Repeat field. We can split the O.3 field into the repeated fields by replacing the  Repeat field separator (^) with new lines. This is identical to what we did with fields.
 
 
 ```ASTM
@@ -138,80 +141,96 @@ And we end up with the following:
 
 ![image-20240529214915431](.\assets\image-20240529214915431.png)  
 
-Note that components are numbered from 1 to n. The ASTM position notation is the following:
+The notation for repeat fields is their filed notation plus their repeat field position.  For sample ID SID103, the notation is O.3.2.
 
+Below, I list the complete order record field position notations, Data Types, and values.
 
-| Position | Value              |
-| -------- | ------------------ |
-| O.3.1    | SID102             |
-| O.3.2    | SID103             |
+| Position | Data Type           | Value       |
+| -------- | ------------------- | ----------- |
+| O.1      | Record Type ID      | O           |
+| O.2      | Sequence Number     | 1           |
+| O.3.1    | Specimen ID         | SID102      |
+| O.3.2    | Specimen ID         | SID103      |
+| O.5      | Test ID             | ABO FWD/RVS |
+| O.16.1   | Specimen Descriptor | PACKEDCELLS |
+| O.16.2   | Specimen Descriptor | PLASMA      |
 
-
-
-List of the complete Order record with the ASTM notation and their vaules:
-
-
-| Position | Value              |
-| -------- | ------------------ |
-| O.1      | O                  |
-| O.2      | 1                  |
-| O.3.1    | SID102             |
-| O.3.2    | SID103             |
-| O.5      | ABO FWD/RVS        |
-| O.16.1   | PACKEDCELLS        |
-| O.16.2   | PLASMA             |
-
-
-
-
-
-| Position | Value              |
-| -------- | ------------------ |
-| O.1      | O                  |
-| O.2      | 1                  |
-| O.3      | SID102\SID103      |
-| O.3.1    | SID102             |
-| O.3.2    | SID103             |
-| O.5      | ABO FWD/RVS        |
-| O.16     | PACKEDCELLS\PLASMA |
-| O.16.1   | PACKEDCELLS        |
-| O.16.2   | PLASMA             |
-
-
-
-
-
-![image-20240529210743871](.\assets\image-20240529210743871.png)  
-
-
-
-fgghjgfhjghjhg
-
-![image-20240529210904860](.\assets\image-20240529210904860.png)  
-
-
+  
 
 # Components
 
+One data type that occurs in ASTM is a person's full name.  ASTM specifies that full names follow this format: last name, first name, middle name or initial, suffix, and title. Full names have several components, and the component separator separates each part.  Naming conventions vary considerably around the world. Full names can be in any format agreed upon between the sender and the receiver. This means the parts of a full name do not have to be separated by the component separator. When more than one full name is required, they are separated by a repeat separator.
+
+Let's add a couple of ordering physicians to our order record. Physicians can be identified by their identities, names, or both. I will use both in our example.
 
 ```ASTM
-P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+O|1|SID101||ABORH|||||||||||CENTBLOOD|PHY1001^Brewster^Katherine\PHY1002^McCoy^Leonard^H
 ```
+
+As we know, the first step is to break the order record into fields. 
+
+![image-20240720193941865](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240720193941865.png)  
+
+
+
+We can see that O.17 is the ordering physician field and contains two repeat fields separated by the repeat field separator (\).
+
+```ASTM
+PHY1001^Brewster^Katherine\PHY1002^McCoy^Leonard^H
+```
+
+We copy this field into another tab and break the repeat fields into separate lines.  
+
+![image-20240719214822554](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719214822554.png) 
+
+
+
+We'll copy the first repeat field, O.17.1, into another tab and break the components into separate lines.  
+
+```astm
+PHY1001^Brewster^Katherine
+```
+
+We will do the same with the component separator (^) as we did with the field separator.
+
+![image-20240719215046542](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719215046542.png) 
+
+O.17.1.1 is the physician ID, O.17.1.2 is the last name, and O.17.1.3 is the first name.
+
+![image-20240719215548243](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719215548243.png) 
+
+
+
+Below is a list of the fields, their position notation, Data Type, and value.
+
+| Position | Data Type                     | Value     |
+| -------- | ----------------------------- | --------- |
+| O.1      | Record Type ID                | O         |
+| O.2      | Sequence Number               | 1         |
+| O.3      | Specimen ID                   | SID101    |
+| O.5      | Test ID                       | ABORH     |
+| O.17.1.1 | Physician [1] - Identifier    | PHY1001   |
+| O.17.1.2 | Physician [1] - Last Name     | Brewster  |
+| O.17.1.3 | Physician [1]- First Name     | Katherine |
+| O.17.2.1 | Physician [1] - Identifier    | PHY1002   |
+| O.17.2.2 | Physician [1] - Last Name     | McCoy     |
+| O.17.2.3 | Physician [1]- First Name     | Leonard   |
+| O.17.2.4 | Physician [1]- Middle Initial | H         |
+| O.16     | Specimen Descriptor           | CENTBLOOD |
+
+
+
 
 
 # ASTM Record Notation
 
-The ASTM record notation I use is very similar to IP notation and is used to identify the parts of a record. It consists of a record ID followed by indexes into the parts of the record.  
+The ASTM record notation I use allows us to identify the parts of a record. It consists of a record ID followed by indexes, one for Field, Repeat Field, and Component.  
 
-- RecordID.Field - The specimen ID in the Order record field 3, is denoted as O.3
+Record-ID.Field.Repeat.Component
 
-- RecordID.Field.Repeat.Component P.14.2: HID714^Pierce^Hawkeye
+# Breaking down the introductory Message
 
-
-
-# Taking apart the original message
-
-The example ASTM message provided in the introduction is borken out into its parts.
+As promised, we will break down the example ASTM message in the introduction into its parts.
 
 ```ASTM
 H|\^&|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633
@@ -222,7 +241,21 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
 L|1|N
 ```
 
+# Record Type IDs
 
+| Type ID | Record Description                                           | Level |
+| ------- | ------------------------------------------------------------ | ----- |
+| H       | Message Header - contains information about the sender and defines separators and the escape character | 0     |
+| P       | Patient - includes information on an individual patient      | 1     |
+| O       | Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request. | 2     |
+| R       | Result - contains the results of a single analytic determination. | 3     |
+| M       | Manufacturer Information - the fields in this record are defined by the manufacturer. |       |
+| Q       | Request for information - used to request information, e.g., outstanding orders for a sample. | 1     |
+| L       | Message Terminator - the last record in the message. A header record may be transmitted after this record, which signifies the start of a second message. | 0     |
+
+## Header Record
+
+The Header record defines the separators and escape character, and contains information about the sender and receiver. It is the first record in an ASTM message. 
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
@@ -233,8 +266,9 @@ L|1|N
 | H.13     | Version Number             | LIS2-A                          |
 | H.14     | Date and Time of Message   | 20210309142633                  |
 
+## Patient Record
 
-Patient Record
+The patient record contains patient demographics, such as patient IDs, names, sex, and dates of birth.
 
 | Position | Type                         | Value                         |
 | -------- | ---------------------------- | ----------------------------- |
@@ -259,8 +293,9 @@ Patient Record
 | P.14.1.4 | Middle Initial                         | P                             |
 | P.15     | Special Field 1                         | Blaine                        |
 
+## Test Order Record
 
-Order Record
+The Test Order record contains all required information to request tests to be performed on one or more specimens.
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
@@ -274,7 +309,11 @@ Order Record
 | O.23 | Date/Time Results Reported or Last Modified | 20210309142229 |
 | O.26 | Report Types | R |
 
-Result Record (1)
+## Result Record (1)
+
+The Result record 
+
+A Result record is returned for each separate analysis requested by the test.
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
@@ -287,7 +326,7 @@ Result Record (1)
 | R.13 | Date/Time Test Completed | 20210309142229 |
 | R.14 | Instrument Identification | JNumber |
 
-Result Record (2)
+## Result Record (2)
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
@@ -302,7 +341,7 @@ Result Record (2)
 
 
 
-Terminator Record (L)
+## Terminator Record (L)
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
@@ -312,43 +351,22 @@ Terminator Record (L)
 
 
 
-
-# Record Separator
-
-
-
 # ASTM Escape Sequences
 
+The escape character is the last of the four defined characters in the header. Its primary purpose is to create a sequence of characters to replace message separator characters used in fields. There is also an escape sequence for the escape character. 
 
-The escape character is the last of the 4 defined characters in the header. The escape character is used to create a sequence of characters to replace the defined characters in the text values. This is similar to what is done in XML when \&lt; is used to replace the reserved character *left angle bracket* (<) in text data.
+ASTM uses escape sequences to differentiate between field text data, reserved separators, and escape characters. 
 
-Take for example the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name was placed in an order profile field as is, it would not be parsed as one profile, but three. To prevent this, embedded repeat field separators are replaced with an escape sequence, which will be converted back to the embedded repeat field separator when it is parsed by the receiver of the message. 
+Take, for example, the name of a profile that contains the repeat field separator, as in "ABO\Rh\ABScr", named after the analyses returned by the profile. If this profile name were placed in an order profile field as is, the receiver would read it as 3 repeat fields and not one profile name. To prevent this, the repeat field separator in the text data is replaced by the sender with an escape sequence, which will be converted back to the embedded repeat field separator character by the receiver of the message.
 
-When the sender writes "ABO\Rh\ABScr" into the order record, every repeat separator (\\) is replaced with "&R&",  resulting with a string of "ABO<u>&R&</u>Rh<u>&R&</u>ABScr". When the profile is read by the receiver of the message, every "&R&" is replaced with the repeat field separator (\\), restoring the data to it's original text.
+| ESCAPE Sequence |                                 |
+| --------------- | ------------------------------- |
+| &F&             | Embedded field separator        |
+| &S&             | Embedded component separator    |
+| &R&             | Embedded repeat field separator |
+| &E&             | Embedded escape character       |
 
-```ASTM
-Profile name: ABO\Rh\ABScr
-When written into the message, replace every field separator (\) with the escape sequence &R&: 
-	ABO&R&Rh&R&ABScr
-When read from the message, replace every escape sequence &R& with the field separator (\):
-	ABO\Rh\ABScr
-
-O|1|SID101||ABO&R&Rh&R&ABScr|||||||||||CENTBLOOD
-```
-
-
-
-Table 1: Recode Type IDs
-
-| Type ID | Record Description                                           | Level |
-| ------- | ------------------------------------------------------------ | ----- |
-| H       | Message Header - contains information about the sender and defines separators and the escape character | 0     |
-| P       | Patient - contains information about an individual patient   | 1     |
-| O       | Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request. | 2     |
-| R       | Result - contains the results ofzl a single analytic determination. | 3     |
-| M       | Manufacture Information - the fields in this record are defined by the manufacturer. |       |
-| Q       | Request for information - used to request information, e.g. request outstanding orders for a sample. | 1     |
-| L       | Message Terminator - the last record in the message. A header record may be transmitted after this record signifying the start of a second message. | 0     |
+Separators and escape characters can vary with each message; they are defined in the Header record and used throughout the message.
 
 
 
