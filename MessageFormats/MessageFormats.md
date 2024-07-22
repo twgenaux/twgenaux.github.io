@@ -31,8 +31,6 @@ L|1|N
 
 An ASTM message is an ordered list of lines called records. A record is an ordered list of fields. A Field Separator separates fields; in this case, a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
 
-
-
 # Field Separator
 
 Let's begin with an ASTM Order record with only the essential parts and nothing else.
@@ -45,7 +43,7 @@ The table below shows the fields in the above Order record and their field posit
 
 ![image-20240419223033977](.\Message Formats.assests\image-20240419223033977.png) 
 
-ASTM messages use field separators, making it easy for computers to create and parse these messages.
+ASTM messages use field separators, making it easy for computers to create and read these messages.
 
 Let me show you how to manually disassemble this Order record and identify each field and the type of information it contains.
 
@@ -80,7 +78,7 @@ Below, I list the fields, their position notation, Data Type, and value.
 
 You can use the same process in reverse to create an Order record manually.
 
-![image-20240719204446801](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719204446801.png) 
+![image-20240719204446801](./MessageFormats.assets/image-20240719204446801.png)  
 
 To hand code an Order record:
 
@@ -114,7 +112,7 @@ If we break the above Order record into fields, we get the following fields and 
 | O.5      | Test ID             | ABO FWD/RVS        |
 | O.16     | Specimen Descriptor | PACKEDCELLS\PLASMA |
 
-Field O.3, Specimen ID is a Repeat field. We can split the O.3 field into the repeated fields by replacing the  Repeat field separator (^) with new lines. This is identical to what we did with fields.
+Field O.3, Specimen ID is a Repeat field. We can split the O.3 field into the repeated fields by replacing the  Repeat field separator (\\) with new lines. This is identical to what we did with fields.
 
 
 ```ASTM
@@ -143,9 +141,9 @@ Below, I list the complete order record field position notations, Data Types, an
 
 # Component Separator
 
-One data type that occurs in ASTM is a person's full name.  ASTM specifies that full names follow this format: last name, first name, middle name or initial, suffix, and title. Full names have several components, and the component separator separates each part.  Naming conventions vary considerably around the world. Full names can be in any format agreed upon between the sender and the receiver. This means the parts of a full name do not have to be separated by the component separator. When more than one full name is required, they are separated by a repeat separator.
+One data type that occurs in ASTM is a person's full name.  ASTM specifies that full names follow this format: last name, first name, middle name or initial, suffix, and title. Full names have several components, and the component separator is used to separate each part.  Naming conventions vary considerably around the world. Full names can be in any format agreed upon between the sender and the receiver. This means the parts of a full name do not have to be separated by the component separator. When more than one full name is required, they are separated by a repeat separator.
 
-Let's add a couple of ordering physicians to our order record. Physicians can be identified by their identities, names, or both. I will use both in our example.
+Let's add a couple of ordering physicians to our order record. Physicians can be identified by their Identifier code, names, or both. I will use both in our example.
 
 ```ASTM
 O|1|SID101||ABORH|||||||||||CENTBLOOD|PHY1001^Brewster^Katherine\PHY1002^McCoy^Leonard^H
@@ -153,11 +151,11 @@ O|1|SID101||ABORH|||||||||||CENTBLOOD|PHY1001^Brewster^Katherine\PHY1002^McCoy^L
 
 As we know, the first step is to break the order record into fields. 
 
-![image-20240720193941865](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240720193941865.png)  
+![image-20240720193941865](./MessageFormats.assets/image-20240720193941865.png) 
 
 
 
-We can see that O.17 is the ordering physician field and contains two repeat fields separated by the repeat field separator (\).
+We can see that O.17 is the ordering physician field and contains two repeat fields separated by the repeat field separator (\\).
 
 ```ASTM
 PHY1001^Brewster^Katherine\PHY1002^McCoy^Leonard^H
@@ -165,9 +163,7 @@ PHY1001^Brewster^Katherine\PHY1002^McCoy^Leonard^H
 
 We copy this field into another tab and break the repeat fields into separate lines.  
 
-![image-20240719214822554](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719214822554.png) 
-
-
+![image-20240719214822554](./MessageFormats.assets/image-20240719214822554.png) 
 
 We'll copy the first repeat field, O.17.1, into another tab and break the components into separate lines.  
 
@@ -177,13 +173,11 @@ PHY1001^Brewster^Katherine
 
 We will do the same with the component separator (^) as we did with the field separator.
 
-![image-20240719215046542](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719215046542.png) 
+![image-20240719215046542](./MessageFormats.assets/image-20240719215046542.png) 
 
 O.17.1.1 is the physician ID, O.17.1.2 is the last name, and O.17.1.3 is the first name.
 
-![image-20240719215548243](C:\Users\thero\OneDrive\Projects\GitHub\twgenaux.github.io\MessageFormats\assets\image-20240719215548243.png) 
-
-
+![image-20240719215548243](./MessageFormats.assets/image-20240719215548243.png) 
 
 Below is a list of the fields, their position notation, Data Type, and value.
 
@@ -203,8 +197,6 @@ Below is a list of the fields, their position notation, Data Type, and value.
 | O.16     | Specimen Descriptor           | CENTBLOOD |
 
 
-
-
 # Escape Sequences
 
 Separators and escape characters can vary with each message; they are defined in the Header record and used throughout the message. The escape character is the last of the four defined characters in the header. Its primary purpose is to create a sequence of characters to replace message separator characters used in field data. There is also an escape sequence for the escape character. 
@@ -213,7 +205,7 @@ ASTM messages use escape sequences to handle situations where the standard field
 
 - **Standard Separators:** The structure of an ASTM message uses specific characters to separate different data elements. Depending on the specific implementation, these separators could be commas, pipes ("|"), or other characters.
 
-- **Data with Separators:**  Sometimes, the data might contain the same separator character used in the structure of the message.
+- **Data with Separators:**  Sometimes, the data might contain the same character used in the structure of the message.
 
 Escape sequences avoid confusion when the receiver reads a message. The special character sequence tells the receiving system to interpret the escape sequence as a separator *character*, not part of the message's structure.
 
@@ -236,7 +228,7 @@ The ASTM record notation I use allows us to identify the parts of a record. It c
 
 ​	Record-ID.Field.Repeat.Component
 
-When a message contains records with sequence number greater than 1, we can use the following notation to indicate the record being referenced.
+When a message contains records with a sequence number greater than 1, we can use an array notation to indicate the record being referenced.
 
 ​	Record-ID.Field[SequenceNumber].Repeat.Component
 
