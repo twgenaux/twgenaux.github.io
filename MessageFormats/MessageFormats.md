@@ -9,31 +9,10 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 <h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM Message Formats</center></span></h1>
 <h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">21-July-2024</p>
+<p style="text-align:center">22-July-2024</p>
 
 
 
-
-# Definitions 
-
-| TERM                | DESCRIPTION                                                  |
-| ------------------- | ------------------------------------------------------------ |
-| ASTM                | Refers to ASTM E1394 and LIS02 standards.                    |
-| ASTM Message        | An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
-| ASTM Message Format | A specific implementation of the ASTM E1394 or LIS02 standards by a manufacturer. |
-| Component           | A single data element of a field's Data Type, i.e., of the patient name field in a Patient record. |
-| Data Type           | A defined format of one or more data values, such as a birthdate, patient's name, etc. |
-| Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
-| LIS                 | Laboratory Information Systems                               |
-| Record              | An ordered list of fields, i.e., the fields in a Patient record containing a patient's name, date of birth, etc. |
-| Repeat field        | A repeating field (Data Type), i.e., a list of two or more of a patient's attending physicians |
-| Sequence Number     | Used to distinguish records of the same type that may occur multiple times within ahierarchical level within a message. |
-
-## TODO
-
-- [ ] Add links to standards, LIS guides, and other resources.
-- [ ] How do I find out what each field is? The instrument interface guide. The standard.
-- [ ] Table of Data Types
 
 # Introduction
 
@@ -242,17 +221,6 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
 L|1|N
 ```
 
-# Record Type IDs
-
-| Type ID | Record Description                                           | Level |
-| ------- | ------------------------------------------------------------ | ----- |
-| H       | Message Header - contains information about the sender and defines separators and the escape character | 0     |
-| P       | Patient - includes information on an individual patient      | 1     |
-| O       | Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request. | 2     |
-| R       | Result - contains the results of a single analytic determination. | 3     |
-| M       | Manufacturer Information - the fields in this record are defined by the manufacturer. |       |
-| Q       | Request for information - used to request information, e.g., outstanding orders for a sample. | 1     |
-| L       | Message Terminator - the last record in the message. A header record may be transmitted after this record, which signifies the start of a second message. | 0     |
 
 ## Header Record
 
@@ -376,4 +344,38 @@ Take, for example, the name of a profile that contains the repeat field separato
 
 
 
+# Definitions 
 
+| TERM                | DESCRIPTION                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| ASTM                | Refers to ASTM E1394 and LIS02 standards.                    |
+| ASTM Message        | An ordered list of ASTM records, starting with a Header record and ending with a Terminator record. |
+| ASTM Message Format | A specific implementation of the ASTM E1394 or LIS02 standards by a manufacturer. |
+| Component           | A single data element of a field's Data Type, i.e., of the patient name field in a Patient record. |
+| Data Type           | A defined format of one or more data values, such as a birthdate, patient's name, etc. |
+| Field               | An attribute (Data Type) of a record, i.e. a patient's  name |
+| LIS                 | Laboratory Information Systems                               |
+| Record              | An ordered list of fields, i.e., the fields in a Patient record containing a patient's name, date of birth, etc. |
+| Repeat field        | A repeating field (Data Type), i.e., a list of two or more of a patient's attending physicians |
+| Sequence Number     | Used to distinguish records of the same type that may occur multiple times within ahierarchical level within a message. |
+
+
+
+# Record Type IDs
+
+| Type ID | Record Description                                           | Level |
+| ------- | ------------------------------------------------------------ | ----- |
+| H       | Message Header - contains information about the sender and defines separators and the escape character | 0     |
+| P       | Patient - includes information on an individual patient      | 1     |
+| O       | Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request. | 2     |
+| R       | Result - contains the results of a single analytic determination. | 3     |
+| M       | Manufacturer Information - the fields in this record are defined by the manufacturer. |       |
+| Q       | Request for information - used to request information, e.g., outstanding orders for a sample. | 1     |
+| L       | Message Terminator - the last record in the message. A header record may be transmitted after this record, which signifies the start of a second message. | 0     |
+
+
+
+## TODO
+
+- [ ] Add section - How do I find out the definition of each field?
+- [ ] Add a refernce section with links to standards, LIS guides, and other resources.
