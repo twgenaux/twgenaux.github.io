@@ -16,9 +16,9 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 
 # Introduction
 
-The ASTM E1394 standard was created over 30 years ago. However, messages based on the ASTM E1394 (now LIS02) standard are still being used by Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments. Throughout this document, I will use ASTM to refer to ASTM E1394, LIS2, and LIS02 standards.
+The ASTM E1394 standard was created over 30 years ago. However, Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments still use messages based on the ASTM E1394 (now LIS02) standard. I will use "ASTM" throughout this document to refer to the ASTM E1394, LIS2, and LIS02 standards.
 
-Below is one example of an ASTM message. I aim to help you understand its construction and identify each part. Don't worry; we won't jump into this all at once. We will start small and work our way up to more complex messages as we go along.
+Here is an example of an ASTM message. I want to help you understand its structure and identify each part. Don't worry, we won't cover everything all at once. We'll start with the basics and then move on to more complex messages as we go along.
 
 ```ASTM
 H|\^&|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633
@@ -29,11 +29,11 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
 L|1|N
 ```
 
-An ASTM message is an ordered list of lines called records. A record is an ordered list of fields. A Field Separator separates fields; in this case, a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
+An ASTM message is composed of lines called records, each of which is a list of fields separated by a pipe character (|). Every record begins with a Record Type ID, like O, for the Order record, which indicates the type of data contained in that record.
 
 # Field Separator
 
-Let's begin with an ASTM Order record with only the essential parts and nothing else.
+Let's start with an ASTM Order record containing only essential information and nothing more.
 
 ```ASTM
 O|1|SID101||ABORH|||||||||||CENTBLOOD
@@ -43,19 +43,19 @@ The table below shows the fields in the above Order record and their field posit
 
 ![image-20240419223033977](.\Message Formats.assests\image-20240419223033977.png) 
 
-ASTM messages use field separators, making it easy for computers to create and read these messages.
+ASTM messages use field separators, making it easy for computers to create and read them.
 
 Let me show you how to manually disassemble this Order record and identify each field and the type of information it contains.
 
-You can use any text editor that shows line numbers and allows you to replace each field separator (|) with a line break. I'll demonstrate with Notepad++.
+You can use any text editor that can show line numbers and can replace each field separator (|) with a line break. I'll demonstrate with Notepad++.
 
 ![image-20240719202227277](.\assets\image-20240719202227277.png)    
 
-The first step is to split the fields into separate lines:
+The first step is to split the fields in the record into separate lines. In the Replace dialog:
 
-1. In the Replace dialog, enter the field separator. 
+1. Enter the field separator. 
 2. Enter the new line characters: \r\n
-3. Enable the Extended search
+3. Enable the Extended search.
 4. Click Replace All
 
 You now have a list of fields where each line number is also its field position.
@@ -76,16 +76,16 @@ Below, I list the fields, their position notation, Data Type, and value.
 | O.5      | Test ID             | ABORH     |
 | O.16     | Specimen Descriptor | CENTBLOOD |
 
-You can use the same process in reverse to create an Order record manually.
+You can reverse the process to create an Order record manually.
 
 ![image-20240719204446801](./MessageFormats.assets/image-20240719204446801.png)  
 
 To hand code an Order record:
 
-1. Enter each field attribute on the line number corresponding to its field position as defined by the ASTM standard or the manufacturer's LIS interface guide. For example, the sample ID goes in field 3 for an Order record, so write it on line 3.
+1. Enter each field attribute on the line number corresponding to its position as defined by the ASTM standard or the manufacturer's LIS interface guide. For example, the sample ID goes in field 3 for an Order record, so write it on line 3.
 2. Enter the new line characters: \r\n
 3. Enter the field separator. 
-4. Enable the Extended search
+4. Enable the Extended search.
 5. Click *Replace all*
 
 Now, we have manually created an Order record. Computers are programmed to do something similar.
