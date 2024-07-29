@@ -9,7 +9,8 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 <h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM Message Formats</center></span></h1>
 <h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">22-July-2024</p>
+<p style="text-align:center">28-July-2024</p>
+
 
 
 
@@ -29,7 +30,7 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
 L|1|N
 ```
 
-An ASTM message is composed of lines called records, each of which is a list of fields separated by a pipe character (|). Every record begins with a Record Type ID, like O, for the Order record, which indicates the type of data contained in that record.
+An ASTM message comprises lines called records, each of which is a list of fields separated by a pipe character (|). Every record begins with a Record Type ID, like O, for the Order record, which indicates the type of data contained in that record.
 
 # Field Separator
 
@@ -141,7 +142,7 @@ Below, I list the complete order record field position notations, Data Types, an
 
 # Component Separator
 
-One data type that occurs in ASTM is a person's full name.  ASTM specifies that full names follow this format: last name, first name, middle name or initial, suffix, and title. Full names have several components, and the component separator is used to separate each part.  Naming conventions vary considerably around the world. Full names can be in any format agreed upon between the sender and the receiver. This means the parts of a full name do not have to be separated by the component separator. When more than one full name is required, they are separated by a repeat separator.
+One data type that occurs in ASTM is a person's full name.  ASTM specifies that full names follow this format: last name, first name, middle name or initial, suffix, and title. Full names have several components, and the component separator separates each part.  Naming conventions vary considerably around the world. Full names can be in any format agreed upon between the sender and the receiver. This means the parts of a full name do not have to be separated by the component separator. When more than one full name is required, they are separated by a repeat separator.
 
 Let's add a couple of ordering physicians to our order record. Physicians can be identified by their Identifier code, names, or both. I will use both in our example.
 
