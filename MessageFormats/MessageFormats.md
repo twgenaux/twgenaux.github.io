@@ -9,7 +9,8 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 <h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM Message Formats</center></span></h1>
 <h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">28-July-2024</p>
+<p style="text-align:center">5-August-2024</p>
+
 
 
 
@@ -19,14 +20,14 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 
 The ASTM E1394 standard was created over 30 years ago. However, Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments still use messages based on the ASTM E1394 (now LIS02) standard. I will use "ASTM" throughout this document to refer to the ASTM E1394, LIS2, and LIS02 standards.
 
-Here is an example of an ASTM message. I want to help you understand its structure and identify each part. Don't worry, we won't cover everything all at once. We'll start with the basics and then move on to more complex messages as we go along.
+Here is an example of an immunohematology-based ASTM message. I want to help you understand its structure and identify each part. Don't worry, we won't cover everything all at once. We'll start with the basics and then move on to more complex messages as we go along.
 
 ```ASTM
-H|\^&|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633
+H|\^&|||OCD^VISION^5.13.1.46935^J60009999|||||||P|LIS2-A|20210309142633
 P|1|PID123456||NID123456^MID123456^OID123456|Brown^Bobby^B|White|19650102030400|U|||||PHY1234^Kildare^James^P|Blaine
 O|1|SID305||ABO|N|20210309142136|||||||||CENTBLOOD|||||||20210309142229|||R
-R|1|ABO|B|||||R||Automatic||20210309142229|JNumber
-R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
+R|1|ABO|B|||||R||Automatic||20210309142229|J60009999
+R|2|Rh|POS|||||R||Automatic||20210309142229|J60009999
 L|1|N
 ```
 
@@ -238,11 +239,11 @@ When a message contains records with a sequence number greater than 1, we can us
 As promised, we will break down the example ASTM message in the introduction into its parts.
 
 ```ASTM
-H|\^&|||OCD^VISION^5.13.1.46935^JNumber|||||||P|LIS2-A|20210309142633
+H|\^&|||OCD^VISION^5.13.1.46935^J60009999|||||||P|LIS2-A|20210309142633
 P|1|PID123456||NID123456^MID123456^OID123456|Brown^Bobby^B|White|19650102030400|U|||||PHY1234^Kildare^James^P|Blaine
 O|1|SID305||ABO|N|20210309142136|||||||||CENTBLOOD|||||||20210309142229|||R
-R|1|ABO|B|||||R||Automatic||20210309142229|JNumber
-R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
+R|1|ABO|B|||||R||Automatic||20210309142229|J60009999
+R|2|Rh|POS|||||R||Automatic||20210309142229|J60009999
 L|1|N
 ```
 
@@ -251,14 +252,14 @@ L|1|N
 
 The Header record defines the separators and escape character, and contains information about the sender and receiver. It is the first record in an ASTM message. 
 
-| Position | Type                       | Value                           |
-| -------- | -------------------------- | ------------------------------- |
-| H.1      | Record Type ID             | H                               |
-| H.2      | Delimiter Definition       | \^&                             |
-| H.5      | Sender Name or ID          | OCD^VISION^5.13.1.46935^JNumber |
-| H.12     | Processing ID (P, T, D, Q) | P                               |
-| H.13     | Version Number             | LIS2-A                          |
-| H.14     | Date and Time of Message   | 20210309142633                  |
+| Position | Type                       | Value                             |
+| -------- | -------------------------- | --------------------------------- |
+| H.1      | Record Type ID             | H                                 |
+| H.2      | Delimiter Definition       | \^&                               |
+| H.5      | Sender Name or ID          | OCD^VISION^5.13.1.46935^J60009999 |
+| H.12     | Processing ID (P, T, D, Q) | P                                 |
+| H.13     | Version Number             | LIS2-A                            |
+| H.14     | Date and Time of Message   | 20210309142633                    |
 
 ## Patient Record
 
@@ -293,7 +294,7 @@ The Test Order record contains all required information to request tests to be p
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
-| O.1      | Record Type ID             | p                               |
+| O.1      | Record Type ID             | O                              |
 | O.2      | Sequence Number       | 1                          |
 | O.3 | Specimen ID | SID305 |
 | O.5 | Universal Test ID | ABO |
@@ -311,27 +312,27 @@ A Result record is returned for each separate analysis requested by the test.
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
-| R.1      | Record Type ID             | p                               |
+| R.1      | Record Type ID             | R                              |
 | R.2      | Sequence Number       | 1                          |
 | R.3 | Test ID | ABO |
 | R.4 | Analysis | B |
 | R.9 | Result Status | R |
 | R.11 | Operator Identification | Automatic |
 | R.13 | Date/Time Test Completed | 20210309142229 |
-| R.14 | Instrument Identification | JNumber |
+| R.14 | Instrument Identification | J60009999 |
 
 ## Result Record (2)
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
-| R.1      | Record Type ID             | p                               |
+| R.1      | Record Type ID             | R                              |
 | R.2      | Sequence Number       | 1                          |
 | R.3 | Test ID | Rh |
 | R.4 | Analysis | POS |
 | R.9 | Result Status | R |
 | R.11 | Operator Identification | Automatic |
 | R.13 | Date/Time Test Completed | 20210309142229 |
-| R.14 | Instrument Identification | JNumber |
+| R.14 | Instrument Identification | J60009999 |
 
 
 
@@ -339,7 +340,7 @@ A Result record is returned for each separate analysis requested by the test.
 
 | Position | Type                       | Value                           |
 | -------- | -------------------------- | ------------------------------- |
-| R.1      | Record Type ID             | p                               |
+| R.1      | Record Type ID             | L                              |
 | R.2      | Sequence Number       | 1                          |
 | R.3 | Termination Code | N |
 
@@ -362,22 +363,32 @@ A Result record is returned for each separate analysis requested by the test.
 
 
 
-# Record Type IDs
+# Selected Record Type IDs
 
-| Type ID | Record Description                                           | Level |
-| ------- | ------------------------------------------------------------ | ----- |
-| H       | Message Header - contains information about the sender and defines separators and the escape character | 0     |
-| P       | Patient - includes information on an individual patient      | 1     |
-| O       | Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request. | 2     |
-| R       | Result - contains the results of a single analytic determination. | 3     |
-| M       | Manufacturer Information - the fields in this record are defined by the manufacturer. |       |
-| Q       | Request for information - used to request information, e.g., outstanding orders for a sample. | 1     |
-| L       | Message Terminator - the last record in the message. A header record may be transmitted after this record, which signifies the start of a second message. | 0     |
+| Type ID | Record Description                                           |
+| ------- | ------------------------------------------------------------ |
+| H       | Message Header - contains information about the sender and defines separators and the escape character |
+| P       | Patient - includes information on an individual patient      |
+| O       | Order - when sent from an LIS, this record contains information about a test order. When sent by the instrument, it shall provide information about the test request. |
+| R       | Result - contains the results of a single analytic determination. |
+| M       | Manufacturer Information - the fields in this record are defined by the manufacturer. |
+| Q       | Request for information - used to request information, e.g., outstanding orders for a sample. |
+| L       | Message Terminator - the last record in the message. A header record may be transmitted after this record, which signifies the start of a second message. |
+
+# Field Definitions
+
+You can find the descriptions of fields in the LIS standards and in the instrument LIS Interface guides or specificati0ns.
+
+
+
+# References to Standards, LIS Guides, and other Sources
+
+
 
 
 
 ## TODO
 
 - [ ] Add section - How do I find out the definition of each field?
-- [ ] Add a refernce section with links to standards, LIS guides, and other resources.
+- [ ] Add a reference section with links to standards, LIS guides, and other resources.
 - [ ] Add an example message in section ASTM Record Notation to illustrate the notation
