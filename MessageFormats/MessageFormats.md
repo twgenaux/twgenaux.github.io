@@ -56,9 +56,7 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|JNumber
 L|1|N
 ```
 
-An ASTM message is an ordered list of lines called records. In the message above, each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
-
-A record is an ordered list of fields. A Field Separator separates each field; in this case, a pipe character is used (|). 
+An ASTM message is an ordered list of lines called records. A record is an ordered list of fields. A Field Separator separates fields; in this case, a pipe character is used (|). Each record starts with a Record Type ID, such as O, for the Order record. The Record Type ID identifies what data is contained in each record. 
 
 Let's begin with an ASTM Order record with only the essential parts and nothing else.
 
@@ -70,11 +68,11 @@ The table below shows the fields in the above Order and their field position num
 
 ![image-20240419223033977](.\Message Formats.assests\image-20240419223033977.png) 
 
-Using a field separator makes it easy for computers to create and parse ASTM messages.
+ASTM messages are easy to implement. Using a field separator makes it easy for computers to create and parse these messages.
 
-Using a text editor like Notepad++, you can manually take apart this Order record and identify each field and the type of information in it.
+Let me show you how to manually take apart this Order record and identify each field and the type of information in it.
 
-You can use any text editor as long as it can display then line numbers and allow you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I'll demonstrate with Notepad++.
+You can use any text editor that can number the lines and allow you to replace the field separator (|) with a Carriage Return (CR) and Line Feed (LF). I'll demonstrate with Notepad++.
 
 ![image-20240420191928705](.\Message Formats.assests\image-20240420191928705.png)  
 
