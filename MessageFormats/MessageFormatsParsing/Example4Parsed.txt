@@ -1,0 +1,68 @@
+AstmMessageParsing.exe Example4.txt /TransMap:"LIS02-A2E Map.txt" >> Example4Parsed.txt
+
+P.1:P
+P.2:1
+P.3:PID123456
+P.6:Brown^Bobby^B
+P.6.1.1:Brown
+P.6.1.2:Bobby
+P.6.1.3:B
+P.14:PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+P.14.1:PHY101^Forbin^Charles^A
+P.14.1.1:PHY101
+P.14.1.2:Forbin
+P.14.1.3:Charles
+P.14.1.4:A
+P.14.2:PHY103^Morbius^Edward
+P.14.2.1:PHY103
+P.14.2.2:Morbius
+P.14.2.3:Edward
+
+
+
+
+
+P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+
+
+
+
+
+P.1:P
+P.2:1
+P.3:PID123456
+P.6:Brown^Bobby^B
+P.6.1.1:Brown
+P.6.1.2:Bobby
+P.6.1.3:B
+P.14:PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+P.14.1:PHY101^Forbin^Charles^A
+P.14.1.1:PHY101
+P.14.1.2:Forbin
+P.14.1.3:Charles
+P.14.1.4:A
+P.14.2:PHY103^Morbius^Edward
+P.14.2.1:PHY103
+P.14.2.2:Morbius
+P.14.2.3:Edward
+
+Record Type:P
+Sequence Number:1
+Practice-Assigned Patient ID:PID123456
+Patient Name:Brown^Bobby^B
+Special Field 1:PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+
+P.1:P
+M.2:1
+P.3:PID123456
+P.6:Brown^Bobby^B
+P.14:PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+
+
+
+P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+
+
+P|1|PID123456|||Brown^Bobby^B||||||||PHY101^Forbin^Charles^A\PHY103^Morbius^Edward
+
+
