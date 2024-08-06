@@ -7,9 +7,12 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 ---
 
 <h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM Message Formats</center></span></h1>
-<h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
+<p style="text-align:center">Revision 1</p>
 <p style="text-align:center">5-August-2024</p>
+
+
+
 
 
 # Introduction
@@ -27,7 +30,7 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|J60009999
 L|1|N
 ```
 
-An ASTM message comprises lines called records, each of which is a list of fields separated by a pipe character (|). Every record begins with a Record Type ID, like O, for the Order record, which indicates the type of data contained in that record.
+An ASTM message comprises lines called records, a list of fields separated by a pipe character (|). Every record begins with a Record Type ID, like O, for the Order record, which indicates the type of data contained in that record.
 
 # Field Separator
 
@@ -383,8 +386,9 @@ You can find the descriptions of fields in the LIS standards and in instrument L
 
 [Quidel Sofia Instrument LIS Interface Specification](https://connectme.quidel.com/files/TB2022100EN00-SofiaLIS-Specification.pdf)
 
-You can find many instrument and middleware LIS guides by searching for: *Software LIS Interface Specification Guide*
+You can find many instrument and middleware LIS guides by searching for *Software LIS Interface Specification Guide*
 
-- BD FACS Workflow Manager Software LIS Interface Specification Guide -  specifies the ASTM and HL7 messages.
-- The Sofia 2 LIS Interface Specification -  specifies the ASTM and HL7 messages.
+- BD FACS Workflow Manager Software LIS Interface Specification Guide -  specifies the ASTM and HL7 messages for the instrument.
+- The Sofia 2 LIS Interface Specification -  specifies the ASTM and HL7 messages for the instrument.
+- AQUIOS LIS Interface Specification - specifies the ASTM messages for the instrument.
 
