@@ -12,10 +12,6 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 <p style="text-align:center">5-August-2024</p>
 
 
-
-
-
-
 # Introduction
 
 The ASTM E1394 standard was created over 30 years ago. However, Laboratory Information Systems (LIS), middleware, and clinical laboratory instruments still use messages based on the ASTM E1394 (now LIS02) standard. I will use "ASTM" throughout this document to refer to the ASTM E1394, LIS2, and LIS02 standards.
@@ -377,18 +373,18 @@ A Result record is returned for each separate analysis requested by the test.
 
 # Field Definitions
 
-You can find the descriptions of fields in the LIS standards and in the instrument LIS Interface guides or specificati0ns.
+You can find the descriptions of fields in the LIS standards and in instrument LIS Interface guides or specificati0ns.
 
 
 
-# References to Standards, LIS Guides, and other Sources
+# References to Standards, LIS Guides, and Other Sources
 
+[LIS02 Specification for Transferring Information Between Clinical Laboratory Instruments and Information Systems, 2nd Edition](https://clsi.org/standards/products/automation-and-informatics/documents/lis02) 
 
+[Quidel Sofia Instrument LIS Interface Specification](https://connectme.quidel.com/files/TB2022100EN00-SofiaLIS-Specification.pdf)
 
+You can find many instrument and middleware LIS guides by searching for: *Software LIS Interface Specification Guide*
 
+- BD FACS Workflow Manager Software LIS Interface Specification Guide -  specifies the ASTM and HL7 messages.
+- The Sofia 2 LIS Interface Specification -  specifies the ASTM and HL7 messages.
 
-## TODO
-
-- [ ] Add section - How do I find out the definition of each field?
-- [ ] Add a reference section with links to standards, LIS guides, and other resources.
-- [ ] Add an example message in section ASTM Record Notation to illustrate the notation
