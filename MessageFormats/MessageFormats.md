@@ -6,10 +6,10 @@ theme: Pixyll
 tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 ---
 
-<h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM Message Formats</center></span></h1>
+<h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM E1394 and LIS02-A2 Message Formats</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
 <p style="text-align:center">Revision 1</p>
-<p style="text-align:center">5-August-2024</p>
+<p style="text-align:center">7-August-2024</p>
 
 
 
@@ -30,7 +30,7 @@ R|2|Rh|POS|||||R||Automatic||20210309142229|J60009999
 L|1|N
 ```
 
-An ASTM message comprises lines called records, a list of fields separated by a pipe character (|). Every record begins with a Record Type ID, like O, for the Order record, which indicates the type of data contained in that record.
+An ASTM message comprises lines called records, a list of fields separated by a pipe character (|). Every record begins with a Record Type ID, like O, for an Order record, which indicates the type of data contained in that record.
 
 # Field Separator
 
@@ -40,13 +40,13 @@ Let's start with an ASTM Order record containing only essential information and 
 O|1|SID101||ABORH|||||||||||CENTBLOOD
 ```
 
-The table below shows the fields in the above Order record and their field position number, Data Type, and values. The field position in the record identifies its Data Type.  
+The table below shows the fields in the above Order record and their field position number, Data Type, and values. The field position in the record identifies its Data Type.  Not all fields are required.
 
 ![image-20240419223033977](.\Message Formats.assests\image-20240419223033977.png) 
 
 ASTM messages use field separators, making it easy for computers to create and read them.
 
-Let me show you how to manually disassemble this Order record and identify each field and the type of information it contains.
+Let me show you how to manually disassemble this Order record and identify each field and the type of data it contains.
 
 You can use any text editor that can show line numbers and can replace each field separator (|) with a line break. I'll demonstrate with Notepad++.
 
@@ -83,7 +83,7 @@ You can reverse the process to create an Order record manually.
 
 To hand code an Order record:
 
-1. Enter each field attribute on the line number corresponding to its position as defined by the ASTM standard or the manufacturer's LIS interface guide. For example, the sample ID goes in field 3 for an Order record, so write it on line 3.
+1. Enter each field attribute on the line number corresponding to its position as defined by the ASTM standard or the manufacturer's LIS interface guide. For example, the sample ID goes in field 3 (O.3) for an Order record, so write it on line 3.
 2. Enter the new line characters: \r\n
 3. Enter the field separator. 
 4. Enable the Extended search.
@@ -378,17 +378,25 @@ A Result record is returned for each separate analysis requested by the test.
 
 You can find the descriptions of fields in the LIS standards and in instrument LIS Interface guides or specificati0ns.
 
+Additionally, in Markey, Brian (2010) (1), 
+
 
 
 # References to Standards, LIS Guides, and Other Sources
 
-[LIS02 Specification for Transferring Information Between Clinical Laboratory Instruments and Information Systems, 2nd Edition](https://clsi.org/standards/products/automation-and-informatics/documents/lis02) 
+- [LIS02 Specification for Transferring Information Between Clinical Laboratory Instruments and Information Systems, 2nd Edition](https://clsi.org/standards/products/automation-and-informatics/documents/lis02) 
 
-[Quidel Sofia Instrument LIS Interface Specification](https://connectme.quidel.com/files/TB2022100EN00-SofiaLIS-Specification.pdf)
+- [Quidel Sofia Instrument LIS Interface Specification](https://connectme.quidel.com/files/TB2022100EN00-SofiaLIS-Specification.pdf)
+- Markey, Brian (2010) (1) In search of good health messages: An investigation of the properties of a messaging standard that makes it useable but generally applicable
+- Markey, Brian (2010) A quiet success story in the laboratory: survey of 30 implementations of the ASTM 1394-97 standard for analyser interfaces.
 
 You can find many instrument and middleware LIS guides by searching for *Software LIS Interface Specification Guide*
 
 - BD FACS Workflow Manager Software LIS Interface Specification Guide -  specifies the ASTM and HL7 messages for the instrument.
 - The Sofia 2 LIS Interface Specification -  specifies the ASTM and HL7 messages for the instrument.
 - AQUIOS LIS Interface Specification - specifies the ASTM messages for the instrument.
+
+You can do general search by entering the following Google search: 
+
+- "LIS2-A" OR "ASTM E1394" OR "E1394" OR "LIS02-A2"
 
