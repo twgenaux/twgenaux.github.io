@@ -251,97 +251,106 @@ L|1|N
 
 The Header record defines the separators and escape character, and contains information about the sender and receiver. It is the first record in an ASTM message. 
 
-| Position | Type                       | Value                             |
-| -------- | -------------------------- | --------------------------------- |
-| H.1      | Record Type ID             | H                                 |
-| H.2      | Delimiter Definition       | \^&                               |
-| H.5      | Sender Name or ID          | OCD^VISION^5.13.1.46935^J60009999 |
-| H.12     | Processing ID (P, T, D, Q) | P                                 |
-| H.13     | Version Number             | LIS2-A                            |
-| H.14     | Date and Time of Message   | 20210309142633                    |
+| Position | Data Type        | Value          |
+| -------- | ---------------- | -------------- |
+| H.1      | Record Type ID   | H              |
+| H.2      | Delimiters       | \^&  |
+| H.5.1.1  | Sender Company   | OCD            |
+| H.5.1.2  | Instrument Model | VISION         |
+| H.5.1.3  | Version          | 5.13.1.46935   |
+| H.5.1.4  | Instrument ID    | J60009999      |
+| H.12     | Processing ID    | P              |
+| H.13     | Version Number   | LIS2-A         |
+| H.14     | Timestamp        | 20210309142633 |
+
 
 ## Patient Record
 
 The patient record contains patient demographics, such as patient IDs, names, sex, and dates of birth.
 
-| Position | Type                         | Value                         |
-| -------- | ---------------------------- | ----------------------------- |
-| P.1      | Record Type ID               | p                             |
-| P.2      | Sequence Number              | 1                             |
-| P.3      | Practice-Assigned Patient ID | PID123456                     |
-| P.5      | Patient ID Number 3          | NID123456^MID123456^OID123456 |
-| P.5.1.1  | National ID                         | NID123456                     |
-| P.5.1.2  | Medical Record                         | MID123456                     |
-| P.5.1.3  | Other ID                         | OID123456                     |
-| P.6      | Patient Name                 | Brown^Bobby^B                 |
-| P.6.1.1  | Patient Last Name            | Brown                         |
-| P.6.1.2  | Patient First Name           | Bobby                         |
-| P.6.1.3  | Patient Middle Initial           | B                         |
-| P.7      | Mother’s Maiden Name | White                         |
-| P.8      | Birthdate                         | 19650102030400                |
-| P.9      | Patient Sex                         | U                             |
-| P.14     | Attending Physician ID                         | PHY1234^Kildare^James^P       |
-| P.14.1.1 | Physician ID                         | PHY1234                       |
-| P.14.1.2 | Last Name                         | Kildare                       |
-| P.14.1.3 | First Name                         | James                         |
-| P.14.1.4 | Middle Initial                         | P                             |
-| P.15     | Special Field 1                         | Blaine                        |
+
+
+| Position | Data Type                | Value          |
+| -------- | ------------------------ | -------------- |
+| P.1      | Record Type ID           | P              |
+| P.2      | Sequence Number          | 1              |
+| P.3      | Patient ID               | PID123456      |
+| P.5.1.1  | National ID              | NID123456      |
+| P.5.1.2  | Medical Record ID        | MID123456      |
+| P.5.1.3  | Other ID                 | OID123456      |
+| P.6.1.1  | Patient Last             | Brown          |
+| P.6.1.2  | Patient First            | Bobby          |
+| P.6.1.3  | Patient Middle           | B              |
+| P.7      | Mothers Maiden           | White          |
+| P.8      | BirthDate                | 19650102030400 |
+| P.9      | Sex                      | U              |
+| P.14.1.1 | Attending Physician ID   | PHY1234        |
+| P.14.1.2 | Attending Last Name      | Kildare        |
+| P.14.1.3 | Attending First Name     | James          |
+| P.14.1.4 | Attending Middle Initial | P              |
+| P.15     | Patient’s Birth Name     | Blaine         |
+
 
 ## Test Order Record
 
 The Test Order record contains all required information to request tests to be performed on one or more specimens.
 
-| Position | Type                       | Value                           |
-| -------- | -------------------------- | ------------------------------- |
-| O.1      | Record Type ID             | O                              |
-| O.2      | Sequence Number       | 1                          |
-| O.3 | Specimen ID | SID305 |
-| O.5 | Universal Test ID | ABO |
-| O.6 | Priority | N |
-| O.7 | Requested/Order Date and Time | 20210309142136 |
-| O.16 | Specimen Descriptor | CENTBLOOD |
-| O.23 | Date/Time Results Reported or Last Modified | 20210309142229 |
-| O.26 | Report Types | R |
+
+| Position | Data Type           | Value          |
+| -------- | ------------------- | -------------- |
+| O.1      | Record Type ID      | O              |
+| O.2      | Sequence Number     | 1              |
+| O.3      | Sample IDs          | SID305         |
+| O.5      | Profiles            | ABO            |
+| O.6      | Priority            | N              |
+| O.7      | Requested TimeStamp | 20210309142136 |
+| O.16     | Sample Types        | CENTBLOOD      |
+| O.23     | Reported Time       | 20210309142229 |
+| O.26     | Report Type         | R              |
+
 
 ## Result Record (1)
 
-The Result record 
-
 A Result record is returned for each separate analysis requested by the test.
 
-| Position | Type                       | Value                           |
-| -------- | -------------------------- | ------------------------------- |
-| R.1      | Record Type ID             | R                              |
-| R.2      | Sequence Number       | 1                          |
-| R.3 | Test ID | ABO |
-| R.4 | Analysis | B |
-| R.9 | Result Status | R |
-| R.11 | Operator Identification | Automatic |
-| R.13 | Date/Time Test Completed | 20210309142229 |
-| R.14 | Instrument Identification | J60009999 |
+
+| Position | Data Type       | Value          |
+| -------- | --------------- | -------------- |
+| R.1      | Record Type ID  | R              |
+| R.2      | Sequence Number | 1              |
+| R.3      | Analysis ID     | ABO            |
+| R.4      | Analysis Value  | B              |
+| R.9      | Status          | R              |
+| R.11     | Operator        | Automatic      |
+| R.13     | Completion Time | 20210309142229 |
+| R.14     | Instrument ID   | J60009999      |
+
 
 ## Result Record (2)
 
-| Position | Type                       | Value                           |
-| -------- | -------------------------- | ------------------------------- |
-| R.1      | Record Type ID             | R                              |
-| R.2      | Sequence Number       | 1                          |
-| R.3 | Test ID | Rh |
-| R.4 | Analysis | POS |
-| R.9 | Result Status | R |
-| R.11 | Operator Identification | Automatic |
-| R.13 | Date/Time Test Completed | 20210309142229 |
-| R.14 | Instrument Identification | J60009999 |
+
+| Position | Data Type       | Value          |
+| -------- | --------------- | -------------- |
+| R.1      | Record Type ID  | R              |
+| R.2      | Sequence Number | 2              |
+| R.3      | Analysis ID     | Rh             |
+| R.4      | Analysis Value  | POS            |
+| R.9      | Status          | R              |
+| R.11     | Operator        | Automatic      |
+| R.13     | Completion Time | 20210309142229 |
+| R.14     | Instrument ID   | J60009999      |
 
 
 
 ## Terminator Record (L)
 
-| Position | Type                       | Value                           |
-| -------- | -------------------------- | ------------------------------- |
-| R.1      | Record Type ID             | L                              |
-| R.2      | Sequence Number       | 1                          |
-| R.3 | Termination Code | N |
+
+| Position | Data Type        | Value |
+| -------- | ---------------- | ----- |
+| L.1      | Record Type ID   | L     |
+| L.2      | Sequence Number  | 1     |
+| L.3      | Termination Code | N     |
+
 
 
 
