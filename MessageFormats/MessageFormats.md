@@ -1,5 +1,5 @@
 ---
-title: Introduction to ASTM Message Formats
+title: Introduction to ASTM E1394 and LIS02-A2 Message Formats
 category: LIS
 author: [ Theron W. Genaux]
 theme: Pixyll
@@ -9,7 +9,7 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 <h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM E1394 and LIS02-A2 Message Formats</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
 <p style="text-align:center">Revision 1</p>
-<p style="text-align:center">7-August-2024</p>
+<p style="text-align:center">12-August-2024</p>
 
 
 
@@ -182,20 +182,20 @@ O.17.1.1 is the physician ID, O.17.1.2 is the last name, and O.17.1.3 is the fir
 
 Below is a list of the fields, their position notation, Data Type, and value.
 
-| Position | Data Type                     | Value     |
-| -------- | ----------------------------- | --------- |
-| O.1      | Record Type ID                | O         |
-| O.2      | Sequence Number               | 1         |
-| O.3      | Specimen ID                   | SID101    |
-| O.5      | Test ID                       | ABORH     |
-| O.17.1.1 | Physician [1] - Identifier    | PHY1001   |
-| O.17.1.2 | Physician [1] - Last Name     | Brewster  |
-| O.17.1.3 | Physician [1]- First Name     | Katherine |
-| O.17.2.1 | Physician [1] - Identifier    | PHY1002   |
-| O.17.2.2 | Physician [1] - Last Name     | McCoy     |
-| O.17.2.3 | Physician [1]- First Name     | Leonard   |
-| O.17.2.4 | Physician [1]- Middle Initial | H         |
-| O.16     | Specimen Descriptor           | CENTBLOOD |
+| Position | Data Type                      | Value     |
+| -------- | ------------------------------ | --------- |
+| O.1      | Record Type ID                 | O         |
+| O.2      | Sequence Number                | 1         |
+| O.3      | Specimen ID                    | SID101    |
+| O.5      | Test ID                        | ABORH     |
+| O.17.1.1 | Physician [1] - Identifier     | PHY1001   |
+| O.17.1.2 | Physician [1] - Last Name      | Brewster  |
+| O.17.1.3 | Physician [1] - First Name     | Katherine |
+| O.17.2.1 | Physician [2] - Identifier     | PHY1002   |
+| O.17.2.2 | Physician [2] - Last Name      | McCoy     |
+| O.17.2.3 | Physician [2] - First Name     | Leonard   |
+| O.17.2.4 | Physician [2] - Middle Initial | H         |
+| O.16     | Specimen Descriptor            | CENTBLOOD |
 
 
 # Escape Sequences
