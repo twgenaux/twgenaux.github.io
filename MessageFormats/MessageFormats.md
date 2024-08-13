@@ -69,13 +69,13 @@ The Specimen ID is in section 8.4.3 and is referred to as O.3 for Order record f
 
 Below, I list the fields, their position notation, Data Type, and value.
 
-| Position | Data Type           | Value     |
-| -------- | ------------------- | --------- |
-| O.1      | Record Type ID      | O         |
-| O.2      | Sequence Number     | 1         |
-| O.3      | Specimen ID         | SID101    |
-| O.5      | Test ID             | ABORH     |
-| O.16     | Specimen Descriptor | CENTBLOOD |
+| Position | Data Type       | Value     |
+| -------- | --------------- | --------- |
+| O.1      | Record Type ID  | O         |
+| O.2      | Sequence Number | 1         |
+| O.3      | Sample IDs      | SID101    |
+| O.5      | Profiles        | ABORH     |
+| O.16     | Sample Types    | CENTBLOOD |
 
 You can reverse the process to create an Order record manually.
 
@@ -128,15 +128,15 @@ The notation for repeat fields is their filed notation plus their repeat field p
 
 Below, I list the complete order record field position notations, Data Types, and values.
 
-| Position | Data Type           | Value       |
-| -------- | ------------------- | ----------- |
-| O.1      | Record Type ID      | O           |
-| O.2      | Sequence Number     | 1           |
-| O.3.1    | Specimen ID         | SID102      |
-| O.3.2    | Specimen ID         | SID103      |
-| O.5      | Test ID             | ABO FWD/RVS |
-| O.16.1   | Specimen Descriptor | PACKEDCELLS |
-| O.16.2   | Specimen Descriptor | PLASMA      |
+| Position | Data Type       | Value       |
+| -------- | --------------- | ----------- |
+| O.1      | Record Type ID  | O           |
+| O.2      | Sequence Number | 1           |
+| O.3.1    | Sample ID1      | SID102      |
+| O.3.2    | SampleI D2      | SID103      |
+| O.5      | Profiles        | ABO FWD/RVS |
+| O.16.1   | Sample Type1    | PACKEDCELLS |
+| O.16.2   | Sample Type2    | PLASMA      |
 
   
 
@@ -182,20 +182,20 @@ O.17.1.1 is the physician ID, O.17.1.2 is the last name, and O.17.1.3 is the fir
 
 Below is a list of the fields, their position notation, Data Type, and value.
 
-| Position | Data Type                      | Value     |
-| -------- | ------------------------------ | --------- |
-| O.1      | Record Type ID                 | O         |
-| O.2      | Sequence Number                | 1         |
-| O.3      | Specimen ID                    | SID101    |
-| O.5      | Test ID                        | ABORH     |
-| O.17.1.1 | Physician [1] - Identifier     | PHY1001   |
-| O.17.1.2 | Physician [1] - Last Name      | Brewster  |
-| O.17.1.3 | Physician [1] - First Name     | Katherine |
-| O.17.2.1 | Physician [2] - Identifier     | PHY1002   |
-| O.17.2.2 | Physician [2] - Last Name      | McCoy     |
-| O.17.2.3 | Physician [2] - First Name     | Leonard   |
-| O.17.2.4 | Physician [2] - Middle Initial | H         |
-| O.16     | Specimen Descriptor            | CENTBLOOD |
+| Position | Data Type               | Value     |
+| -------- | ----------------------- | --------- |
+| O.1      | Record Type ID          | O         |
+| O.2      | Sequence Number         | 1         |
+| O.3      | Sample IDs              | SID101    |
+| O.5      | Profiles                | ABORH     |
+| O.16     | Sample Types            | CENTBLOOD |
+| O.17.1.1 | Ordering Physician ID   | PHY1001   |
+| O.17.1.2 | Ordering Last Name      | Brewster  |
+| O.17.1.3 | Ordering First Name     | Katherine |
+| O.17.2.1 | Ordering Physician ID   | PHY1002   |
+| O.17.2.2 | Ordering Last Name      | McCoy     |
+| O.17.2.3 | Ordering First Name     | Leonard   |
+| O.17.2.4 | Ordering Middle Initial | H         |
 
 
 # Escape Sequences
