@@ -87,41 +87,40 @@
 
 
 
-| Position | Data Type | Value |
-| -------- | ------------------- | --------- |
-| O.1 | Record Type ID | O |
-| O.2 | Sequence Number | 1 |
-| O.3 | Sample IDs | SID101 |
-| O.5 | Profiles | ABORH |
-| O.16 | Sample Types | CENTBLOOD |
+| Position | Data Type       | Value     |
+| -------- | --------------- | --------- |
+| O.1      | Record Type ID  | O         |
+| O.2      | Sequence Number | 1         |
+| O.3      | Sample IDs      | SID101    |
+| O.5      | Profiles        | ABORH     |
+| O.16     | Sample Types    | CENTBLOOD |
 
 
 
-| Position | Data Type | Value |
-| -------- | ------------------- | --------- |
-| O.1 | Record Type ID | O |
-| O.2 | Sequence Number | 1 |
-| O.3.1 | Sample ID1 | SID102 |
-| O.3.2 | SampleI D2 | SID103 |
-| O.5 | Profiles | ABO FWD/RVS |
-| O.16.1 | Sample Type1 | PACKEDCELLS |
-| O.16.2 | Sample Type2 | PLASMA |
+| Position | Data Type       | Value       |
+| -------- | --------------- | ----------- |
+| O.1      | Record Type ID  | O           |
+| O.2      | Sequence Number | 1           |
+| O.3.1    | Sample ID1      | SID102      |
+| O.3.2    | SampleI D2      | SID103      |
+| O.5      | Profiles        | ABO FWD/RVS |
+| O.16.1   | Sample Type1    | PACKEDCELLS |
+| O.16.2   | Sample Type2    | PLASMA      |
 
 
 
-| Position | Data Type | Value |
-| -------- | ------------------- | --------- |
-| O.1 | Record Type ID | O |
-| O.2 | Sequence Number | 1 |
-| O.3 | Sample IDs | SID101 |
-| O.5 | Profiles | ABORH |
-| O.16 | Sample Types | CENTBLOOD |
-| O.17.1.1 | Ordering Physician ID | PHY1001 |
-| O.17.1.2 | Ordering Last Name | Brewster |
-| O.17.1.3 | Ordering First Name | Katherine |
-| O.17.2.1 | Ordering Physician ID | PHY1002 |
-| O.17.2.2 | Ordering Last Name | McCoy |
-| O.17.2.3 | Ordering First Name | Leonard |
-| O.17.2.4 | Ordering Middle Initial | H |
-
+| Position | Data Type               | Value     |
+| -------- | ----------------------- | --------- |
+| O.1      | Record Type ID          | O         |
+| O.2      | Sequence Number         | 1         |
+| O.3      | Sample IDs              | SID101    |
+| O.5      | Profiles                | ABORH     |
+| O.16     | Sample Types            | CENTBLOOD |
+| O.17.1.1 | Ordering Physician ID   | PHY1001   |
+| O.17.1.2 | Ordering Last Name      | Brewster  |
+| O.17.1.3 | Ordering First Name     | Katherine |
+| O.17.2.1 | Ordering Physician ID   | PHY1002   |
+| O.17.2.2 | Ordering Last Name      | McCoy     |
+| O.17.2.3 | Ordering First Name     | Leonard   |
+| O.17.2.4 | Ordering Middle Initial | H         |
 
