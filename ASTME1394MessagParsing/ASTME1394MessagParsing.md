@@ -8,22 +8,22 @@ tags: [LIS,ASTM,E1394,LIS02]
 
 
 <h1 id='astm-e1394-message-parsing'><span><center>ASTM E1394 Message Parsing</center></span></h1>
-<h3><span><center>DRAFT</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">14-June-2024</p>
+<p style="text-align:center">21-February-2025</p>
 
 
 
+This project demonstrates generically parsing ASTM  E1394 (a.k.a LIS2) messages. It is a prototype demonstrating a method to parse any ASTM  E1394 (ASTM) message and return key/value pairs containing all the information in the message. These key/value pairs can recreate an equivalent ASTM message.
 
-This project demonstrates generically reading and creating ASTM  E1394 messages. 
+In 2015, I started working with vendors and customers to help them interface with my company's new family of instruments, which used the ASTM E1394 message format. I wondered how LIS and middleware vendors could adapt and connect with so many instruments as each instrument manufacturer developed its message format based on the ASTM E1394 standard.
 
-In 2015 I started working with vendors and customers to help them interface to my company's new instrument. The message format was ASTM E1394 (ASTM). I started to wonder how LIS and middleware vendors were able to adapt to connecting with so many instruments where each instrument manufacturer developed their own message format based on the ASTM E1394 standard.
+I had already seen some code that reads and writes ASTM messages on the web and proprietary. I always thought that they were error-prone and overly complex. I wondered how reading, writing, and processing ASTM messaging could be generalized to adapt to all the variations I've seen. I also wanted to make it less error-prone.
 
-I had already seen some code that reads and writes ASTM messages, both on the web and proprietary. And I always thought that they were error prone to use and and overly complex. I started  wondering how reading, writng, and processing ASTM messaging could be generalized so that one could adapt to all the variations that I've seen. I also wondered how to make it less error prone.
+I played around mentally with different ideas for a while until I realized that an ASTM record is, in essence, a recursive data structure with one recursion per separator. ASTM records have three separators: field, Repeat-Field, and Components. Because they only have three delimiters, they are limited to only three levels of recursion. 
 
-I played around mentally going through different ideas for a while until I realized that an ASTM record is in essence a recursive data structure, one recursion per separator. ASTM records have 3 separators; Field, Repeat-Field, and Components. Because it only has 3 delimiters, it is limited to only 3 levels of recursion. Note, HL7 2.x (Pipehat) has 4 separators and 4 levels of recursion. This code also supports HL7 2.x messages.
+HL7  version 2 (pipe-delimited) messages use segment, field, component, and sub-component delimiters, which have four separators and four levels of recursion. This code can be used with version 2 (pipe-delimited) messages.
 
-The following output is from a program that was developed to explore two ideas; generically reading and writing ASTM messages, and using bi-directional maps (Translation Map) to map database orders, patients, and results to create and read ASTM messages. The program supports round-tripping, such that the extracted content from one message can be used to recreate the equivelent original message. This program also works with HL7 Version 2.5 message files.
+The following output is from a program developed to explore two ideas: generically reading and writing ASTM messages and using bidirectional maps (Translation Map). ASTM messages are parsed into position/value pairs, where the key identifies the position of a value in a record. These position/value pairs are then mapped to token key/value pairs, where the key determines the value type. The program supports round-tripping, so the extracted content from one message can recreate the equivalent original message. The original translation map can map the token pairs to position pairs that can be used to recreate an equivalent ASTM message. 
 
 
 Input message:
@@ -86,7 +86,7 @@ L.1:L
 
 
 
-A bi-directional translation map is used to remap the Position:Value pairs into Key:Value pairs. It is also used to remap the Key:ValuePosition:Value pairs back into Position:Value pairs.
+A bidirectional translation map is used to remap the Position:Value pairs into Key:Value pairs and to remap the Key:ValuePosition:Value pairs back into Position:Value pairs.
 
 An Order record like this:
 
@@ -141,7 +141,7 @@ OrderSampleType2:PLASMA
 
 
 
-I used a bi-directional translation map to remap the message Position:Value pairs into Key:Value pairs. 
+I used a bidirectional translation map to remap the message Position:Value pairs into Key:Value pairs. 
 
 Here we list the extracted message Key:Value pairs:
 
