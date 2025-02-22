@@ -8,8 +8,8 @@ tags: [LIS, ASTM,E1394 ,LIS2, LIS02, HL7 V2.x ]
 
 <h1 id='astm-e1394-message-parsing'><span><center>Introduction to ASTM E1394 and LIS02-A2 Message Formats</center></span></h1>
 <p style="text-align:center">Theron W. Genaux</p>
-<p style="text-align:center">Revision 1</p>
-<p style="text-align:center">12-August-2024</p>
+<p style="text-align:center">Revision 2</p>
+<p style="text-align:center">21-February-2025</p>
 
 
 
