@@ -48,7 +48,7 @@ ASTM messages use field separators, making it easy for computers to create and r
 
 Let me show you how to manually disassemble this Order record and identify each field and the type of data it contains.
 
-You can use any text editor that can show line numbers and can replace each field separator (|) with a line break. I'll demonstrate with Notepad++.
+You can use any text editor showing line numbers and replacing each field separator (|) with a line break. I'll demonstrate with Notepad++.
 
 ![image-20240719202227277](.\assets\image-20240719202227277.png)    
 
