@@ -4,6 +4,12 @@ title: Theron W. Genaux
 
 # Theron W. Genaux
 
+## Contents
+
+[TOC]
+
+## About Me
+
 Software Engineer experienced in developing real-time embedded systems, internationalized Microsoft Windows-based applications, and regulated medical device software. Acquired a broad range of skills in all software development life cycle phases, from requirements gathering and design to systems implementation and testing. Strong analytical, diagnostic, and problem-solving abilities.
 
 Recognized within QuidelOrtho as a Laboratory Information System (LIS) Subject Matter Expert for Ortho Immunohematology (IH) Instruments from 2015 through 2025. Supported Vision, Connect, Optix Reader, ProVue, AutoVue, and ITM instruments and middleware).
