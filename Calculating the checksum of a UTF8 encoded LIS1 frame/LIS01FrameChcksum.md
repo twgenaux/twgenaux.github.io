@@ -17,6 +17,7 @@ tags: [LIS, ASTM, LIS1, LIS01, LIS01A2E]
 
 - [LIS01A2E](https://clsi.org/standards/products/automation-and-informatics/documents/lis01/), Specification for Low-Level Protocol to Transfer Messages Between Clinical Laboratory Instruments and Computer Systems
 - [LIS02A2E](https://clsi.org/standards/products/automation-and-informatics/documents/lis02), Specification for Transferring Information Between Clinical Laboratory Instruments and Information Systems
+- Hendrickson Group - [Calculating the checksum of an ASTM document](https://www.hendricksongroup.com/code_003.aspx) 
 
 
 
@@ -29,9 +30,7 @@ tags: [LIS, ASTM, LIS1, LIS01, LIS01A2E]
 - What is LIS1 and what is a frame?
 - 
 
-The LIS02 specification describes the structure of messages that are sent between an instrument and a Laboratory Information System (LIS). These messages are used to send orders, receive results, and query each other for information. They can be exchanged in network shared folders, serial communication, and TCP/IP protocols.
-
-LIS01 is a specification for a Low-Level Protocol that can exchange LIS02 messages through serial communication and TCP/IP. The protocol is implemented to allow bidirectional communication, where each system takes turns sending and receiving messages. LIS02 messages are sent one line (called a record) at a time. The LIS01 protocol is not limited to just LIS02 messages; it can send any text-based message that its protocol can support. For LIS02 content, an LIS01 message is defined as one LIS02 record.
+The LIS02 specification describes the structure and content of messages sent between an instrument and a Laboratory Information System (LIS). These messages are used to send orders, receive results, and query each other for information. They can be exchanged in network shared folders, serial communication, and TCP/IP protocols.
 
 Below is an LIS02 Message containing four records; Header (H), Patient (P), Order (O), and End of Message (L).
 
@@ -42,13 +41,15 @@ O|1|SID305||ABO|N|20210309142633|||||N||||CENTBLOOD<CR>
 L|1|N<CR>
 ```
 
+LIS01 is a specification for a low-level protocol that can exchange LIS02 messages through serial communication and TCP/IP. The protocol is implemented to allow bidirectional communication, where each system takes turns sending and receiving messages. LIS02 messages are sent one line (called a record) at a time. The LIS01 protocol is not limited to just LIS02 messages; it can send any text-based message that its protocol can support. For LIS02 content, an LIS01 message is defined as one LIS02 record.
+
 Each LIS02 record is sent in an LIS01 frame that starts with an \<STX> and ends with a \<CR>\<LF> sequence. The message (record) sits between the \<STX> and the \<ETX>. Each frame contains a checksum, which is used to validate that the message has not been corrupted in transit. The checksum lies between the  \<ETX> and \<CR>\<LF> sequence.
 
 ```
-<STX><LIS02 Record><ETX><Tow digit hexidecimal Checksum><CR><LF>
+<STX><LIS02 Record><ETX><Two digit hexidecimal Checksum><CR><LF>
 ```
 
-The checksum for the Order record (O) shown below is the hexidecimal value 4B.
+The checksum for the Header record is the hexidecimal value 96, and the checksum for the Order record (O) shown below is the hexidecimal value 4B.
 
 ```
 Instrument: <ENQ>
