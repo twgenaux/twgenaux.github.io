@@ -2,7 +2,7 @@
 title: Theron W. Genaux
 ---
 
-# My Career
+# Theron W. Genaux: My Career
 
 I began my career as a Digital Systems Technician (DST) at Kodak, then transitioned into software engineering. A few years later, I returned to college to earn my Bachelor's degree in Computer Science.
 

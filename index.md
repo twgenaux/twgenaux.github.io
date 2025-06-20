@@ -4,6 +4,8 @@ title: Theron W. Genaux
 
 [TOC]
 
+# Theron W. Genaux
+
 # About Me
 
 I'm a software engineer with experience in developing real-time, event-driven embedded systems, internationalized Microsoft Windows-based applications, and software for regulated medical devices. Acquired a broad range of skills in all software development life cycle phases, from requirements gathering and design to systems implementation and testing. Strong analytical, diagnostic, and problem-solving abilities.
