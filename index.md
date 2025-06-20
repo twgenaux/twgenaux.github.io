@@ -24,13 +24,13 @@ Designed and developed a real-time embedded subsystem communication module for a
 
 ## [Introduction to ASTM E1394 and LIS02-A2 Message Formats](https://twgenaux.github.io/MessageFormats/MessageFormats)
 
-​	A basic introduction to the ASTM E1394 and LIS02 message formats.
+​	A basic introduction to the ASTM E1394 and LIS02 message formats for non-programmers.
 
 **TAGS:** E1394, LIS2, LIS02
 
 ## [ASTM E1394 Message Parsing](https://twgenaux.github.io/ASTME1394MessagParsing/ASTME1394MessagParsing)  
 
-This project demonstrates the generic parsing of ASTM E1394 (also known as LIS2) messages. It is a prototype that shows a method for parsing any ASTM E1394 (ASTM) message and returning key/value pairs containing all the information in the message. These key/value pairs can be used to recreate an equivalent ASTM message.
+This project demonstrates the generic parsing of ASTM E1394 (also known as LIS2) messages. It is a prototype that shows a method for parsing any ASTM E1394 (ASTM) message and returning key/value pairs containing all the information in the message. These key/value pairs can be used to recreate an equivalent ASTM message. I'm continuing to revise and expand my approach as time permits.
 
 **TAGS:** E1394, LIS2, LIS02
 
@@ -41,4 +41,6 @@ This project demonstrates the generic parsing of ASTM E1394 (also known as LIS2)
 The LIS1-A / ASTM E1381 Frame Checksum Calculator (LFCC) can be used to calculate or verify the checksum of an LIS01 frame.
 
 ![image-20250314201901833.png](https://github.com/twgenaux/LIS01-Checksum-Calculatpr-Verifier/blob/main/README.assets/image-20250314201901833.png?raw=true) 
+
+**TAGS:** LIS01, LIS02
 
