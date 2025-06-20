@@ -22,7 +22,11 @@ This was an invaluable learning experience and introduction to real-time event-d
 
 My first unofficial work as a software engineer was on a Kodak Venture project, where I wrote all the low-level device drivers for what was at the time a general-purpose tablet computer with a CD drive, targeting field service engineers. This project ended when, at one meeting, someone walked in with one of the first laptop computers. 
 
-Because of my work on the venture project, I was hired as a software engineer by an internal group that outsourced engineers as needed for new projects. This led to a career of developing new real-time embedded systems, desktop applications, and supporting and maintaining legacy systems.
+Because of my work on the venture project, I was hired as a software engineer by an internal group that outsourced engineers as needed for new projects. 
+
+The next 15+ years at Kodak were spent developing small and medium-sized C/C++ real-time event-driven embedded systems. My last project at Kodak was a C++ desktop application for configuring print jobs targeting digital high-volume production printers.
+
+I then went to work at Ortho-Clinical Diagnostics for another 15+ years, where I initially worked on legacy C++ Immunohematology (IH) middleware and instruments. I also worked on a C# project, developing a new automated donor screening pipettor. Over the last few years, I primarily supported the Vision IH family of instruments as 3rd-level support, assisting customers, field service personnel, and vendors. I also directly supported some of Vision's C# based subsystems. During that period, I supported the development of new IH middleware and low-volume instruments.
 
 
 
