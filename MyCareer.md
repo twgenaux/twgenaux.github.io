@@ -20,10 +20,10 @@ One of my responsibilities was to work with computer engineers, developing code 
 
 Because of my work on the venture project, I was hired as a software engineer by an internal group that outsourced engineers as needed for new projects. 
 
-The next 15+ years at Kodak were spent developing small and medium-sized C/C++ real-time event-driven embedded systems, often writing low-level and application code. My last project at Kodak was on a team developing a C++ desktop application for configuring print jobs targeting digital high-volume production printers.
+**The next 15+ years at Kodak** were spent developing small and medium-sized C/C++ real-time event-driven embedded systems, often writing low-level and application code. My last project at Kodak was on a team developing a C++ desktop application used by customers to configure print jobs targeting digital high-volume production printers.
 
 **I then went to work at Ortho-Clinical Diagnostics** for the next 15+ years, where I initially worked on legacy C++ Immunohematology (IH) middleware and instruments. These had code bases around 500k LOC. The middleware solution a multithreaded knowledge based system driving an IH workflow through an Oracle database. The IH instrument was another 500k LOC multithreaded C++ system that controlled instrumentation. I was able to quickly gain a working knowledge of both and developed tools to test and validate them. 
 
 After learning C# on my own time, I was given the opportunity to work on a new multithread, C# based automated donor screening pipettor. 
 
-**My last few years at Ortho-Clinical Diagnostics**, I supported the rollout of the Vision IH family of instruments. Initially providing support to customers, field service engineers (FSE), and vendors. I also directly maintained and resolved issues with some of Vision's C# based subsystems. Later I worked as a staff engineer supporting all IH systems and the development of new IH middleware and low-volume instruments.
+**My last few years at Ortho-Clinical Diagnostics**, I supported the rollout of the Vision IH family of instruments. Initially providing support to customers, field service engineers (FSE), and vendors. I also worked closely with the Vision software engineers document and propose solutions for issues as the came up. I also directly maintained and resolved issues with some of Vision's C# based subsystems. Later I worked as a staff engineer supporting all IH systems and the development of new IH middleware and low-volume instruments.
